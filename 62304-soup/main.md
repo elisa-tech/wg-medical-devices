@@ -12,6 +12,6 @@ Note that this review covered Edition 1.1 of IEC 62304, dated 2015 June.
 
 | Requirement | How it relates to openAPS / Linux / ELISA | Actions that could be taken by ELISA |
 | ----------- | ----------------------------------------- | ------------------------------------ |
-| 3.29 SOUP, Software Of Unknown Provenance (acronym): SOFTWARE ITEM that is already developed and generally available and that has not been developed for the purpose of being incorporated into the MEDICAL DEVICE (also known as “off-the-shelf software”) or SOFTWARE ITEM previously developed for which adequate records of the development PROCESSES are not available. NOTE A MEDICAL DEVICE SOFTWARE SYSTEM in itself cannot be claimed to be SOUP. | In the context of openAPS, Raspbian (Linux) would be considered “SOUP” | N/A |
+| 3.29 SOUP, Software Of Unknown Provenance (acronym): <br><br> SOFTWARE ITEM that is already developed and generally available and that has not been developed for the purpose of being incorporated into the MEDICAL DEVICE (also known as “off-the-shelf software”) or SOFTWARE ITEM previously developed for which adequate records of the development PROCESSES are not available. <br><br> NOTE A MEDICAL DEVICE SOFTWARE SYSTEM in itself cannot be claimed to be SOUP. | In the context of openAPS, Raspbian (Linux) would be considered “SOUP” | N/A |
 
 License: CC-BY-4.0
