@@ -1,10 +1,4 @@
-**Review of IEC 62304 requirements that pertain to SOUP**
-
-**Compiled by ELISA Medical Devices group for openAPS application**
-
-**2021-01-06**
-
-<u>Background:</u>
+## Background
 
 IEC 62304 covers “Medical device software – Software life cycle
 processes”. It is intended to be applied to the development and
@@ -20,7 +14,7 @@ kind of software as “Software Of Unknown Provenance” (SOUP).
 
 Note that this review covered Edition 1.1 of IEC 62304, dated 2015 June.
 
-<u>Relevant requirements:</u>
+## Relevant Requirements:
 
 <table>
 <thead>
