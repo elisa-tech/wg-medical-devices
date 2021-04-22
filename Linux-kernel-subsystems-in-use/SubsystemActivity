@@ -1,0 +1,9 @@
+List of active subsystems in event trace:
+
+| Subsystem name | # of calls |
+| kmem_* | 200990 |
+| mm_* | 182471 |
+| sched_* | 195241 |
+| rcu_* | 223011 |
+| irq_* | 1781503 |
+| kmalloc | 79801 |
