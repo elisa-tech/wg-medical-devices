@@ -17,7 +17,7 @@ Create a system calls in use mapping table
 | dup2 | 63 | 251 | |
 | getppid | 64 | 5 | |
 | getpgrp | 65 | 3 | |
-| readlink | 85 | 197| |
+| readlink | 85 | 197 | |
 | munmap | 91 | 575 | |
 | statfs | 99 | 40 | |
 | setitimer | 104 | 2 | |
