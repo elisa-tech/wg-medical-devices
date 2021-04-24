@@ -2,6 +2,7 @@ Create a system calls in use mapping table
 
 | Syscall Name | Syscall Number | # of calls | Subsystem |
 | --- | --- | --- | --- |
+| exit | 1 | 1 | |
 | read | 3 | 13575 | |
 | write | 4 | 1263 | |
 | close | 6 | 3696 | |
