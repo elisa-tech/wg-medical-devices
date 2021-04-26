@@ -91,7 +91,9 @@ Create a system calls in use mapping table
 | unlinkat | 328 | 6 | |
 | readlinkat | 332 | 10 | |
 | faccessat | 334 | 6 | |
+| ??? sudo-4697 called it what is the syscall?  | 336 | 1 | |
 | set_robust_list | 338 | 127 | |
+| ??? dhcpcd called - what is this syscall? | 346 | 15 | |
 | utimensat | 348 | 2 | |
 | timerfd_settime | 353 | 8 | |
 | eventfd2 | 356 | 4 | |
