@@ -19,7 +19,7 @@ Plan of action:
 - Start OpenAPS application from strace
 - Run lsmod to gather module information
 
-OpenAPS employs setup scripts to launch OpenAPS applications. As a resuly using strace is not an option. We modifled 
+OpenAPS employs setup scripts to launch OpenAPS applications. As a resuly using strace is not an option. We modifled OpenAPS setup script to enable event tracing
 
 Tools used:
 
