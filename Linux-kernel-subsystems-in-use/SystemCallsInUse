@@ -3,9 +3,9 @@ Create a system calls in use mapping table
 | Syscall Name | Syscall Number | # of calls | Subsystem |
 | --- | --- | --- | --- |
 | exit | 1 | 1 | |
-| read | 3 | 13575 | |
-| write | 4 | 1263 | |
-| close | 6 | 3696 | |
+| read | 3 | 13575 | core kernel and arch |
+| write | 4 | 1263 | core kernel and arch |
+| close | 6 | 3696 |core kernel and arch |
 | execve | 11 | 203 | |
 | chdir | 12 | 5 | |
 | getpid | 20 | 277 | |
@@ -14,7 +14,7 @@ Create a system calls in use mapping table
 | dup | 41 | 1 | |
 | pipe | 42 | 127 | |
 | brk | 45 | 1160 | |
-| ioctl | 54 | 914 | Which driver/subsystem? |
+| ioctl | 54 | 914 | spidev |
 | dup2 | 63 | 251 | |
 | getppid | 64 | 5 | |
 | getpgrp | 65 | 3 | |
@@ -24,7 +24,7 @@ Create a system calls in use mapping table
 | setitimer | 104 | 2 | |
 | wait4 | 114 | 429 | |
 | sysinfo | 116 | 3 | |
-| sigreturn | 119 | 237 | |
+| sigreturn | 119 | 237 | signal |
 | clone | 120 | 269 | |
 | uname | 122 | 17 | |
 | adjtimex | 124 | 10 | |
@@ -50,11 +50,11 @@ Create a system calls in use mapping table
 | stat64 | 195 | 2634 | |
 | lstat64 | 196 | 144 | |
 | fstat64 | 197 | 2323 | |
-| getuid32 | 199 | 595 | |
-| getgid32 | 200 | 596 | |
-| geteuid32 | 201 | 600 | |
-| getegid32 | 202 | 595 | |
-| getgroups32 | 205 | 2 | |
+| getuid32 | 199 | 595 | core kernel |
+| getgid32 | 200 | 596 | core kernel  |
+| geteuid32 | 201 | 600 | core kernel |
+| getegid32 | 202 | 595 | core kernel |
+| getgroups32 | 205 | 2 | core kernel |
 | setresuid32 | 208 | 16 | |
 | getresuid32 | 209 | 1 | |
 | setresgid32 | 210 | 5 | |
@@ -91,9 +91,9 @@ Create a system calls in use mapping table
 | unlinkat | 328 | 6 | |
 | readlinkat | 332 | 10 | |
 | faccessat | 334 | 6 | |
-| ??? sudo-4697 called it what is the syscall?  | 336 | 1 | |
+| perf_event_open??  | 336 | 1 | |
 | set_robust_list | 338 | 127 | |
-| ??? dhcpcd called - what is this syscall? | 346 | 15 | |
+| epoll_pwait??| 346 | 15 | |
 | utimensat | 348 | 2 | |
 | timerfd_settime | 353 | 8 | |
 | eventfd2 | 356 | 4 | |
