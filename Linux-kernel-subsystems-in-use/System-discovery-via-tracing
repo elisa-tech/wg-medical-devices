@@ -1,6 +1,6 @@
 # H1 Discovering Linux kernel subsystems used by openAPS
 
-Work in progress
+Work in progress - not for publication
 
 Discovering Linux kernel subsystem in use can be accomplished using Linux kernel features and commands. The goal is to gather the system state while OpenAPS workload is running ro determine which parts of the kernel is being used.
 
@@ -20,3 +20,11 @@ Plan of action:
 - Run lsmod to gather module information
 
 OpenAPS employs setup scripts to launch OpenAPS applications. As a resuly using strace is not an option. We modifled 
+
+Tools used:
+
+- System call dump:
+  sudo apt-get install auditd
+  ausyscall --dump > syscalls_dump.out
+- Supported system call check
+  Linux kernel scripts: scripts/checksyscalls.sh
