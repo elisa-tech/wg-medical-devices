@@ -1,8 +1,3 @@
-See the tracing blog below - it still needs to be converted to markdown, including the tables.
-
-https://docs.google.com/document/d/1C1CqhYnaHT7wbhD6hZ8D0eYoq6QSSbFLoruEaf-5JOw/edit?usp=sharing
-
-
 # Discovery Linux kernel subsystems used by openAPS
 
 Discovering the Linux kernel subsystems in use by an application can be accomplished using Linux kernel features and commands. The goal is to gather the system state while the OpenAPS workload is running ro determine which parts of the kernel is being used.
