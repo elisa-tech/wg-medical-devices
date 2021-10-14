@@ -138,6 +138,9 @@ Mapping the syscalls will tell us which system calls OpenAps is using. In additi
 
 ## Updated system view
 
+ ![Updated system diagram](./kernel_activity.png)
+
+
 ## Conclusion
 This tracing activity was a good way of identifying which parts of the kernel are used by OpenAPS. This helped to generate the Updated system view, so it is useful for our goal to do an STPA analysis of OpenAPS Operating System activity. We plan to theoretically analyse how these different subsystems can interact unsafely, while using fault injection and mocked components to collect more traces.
 
