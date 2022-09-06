@@ -8,7 +8,7 @@ Document #1 - Applying STPA Document
 * References to useful STPA
 * Learnings 
 
-Document #2 APS Analysis
+Document #2 openAPS Analysis
 * Introduction to problem
   * Background Info
   * Goals 
