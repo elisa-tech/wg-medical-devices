@@ -1,0 +1,54 @@
+Losses:
+- Identifier: L1
+  Text: Loss of life or cognitive ability (hypoglycemia, hyperglycemia, DKA)
+- Identifier: L2
+  Text: Loss of or damage to equipment
+- Identifier: L3
+  Text: High variance of glucose levels
+Hazards:
+- Identifier: H1
+  Text: Too much insulin
+  Losses:
+  - L1
+  - L3
+- Identifier: H2
+  Text: Too little insulin
+  Losses:
+  - L1
+  - L3
+- Identifier: H3
+  Text: Electrical malfunction
+  Losses:
+  - L1
+  - L2
+  - L3
+- Identifier: H4
+  Text: Too much burden on system
+  Losses:
+  - L2
+Constraints:
+- Identifier: S1
+  Text: OpenAPS should not recommend an insulin dose of more than X mg in any 1 hour
+  Hazards:
+  - H1
+- Identifier: S2
+  Text: OpenAPS should not recommend an insulin dose of less than X mg in any 1 hour
+  Hazards:
+  - H2
+- Identifier: S3
+  Text: If OpenAPS recognises that the user has hazardous levels of insulin or glucose,
+    OpenAPS should alert the human operator
+  Hazards:
+  - H1
+  - H2
+- Identifier: S4
+  Text: OpenAPS should not send signals to other components which might make those
+    other components malfunction
+  Hazards:
+  - H3
+- Identifier: S5
+  Text: OpenAPS should not send so many signals per hour to other system components
+    such that the other components drain battery too quickly
+  Hazards:
+  - H4
+
