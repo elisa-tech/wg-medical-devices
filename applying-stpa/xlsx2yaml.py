@@ -1,10 +1,10 @@
 import yaml
 import pandas as pd
 
-def convert_UCAs_to_yml(sheets_file, uca_sheet):
+def convert_UCAs_to_yml(xlsx_file, uca_sheet):
     uca_categories = ["Providing", "Not Providing", "Timing", "Duration"]
     cc_labels = {"Providing":"P", "Not Providing":"NP", "Timing": "T", "Duration": "D"}
-    uca_df = pd.read_excel(sheets_file, engine='openpyxl', sheet_name=uca_sheet)
+    uca_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=uca_sheet)
     components = []
     component = {}
     control_action = {}
@@ -53,8 +53,8 @@ def convert_UCAs_to_yml(sheets_file, uca_sheet):
 
     return yaml.dump({"Components": components}, sort_keys=False)
 
-def convert_purpose_to_yml(sheets_file, purpose_sheet):
-    purpose_df = pd.read_excel(sheets_file, engine='openpyxl', sheet_name=purpose_sheet)
+def convert_purpose_to_yml(xlsx_file, purpose_sheet):
+    purpose_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=purpose_sheet)
     purpose_dict = {
         "Losses": [],
         "Hazards": [],
@@ -100,6 +100,11 @@ def convert_purpose_to_yml(sheets_file, purpose_sheet):
                 "Hazards": hazards
             })
     return yaml.dump(purpose_dict, sort_keys=False)
+
+# Shefali function, to be continued
+def add_scenarios_to_yml(xlsx_file, scenario_sheet_name, yml_file):
+    scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=scenario_sheet_name)
+
 
 print(convert_UCAs_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs'))
 print(convert_purpose_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Losses, Hazards and SCs'))
