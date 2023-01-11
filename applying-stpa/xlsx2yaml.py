@@ -1,14 +1,14 @@
 import yaml
 import pandas as pd
 
-def convertUcaToJson(sheets_file, uca_sheet):
+def convert_UCAs_to_yml(sheets_file, uca_sheet):
     uca_categories = ["Providing", "Not Providing", "Timing", "Duration"]
     cc_labels = {"Providing":"P", "Not Providing":"NP", "Timing": "T", "Duration": "D"}
-    l1_uca_df = pd.read_excel(sheets_file, engine='openpyxl', sheet_name=uca_sheet)
+    uca_df = pd.read_excel(sheets_file, engine='openpyxl', sheet_name=uca_sheet)
     components = []
     component = {}
     control_action = {}
-    for row in l1_uca_df.iterrows():
+    for row in uca_df.iterrows():
         data = row[1]
         if type(data['Controller']) is str:
             if component:
@@ -51,7 +51,56 @@ def convertUcaToJson(sheets_file, uca_sheet):
                             "Unsafe Control Actions": [split_uca[0].strip()]
                         })
 
-    return yaml.dump({"Components": components})
+    return yaml.dump({"Components": components}, sort_keys=False)
 
-print(convertUcaToJson('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs'))
+def convert_purpose_to_yml(sheets_file, purpose_sheet):
+    purpose_df = pd.read_excel(sheets_file, engine='openpyxl', sheet_name=purpose_sheet)
+    purpose_dict = {
+        "Losses": [],
+        "Hazards": [],
+        "Constraints": []
+    }
+    necessary_identifiers = {
+        "Losses": [],
+        "Hazards": [],
+    }
+    for index,loss in purpose_df['Losses'].items():
+        if type(loss) is str:
+            split_loss = loss.split(": ")
+            purpose_dict["Losses"].append({
+                "Identifier": split_loss[0].strip(),
+                "Text": split_loss[1].strip()
+            })
+            necessary_identifiers["Losses"].append(split_loss[0].strip())
+    for index, hazard in purpose_df['Hazards'].items():
+        if type(hazard) is str:
+            split_hazard = hazard.split(": ")
+            losses = []
+            for loss in necessary_identifiers["Losses"]:
+                if loss in split_hazard[1]:
+                    losses.append(loss)
+            text = split_hazard[1].strip().split(losses[0])[0][:-1].strip()
+            purpose_dict["Hazards"].append({
+                "Identifier": split_hazard[0].strip(),
+                "Text": text,
+                "Losses": losses
+            })
+            necessary_identifiers["Hazards"].append(split_hazard[0].strip())
+    for index, constraint in purpose_df['Scenario Constraints'].items():
+        if type(constraint) is str:
+            split_constraint = constraint.split(": ")
+            hazards = []
+            for hazard in necessary_identifiers["Hazards"]:
+                if hazard in split_constraint[1]:
+                    hazards.append(hazard)
+            text = split_constraint[1].strip().split(hazards[0])[0][:-1].strip()
+            purpose_dict["Constraints"].append({
+                "Identifier": split_constraint[0].strip(),
+                "Text": text,
+                "Hazards": hazards
+            })
+    return yaml.dump(purpose_dict, sort_keys=False)
+
+print(convert_UCAs_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs'))
+print(convert_purpose_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Losses, Hazards and SCs'))
 
