@@ -1,114 +1,115 @@
 Components:
-- Control Actions:
+- Text: OpenAPS
+  Control Actions:
   - Identifier: STB
     Text: Set Temporary Basal
     Unsafe Control Actions:
     - Identifier: UCA-STB-100
-      Reason: Providing
       Text: OpenAPS algorithm recommends too high temporary basal dosing recommendation
         when current glucose levels are low and not likely to rise (bases on active
         insulin and human insulin pump input)
+      Reason: Providing
     - Identifier: UCA-STB-1
-      Reason: Not Providing
       Text: OpenAPS does not set the temporary basal dose when the current insulin
         dosage is not optimal and it has been over X minutes since the last temporary
         basal recommendation
+      Reason: Not Providing
     - Identifier: UCA-STB-101
-      Reason: Providing
       Text: OpenAPS algorithm recommends too low temporary basal dosing recommendation
         when current glucose levels are high and not likely to fall (based on current
         glucose levels, active insulin and human insulin pump input)
+      Reason: Providing
     - Identifier: UCA-STB-2
-      Reason: Not Providing
       Text: OpenAPS does not set the temporary basal dose when there is no active
         temporary basal recommendation and there is adequate data available to make
         a justified recommendation
+      Reason: Not Providing
     - Identifier: UCA-STB-102
-      Reason: Providing
       Text: OpenAPS makes a temporary basal recommendation when there is inadequate
         data available to it to justify the dosing recommendation (eg not enough data,
         data is too conflicting)
-    - Identifier: UCA-STB-103
       Reason: Providing
+    - Identifier: UCA-STB-103
       Text: OpenAPS provides a temporary basal dosing rate when the insulin pump settings
         are not configured correctly for OpenAPS(*1)
-    - Identifier: UCA-STB-104
       Reason: Providing
+    - Identifier: UCA-STB-104
       Text: OpenAPS makes a temporary basal recommendation when the insulin pump is
         not in a state to give a dose (no battery, no insulin, infusion set needs
         changing)
-    - Identifier: UCA-STB-105
       Reason: Providing
+    - Identifier: UCA-STB-105
       Text: "OpenAPS makes a temporary basal dosing recommendation which overrides\
         \ the human\u2019s safe requested level in the insulin pump (?)"
+      Reason: Providing
   - Identifier: ROD
     Text: Request operating data (from the insulin pump)
     Unsafe Control Actions:
     - Identifier: UCA-ROD-100
-      Reason: Providing
       Text: OpenAPS requests (and uses) old or missing data from the insulin pump
         in place of recent data (battery fail option)
+      Reason: Providing
     - Identifier: UCA-ROD-1
-      Reason: Not Providing
       Text: OpenAPS does not get data from the insulin pump when it has not received
         data which is from the last X minutes
+      Reason: Not Providing
     - Identifier: UCA-ROD-1000
-      Reason: Timing
       Text: OpenAPS gets data from the insulin pump < X seconds before the next dosing
         recommendation, when X seconds are needed to incorporate the data into the
         next dosing recommendation
+      Reason: Timing
     - Identifier: UCA-ROD-101
-      Reason: Providing
       Text: OpenAPS requests data from the insulin pump more than X times a minute
-    - Identifier: UCA-ROD-102
       Reason: Providing
+    - Identifier: UCA-ROD-102
       Text: OpenAPS requests insufficient data from the insulin pump to make a reliable
         dosing recommendation
+      Reason: Providing
   - Identifier: RG
     Text: Request glucose level (from nightscout)
     Unsafe Control Actions:
     - Identifier: UCA-RG-100
-      Reason: Providing
       Text: OpenAPS requests (and uses) old or missing glucose data in place of recent
         glucose data
+      Reason: Providing
     - Identifier: UCA-RG-1
-      Reason: Not Providing
       Text: OpenAPS does not get valid data from the NightScout when it has not received
         data which is from the last X minutes
+      Reason: Not Providing
     - Identifier: UCA-RG-1000
-      Reason: Timing
       Text: OpenAPS gets data from the NightScout < X seconds before the next dosing
         recommendation, when X seconds are needed to incorporate the data into the
         next dosing recommendation
+      Reason: Timing
     - Identifier: UCA-RG-101
-      Reason: Providing
       Text: OpenAPS gets data from the CGM more than X times a minute, if NightScout
         is not available (consequence
-    - Identifier: UCA-RG-102
       Reason: Providing
+    - Identifier: UCA-RG-102
       Text: OpenAPS requests insufficient data from the NightScout to make a reliable
         dosing recommendation
+      Reason: Providing
   - Identifier: SIP
     Text: Suspend Insulin Pump
     Unsafe Control Actions:
     - Identifier: UCA-SIP-100
-      Reason: Providing
       Text: OpenAPS suspends insulin dosing when the human is not close to experiencing
         hypoglycemia
+      Reason: Providing
     - Identifier: UCA-SIP-1
-      Reason: Not Providing
       Text: OpenAPS does not suspend insulin dosing, or at least provide an audible
         alert for the human to suspend insulin dosing, when the human is experiencing
         or close to experiencing hypoglycemia
+      Reason: Not Providing
     - Identifier: UCA-SIP-1000
-      Reason: Timing
       Text: OpenAPS suspends insulin dosing more than X minutes after the human is
         experiencing or close to experiencing hypoglycemia
+      Reason: Timing
     - Identifier: UCA-SIP-10000
-      Reason: Duration
       Text: OpenAPS carries on suspending insulin dosing for more than X (~120, maybe
         higher depending on factors) minutes after the human was experiencing or close
         to experiencing hypoglycemia, causing a DKA risk
+      Reason: Duration
   Controller Constraints:
   - Identifier: CC-STB-100
     Text: OpenAPS algorithm must not recommend a too high temporary basal dosing recommendation
@@ -223,111 +224,111 @@ Components:
       after the human was experiencing or close to experiencing hypoglycemia,
     Unsafe Control Actions:
     - UCA-SIP-10000
-  Text: OpenAPS
-- Control Actions:
+- Text: Human Actor
+  Control Actions:
   - Identifier: PTR
     Text: Put together OpenAPS rig
     Unsafe Control Actions:
     - Identifier: UCA-PTR-100
-      Reason: Providing
       Text: Human actor sets up the OpenAPS rig wrong or insecurely (this needs more
         research, hardware will help)
-    - Identifier: UCA-PTR-101
       Reason: Providing
+    - Identifier: UCA-PTR-101
       Text: Human actor makes a software update to another device (eg insulin pump,
         CGM) which makes the device incompatible with OpenAPS
+      Reason: Providing
   - Identifier: S
     Text: Install or update OpenAPS software and dependencies
     Unsafe Control Actions:
     - Identifier: UCA-S-100
-      Reason: Providing
       Text: Human actor makes a software update to the software that the OpenAPS rig
         is using, which makes it incompatible with other device(s) in the system (eg
         pump, CGM)
-    - Identifier: UCA-S-1
-      Reason: Not Providing
-      Text: Human actor does not install all the dependencies necessary for OpenAPS
-    - Identifier: UCA-S-101
       Reason: Providing
+    - Identifier: UCA-S-1
+      Text: Human actor does not install all the dependencies necessary for OpenAPS
+      Reason: Not Providing
+    - Identifier: UCA-S-101
       Text: Human actor installs unecessary additional dependencies for OpenAPS without
         a "test" configuration
+      Reason: Providing
     - Identifier: UCA-S-2
-      Reason: Not Providing
       Text: Human actor does not update the OpenAPS dependencies when there are available
         updates which are compatible with the other OpenAPS dependencies
+      Reason: Not Providing
   - Identifier: CO
     Text: Setup and configure OpenAPS loop
     Unsafe Control Actions:
     - Identifier: UCA-CO-100
-      Reason: Providing
       Text: Human actor selects an inaccurate option when configuring OpenAPS
+      Reason: Providing
     - Identifier: UCA-CO-1
-      Reason: Not Providing
       Text: There is a change in the OpenAPS loop setup, but the human actor does
         not update the configurations of OpenAPS accordingly
+      Reason: Not Providing
     - Identifier: UCA-CO-101
-      Reason: Providing
       Text: Human actor configures OpenAPS with a bad algorithm instead of oref0
+      Reason: Providing
   - Identifier: SO
     Text: Stop OpenAPS loop
     Unsafe Control Actions:
     - Identifier: UCA-SO-100
-      Reason: Providing
       Text: Human actor provides Switch off (hold button goes into reset) when the
         system is expected to be up and running
+      Reason: Providing
     - Identifier: UCA-SO-1
-      Reason: Not Providing
       Text: Human actor does not stop the OpenAPS loop when there is a problem with
         OpenAPS or when OpenAPS is not able to make the insulin pump dose basal in
         line with its recommendations
+      Reason: Not Providing
     - Identifier: UCA-SO-1000
-      Reason: Duration
       Text: Human actor breaks the Power Off button
+      Reason: Duration
   - Identifier: UD
     Text: Provide useful data to pump (eg carbs)
     Unsafe Control Actions:
     - Identifier: UCA-UD-100
-      Reason: Providing
       Text: Human actor provides erroneous input of data affecting insulin dosing
+      Reason: Providing
     - Identifier: UCA-UD-1
-      Reason: Not Providing
       Text: Human actor does not provide data to the insulin pump which can improve
         insulin dosing recommendations (eg carb data at mealtime)
+      Reason: Not Providing
     - Identifier: UCA-UD-1000
-      Reason: Timing
       Text: Human actor provides meal data to the insulin pump more than X minutes
         away from the actual mealtime
+      Reason: Timing
   - Identifier: SB
     Text: Set bolus on pump
     Unsafe Control Actions:
     - Identifier: UCA-SB-100
-      Reason: Providing
       Text: Human actor sets a bolus (or basal) which unintentionally permanently
         overrides OpenAPS temporary basals
+      Reason: Providing
   - Identifier: PM
     Text: Provide mandatory settings for OpenAPS on pump (eg temp basal type as units
       per hour not %, basal profile, DIA)
     Unsafe Control Actions:
     - Identifier: UCA-PM-100
-      Reason: Providing
       Text: Human actor configures insulin pump settings in a way that is not suitable
         for OpenAPS (Temp Basal rates as units per hour not %, carb ratios to grams
         not exchange units, max basal rate set too high, basal profile / carb ratios
         / ISF values not set, DIA too low)
+      Reason: Providing
   - Identifier: UC
     Text: Update CGM / CGM receiver
     Unsafe Control Actions:
     - Identifier: UCA-UC-100
-      Reason: Providing
       Text: Human updates the CGM when OpenAPS rig is trying to pull data from the
         CGM
+      Reason: Providing
     - Identifier: UCA-UC-1
-      Reason: Not Providing
       Text: Human does not update CGM when there are updates available for X weeks
         which can improve glucose data accuracy or prevent problems
+      Reason: Not Providing
     - Identifier: UCA-UC-101
-      Reason: Providing
       Text: Human provides wrong CGM update
+      Reason: Providing
   Controller Constraints:
   - Identifier: CC-PTR-100
     Text: Human actor must not set up the OpenAPS rig wrong or insecurely (this needs
@@ -409,121 +410,120 @@ Components:
       ratios / ISF values not set, DIA too low)
     Unsafe Control Actions:
     - UCA-PM-100
-  Text: Human Actor
-- Control Actions:
+- Text: Infrastructure Developer
+  Control Actions:
   - Identifier: UI
     Text: Update Infrastructure
     Unsafe Control Actions:
     - Identifier: UCA-UI-100
-      Reason: Providing
       Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
+      Reason: Providing
     - Identifier: UCA-UI-1
-      Reason: Not Providing
       Text: Infrastructure developer does not update the OpenAPS infrastructure when
         there is a problem with the current infrastructure
+      Reason: Not Providing
     - Identifier: UCA-UI-101
-      Reason: Providing
       Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
         which makes OpenAPS incompatible with other components in the system being
         used (Insulin pump, CGM)
-    - Identifier: UCA-UI-102
       Reason: Providing
+    - Identifier: UCA-UI-102
       Text: InfDev makes an incomplete update to the OpenAPS infrastructure (compared
         with what has been planned/promised/documented)
+      Reason: Providing
   - Identifier: TI
     Text: Test
     Unsafe Control Actions:
     - Identifier: UCA-T-100
-      Reason: Providing
       Text: Infrastructure developer tests of the system are flawed
+      Reason: Providing
     - Identifier: UCA-T-1
-      Reason: Not Providing
       Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
         sufficiently
+      Reason: Not Providing
     - Identifier: UCA-T-1000
-      Reason: Timing
       Text: Infrastructure developer tests the OpenAPS system infrastructure after
         it's deployed
+      Reason: Timing
     - Identifier: UCA-T-2
-      Reason: Not Providing
       Text: InfDev does not consider all HW setups/configurations when running/updating
         the test cases
-    - Identifier: UCA-T-3
       Reason: Not Providing
+    - Identifier: UCA-T-3
       Text: InfDev does not consider each use case for OpenAPS tools and infrastructure
         when writing tests
-    - Identifier: UCA-T-4
       Reason: Not Providing
+    - Identifier: UCA-T-4
       Text: InfDev does not provide analysis of failed tests
+      Reason: Not Providing
   - Identifier: IF
     Text: Forum
     Unsafe Control Actions:
     - Identifier: UCA-IF-100
-      Reason: Providing
       Text: Infrastructure developers provide a flawed forum (bandwidth issues, software
         bugs)
+      Reason: Providing
     - Identifier: UCA-IF-1
-      Reason: Not Providing
       Text: Infrastructure developers are not present on the forum that they provide
+      Reason: Not Providing
     - Identifier: UCA-IF-100
-      Reason: Timing
       Text: InfDevs do answer the questions more than X hours after the question has
         been asked
+      Reason: Timing
     - Identifier: UCA-IF-101
-      Reason: Providing
       Text: InfDevs give wrong information in the forum
+      Reason: Providing
     - Identifier: UCA-IF-2
-      Reason: Not Providing
       Text: InfDevs are not answering specific types of questions in the forum (bc
         they are biased, thought somebody else will answer etc), so that some questions
         just are forgotten
+      Reason: Not Providing
   - Identifier: IA
     Text: Answers
     Unsafe Control Actions: []
   Controller Constraints: []
-  Text: Infrastructure Developer
-- Control Actions:
+- Text: Algorithm Developer
+  Control Actions:
   - Identifier: UA
     Text: Update Algorithm
     Unsafe Control Actions:
     - Identifier: UCA-UA-100
-      Reason: Providing
       Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
+      Reason: Providing
     - Identifier: UCA-UA-1
-      Reason: Not Providing
       Text: Infrastructure developor does not update the OpenAPS infrastructure when
         there is a problem with the current infrastructure
+      Reason: Not Providing
     - Identifier: UCA-UA-101
-      Reason: Providing
       Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
         which makes OpenAPS incompatible with other components in the system being
         used (Insulin pump, CGM)
+      Reason: Providing
   - Identifier: TA
     Text: Test
     Unsafe Control Actions:
     - Identifier: UCA-TA-100
-      Reason: Providing
       Text: Infrastructure developer tests of the system are flawed
+      Reason: Providing
     - Identifier: UCA-TA-1
-      Reason: Not Providing
       Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
         sufficiently
+      Reason: Not Providing
     - Identifier: UCA-TA-1000
-      Reason: Timing
       Text: Infrastructure developer tests the OpenAPS system infrastructure after
         it's deployed
+      Reason: Timing
   - Identifier: AF
     Text: Forum
     Unsafe Control Actions:
     - Identifier: UCA-AF-100
-      Reason: Providing
       Text: Infrastructure developers provide a flawed forum
+      Reason: Providing
     - Identifier: UCA-AF-1
-      Reason: Not Providing
       Text: Infrastructure developers are not present on the forum that they provide
+      Reason: Not Providing
   - Identifier: AA
     Text: Answers
     Unsafe Control Actions: []
   Controller Constraints: []
-  Text: Algorithm Developer
 
