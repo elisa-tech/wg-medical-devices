@@ -1,35 +1,13 @@
 # wg-medical-devices
 work area for analysis of medical devices
 
-TODO:  Create Document in markdown to follow structure of:
-
 Document #1 - Applying STPA Document
 * Goals
 * References to useful STPA
 * Learnings 
 
 Document #2 openAPS Analysis
-* Introduction to problem
-  * Background Info
-  * Goals 
-  * References & Key Diagrams
+* see https://github.com/elisa-tech/wg-medical-devices/issues/9
 
-* STPA Level 1
-  * Diagram
-  * UCA,  Losses, Analysis
-
-* STPA Level 2
-  * Diagram
-  * UCA, Losses, Analysis
-
-* STPA Level 3
-  * Diagram
-  * UCA, Losses, Analysis
-
-* Results
-
-* Highlights 
-
-* Appendix / Reference Material
-
-* Listed Requirements
+Document #3 upstream Tracing Kernel Subsytems to Linux Kernel
+* see https://github.com/elisa-tech/wg-medical-devices/issues/10
