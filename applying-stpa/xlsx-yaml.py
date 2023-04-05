@@ -1,6 +1,13 @@
 import yaml
 import pandas as pd
 
+from functools import cmp_to_key
+
+def compare_items(item1, item2):
+    item1_number = int(item1["Identifier"].split("-")[-1])
+    item2_number = int(item2["Identifier"].split("-")[-1])
+    return item1_number - item2_number
+
 def convert_UCAs_to_yml(xlsx_file, uca_sheet):
     uca_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=uca_sheet)
     scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name='Level 1 Loss Scenario Analysis')
@@ -79,6 +86,11 @@ def convert_UCAs_to_yml(xlsx_file, uca_sheet):
                             "Text": split_cc[1].strip(),
                             "Unsafe Control Actions": [split_uca[0].strip()]
                         })
+    for component in components:
+        component["Controller Constraints"] = sorted(component["Controller Constraints"], key=cmp_to_key(compare_items))
+        for control_action in component["Control Actions"]:
+            control_action["Unsafe Control Actions"] = sorted(control_action["Unsafe Control Actions"], key=cmp_to_key(compare_items))
+
     return yaml.dump({"Components": components}, sort_keys=False)
 
 def convert_purpose_to_yml(xlsx_file, purpose_sheet):
