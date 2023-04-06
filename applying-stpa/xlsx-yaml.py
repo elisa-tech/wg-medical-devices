@@ -8,9 +8,9 @@ def compare_items(item1, item2):
     item2_number = int(item2["Identifier"].split("-")[-1])
     return item1_number - item2_number
 
-def convert_UCAs_to_yml(xlsx_file, uca_sheet):
+def convert_UCAs_and_L1_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scenarios_sheet):
     uca_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=uca_sheet)
-    scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name='Level 1 Loss Scenario Analysis')
+    scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=l1_loss_scenarios_sheet)
     uca_scenarios = {}
     curr_key = ""
     for row in scenario_df.iterrows():
@@ -20,9 +20,9 @@ def convert_UCAs_to_yml(xlsx_file, uca_sheet):
             curr_key = curr_key[0].strip()
             uca_scenarios.update({curr_key: {"ls1":[], "ls2":[]}})
         if type(data["Loss Scenario Type 1"]) is str:
-            uca_scenarios[curr_key]['ls1'].append(data["Loss Scenario Type 1"])    
+            uca_scenarios[curr_key]['ls1'].append(data["Loss Scenario Type 1"].strip())    
         if type(data["Loss Scenario Type 2"]) is str:
-            uca_scenarios[curr_key]["ls2"].append(data["Loss Scenario Type 2"])
+            uca_scenarios[curr_key]["ls2"].append(data["Loss Scenario Type 2"].strip())
     uca_categories = ["Providing", "Not Providing", "Timing", "Duration"]
     cc_labels = {"Providing":"P", "Not Providing":"NP", "Timing": "T", "Duration": "D"}
     components = []
@@ -63,14 +63,18 @@ def convert_UCAs_to_yml(xlsx_file, uca_sheet):
                     control_action["Unsafe Control Actions"][-1].update({
                         "Scenarios": []
                     })
+                    i = 1
                     for ls1 in uca_scenarios[split_uca[0].strip()]['ls1']:
-                        identifier = "LS-1-"+split_uca[0].strip()
+                        identifier = "LS-1-"+split_uca[0].strip()+"-"+str(i)
+                        i = i + 1
                         control_action["Unsafe Control Actions"][-1]["Scenarios"].append({
                             "Identifier": identifier, 
                             "Text": ls1
                         })
+                    i = 1
                     for ls2 in uca_scenarios[split_uca[0].strip()]['ls2']:
-                        identifier = "LS-2-"+split_uca[0].strip()
+                        identifier = "LS-2-"+split_uca[0].strip()+"-"+str(i)
+                        i = i + 1
                         control_action["Unsafe Control Actions"][-1]["Scenarios"].append({
                             "Identifier": identifier, 
                             "Text": ls2
@@ -142,5 +146,5 @@ def convert_purpose_to_yml(xlsx_file, purpose_sheet):
     return yaml.dump(purpose_dict, sort_keys=False)
 
 
-print(convert_UCAs_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs'))
+print(convert_UCAs_and_L1_loss_scenarios_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs', 'Level 1 Loss Scenario Analysis'))
 print(convert_purpose_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Losses, Hazards and SCs'))
