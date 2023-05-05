@@ -1,6 +1,5 @@
 import yaml
 import pandas as pd
-
 from functools import cmp_to_key
 
 def compare_items(item1, item2):
@@ -8,7 +7,7 @@ def compare_items(item1, item2):
     item2_number = int(item2["Identifier"].split("-")[-1])
     return item1_number - item2_number
 
-def convert_UCAs_and_L1_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scenarios_sheet):
+def convert_UCAs_and_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scenarios_sheet):
     uca_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=uca_sheet)
     scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=l1_loss_scenarios_sheet)
     uca_scenarios = {}
@@ -85,6 +84,8 @@ def convert_UCAs_and_L1_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scen
                     controller_constraints = data[cc_labels[category]+" Controller Constraints"].split("\n")
                     for constraint in controller_constraints:
                         split_cc = constraint.split(": ")
+                        if split_cc == ['']:
+                            continue
                         component["Controller Constraints"].append({
                             "Identifier": split_cc[0].strip(),
                             "Text": split_cc[1].strip(),
@@ -146,5 +147,5 @@ def convert_purpose_to_yml(xlsx_file, purpose_sheet):
     return yaml.dump(purpose_dict, sort_keys=False)
 
 
-print(convert_UCAs_and_L1_loss_scenarios_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs', 'Level 1 Loss Scenario Analysis'))
+print(convert_UCAs_and_loss_scenarios_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs', 'Level 1 Loss Scenario Analysis'))
 print(convert_purpose_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Losses, Hazards and SCs'))
