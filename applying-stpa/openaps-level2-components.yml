@@ -1,529 +1,1192 @@
 Components:
-- Text: OpenAPS
+- Text: Raspi OS
   Control Actions:
-  - Identifier: STB
-    Text: Set Temporary Basal
+  - Identifier: RSA
+    Text: Set up algorithm
     Unsafe Control Actions:
-    - Identifier: UCA-STB-1
-      Text: OpenAPS does not set the temporary basal dose when the current insulin
-        dosage is not optimal and it has been over X minutes since the last temporary
-        basal recommendation
+    - Identifier: UCA-RSA-1
+      Text: Raspi OS does not update the OpenAPS configurations (or prompt the human
+        operator to do so) when there is a change in the OpenAPS loop setup that should
+        affect the configurations
       Reason: Not Providing
-    - Identifier: UCA-STB-2
-      Text: OpenAPS does not set the temporary basal dose when there is no active
-        temporary basal recommendation and there is adequate data available to make
-        a justified recommendation
+      Scenarios:
+      - Identifier: LS-1-UCA-RSA-1-1
+        Text: There is no information in the code/configuration that allows for automated
+          compatibility checks
+      - Identifier: LS-1-UCA-RSA-1-2
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the compatibility checks are not implemented or errorneously implemented
+      - Identifier: LS-1-UCA-RSA-1-3
+        Text: The interface detects the configuration mismatch, but does not show
+          this on the UI
+      - Identifier: LS-1-UCA-RSA-1-4
+        Text: OpenAPS is not set up to prompt the human to update configs when it
+          detects a change that should be reflected in configs or detects inaccurate
+          configs
+      - Identifier: LS-2-UCA-RSA-1-1
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the version information is not updated, so that the compatiblity
+          algorithm thinks everything is still on its old configuration
+      - Identifier: LS-2-UCA-RSA-1-2
+        Text: There have been additional configurations added in the latest OpenAPS
+          version so the version that is being used needs to be updated
+    - Identifier: UCA-RSA-2
+      Text: Raspi OS does not successfully set up the algorithm when the human operator
+        runs the script to set up the algorithm
       Reason: Not Providing
-    - Identifier: UCA-STB-100
-      Text: OpenAPS algorithm recommends too high temporary basal dosing recommendation
-        when current glucose levels are low and not likely to rise (bases on active
-        insulin and human insulin pump input)
+      Scenarios:
+      - Identifier: LS-1-UCA-RSA-2-1
+        Text: Dependencies on the RaspiOS are not / cannot be the correct version
+          to install the algorithm correctly
+      - Identifier: LS-1-UCA-RSA-2-2
+        Text: Raspi OS version is not supported by OpenAPS
+      - Identifier: LS-1-UCA-RSA-2-3
+        Text: Raspi OS has packaging problems / broken packages which are causing
+          problems installing dependencies
+      - Identifier: LS-2-UCA-RSA-2-1
+        Text: Installation script aborts or crashes partway through
+    - Identifier: UCA-RSA-100
+      Text: Raspi OS selects a different option to that which the human operator entered
+        or intended when configuring OpenAPS
       Reason: Providing
-    - Identifier: UCA-STB-101
-      Text: OpenAPS algorithm recommends too low temporary basal dosing recommendation
-        when current glucose levels are high and not likely to fall (based on current
-        glucose levels, active insulin and human insulin pump input)
+      Scenarios:
+      - Identifier: LS-1-UCA-RSA-100-1
+        Text: Raspi OS bug or malfunction
+      - Identifier: LS-1-UCA-RSA-100-2
+        Text: selection of a different memory section than the one the information
+          entered by the operator is stored at (memory address issue)
+      - Identifier: LS-1-UCA-RSA-100-3
+        Text: issue with passing the entered information on to beyond the user interface
+      - Identifier: LS-2-UCA-RSA-100-1
+        Text: Issue with recognizing the operator input
+    - Identifier: UCA-RSA-101
+      Text: Raspi OS configures OpenAPS with a nonoptimal algorithm instead of oref0
       Reason: Providing
-    - Identifier: UCA-STB-102
-      Text: OpenAPS makes a temporary basal recommendation when there is inadequate
-        data available to it to justify the dosing recommendation (eg not enough data,
-        data is too conflicting)
-      Reason: Providing
-    - Identifier: UCA-STB-103
-      Text: OpenAPS provides a temporary basal dosing rate when the insulin pump settings
-        are not configured correctly for OpenAPS(*1)
-      Reason: Providing
-    - Identifier: UCA-STB-104
-      Text: OpenAPS makes a temporary basal recommendation when the insulin pump is
-        not in a state to give a dose (no battery, no insulin, infusion set needs
-        changing)
-      Reason: Providing
-  - Identifier: ROD
-    Text: Request operating data (from the insulin pump)
-    Unsafe Control Actions:
-    - Identifier: UCA-ROD-1
-      Text: OpenAPS does not get data from the insulin pump when it has not received
-        data which is from the last X minutes
-      Reason: Not Providing
-    - Identifier: UCA-ROD-100
-      Text: OpenAPS requests (and uses) old or missing data from the insulin pump
-        in place of recent data (battery fail option)
-      Reason: Providing
-    - Identifier: UCA-ROD-101
-      Text: OpenAPS requests data from the insulin pump more than X times a minute
-      Reason: Providing
-    - Identifier: UCA-ROD-102
-      Text: OpenAPS requests insufficient data from the insulin pump to make a reliable
-        dosing recommendation
-      Reason: Providing
-    - Identifier: UCA-ROD-1000
-      Text: OpenAPS gets data from the insulin pump < X seconds before the next dosing
-        recommendation, when X seconds are needed to incorporate the data into the
-        next dosing recommendation
+      Scenarios:
+      - Identifier: LS-1-UCA-RSA-101-1
+        Text: Raspi OS bug or malfunction
+      - Identifier: LS-1-UCA-RSA-101-2
+        Text: Human confirms that the algorithm is safe when it has not been tested
+          properly
+      - Identifier: LS-2-UCA-RSA-101-1
+        Text: Algorithm has safety flaws that noone knows about
+      - Identifier: LS-2-UCA-RSA-101-2
+        Text: Linux UI misidentifies the algorithm as a recommended algorithm
+    - Identifier: UCA-RSA-1000
+      Text: Raspi OS updates the algorithm or configurations too late, after OpenAPS
+        has already started to operate, and is instead using previous algorithm settings
       Reason: Timing
-  - Identifier: RG
-    Text: Request glucose level (from nightscout)
+      Scenarios:
+      - Identifier: LS-1-UCA-RSA-1000-1
+        Text: Raspi OS bug or malfunction
+      - Identifier: LS-1-UCA-RSA-1000-2
+        Text: Some other action is blocking the update routine
+      - Identifier: LS-1-UCA-RSA-1000-3
+        Text: Scheduling/Interrupt issue
+      - Identifier: LS-1-UCA-RSA-1000-4
+        Text: The Human operator starts running the algorithm before reconfiguring
+          which algorithm to run
+      - Identifier: LS-2-UCA-RSA-1000-1
+        Text: Issue with scheduling the tasks
+  - Identifier: STAO
+    Text: Start OpenAPS
     Unsafe Control Actions:
-    - Identifier: UCA-RG-1
-      Text: OpenAPS does not get valid data from the NightScout when it has not received
-        data which is from the last X minutes
+    - Identifier: UCA-STAO-1
+      Text: Raspi OS does not start OpenAPS loop when Raspi launches and there is
+        an OpenAPS loop set up
       Reason: Not Providing
-    - Identifier: UCA-RG-100
-      Text: OpenAPS requests (and uses) old or missing glucose data in place of recent
-        glucose data
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-1-1
+        Text: Bug in OpenAPS code
+      - Identifier: LS-1-UCA-STAO-1-2
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-1-UCA-STAO-1-3
+        Text: Instruction to start OpenAPS has been cleared from Raspi OS boot instructions
+      - Identifier: LS-1-UCA-STAO-1-4
+        Text: Raspi OS was booted abnormally
+      - Identifier: LS-1-UCA-STAO-1-5
+        Text: Raspi OS crash
+      - Identifier: LS-2-UCA-STAO-1-1
+        Text: OpenAPS loop is set up in the wrong location on RasPi OS
+      - Identifier: LS-2-UCA-STAO-1-2
+        Text: OpenAPS files have been corrupted
+    - Identifier: UCA-STAO-2
+      Text: Raspi OS does not start OpenAPS when the OpenAPS loop is installed
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-2-1
+        Text: Bug in OpenAPS code
+      - Identifier: LS-1-UCA-STAO-2-2
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-1-UCA-STAO-2-3
+        Text: Human operator cancelled the RasPi set up
+      - Identifier: LS-1-UCA-STAO-2-4
+        Text: Raspi OS crash
+      - Identifier: LS-2-UCA-STAO-2-1
+        Text: OpenAPS loop is set up in the wrong location on RasPi OS
+      - Identifier: LS-2-UCA-STAO-2-2
+        Text: OpenAPS files have been corrupted
+    - Identifier: UCA-STAO-3
+      Text: Raspi OS does not start OpenAPS after there has been a completed update
+        to OpenAPS
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-3-1
+        Text: Bug in OpenAPS code
+      - Identifier: LS-1-UCA-STAO-3-2
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-1-UCA-STAO-3-3
+        Text: Human operator cancelled the RasPi set up
+      - Identifier: LS-1-UCA-STAO-3-4
+        Text: Raspi OS crash
+      - Identifier: LS-2-UCA-STAO-3-1
+        Text: OpenAPS files have been corrupted
+      - Identifier: LS-2-UCA-STAO-3-2
+        Text: OpenAPS does not communicate to RasPi OS that there has been a completed
+          update and OpenAPS needs to run again
+    - Identifier: UCA-STAO-100
+      Text: Raspi OS starts a different application and not OpenAPS
       Reason: Providing
-    - Identifier: UCA-RG-101
-      Text: OpenAPS gets data from the CGM more than X times a minute, if NightScout
-        is not available (consequence
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-100-1
+        Text: There is another file called OpenAPS
+      - Identifier: LS-1-UCA-STAO-100-2
+        Text: OpenAPS is set up in the wrong location
+      - Identifier: LS-2-UCA-STAO-100-1
+        Text: There is another instance of OpenAPS set as the default
+    - Identifier: UCA-STAO-101
+      Text: Raspi OS starts an older version of OpenAPS
       Reason: Providing
-    - Identifier: UCA-RG-102
-      Text: OpenAPS requests insufficient data from the NightScout to make a reliable
-        dosing recommendation
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-101-1
+        Text: Raspi OS bug
+      - Identifier: LS-2-UCA-STAO-101-1
+        Text: Configs show the wrong OpenAPS version and have not been updated
+    - Identifier: UCA-STAO-102
+      Text: Raspi OS starts OpenAPS twice
       Reason: Providing
-    - Identifier: UCA-RG-1000
-      Text: OpenAPS gets data from the NightScout < X seconds before the next dosing
-        recommendation, when X seconds are needed to incorporate the data into the
-        next dosing recommendation
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-102-1
+        Text: Raspi OS processer hangs as it is starting OpenAPS
+      - Identifier: LS-2-UCA-STAO-102-1
+        Text: '-'
+    - Identifier: UCA-STAO-103
+      Text: Raspi OS starts OpenAPS loop when OpenAPS is not working properly
+      Reason: Providing
+      Scenarios: []
+    - Identifier: UCA-STAO-1000
+      Text: Raspi OS takes more than X seconds to start the OpenAPS loop
       Reason: Timing
-  - Identifier: SIP
-    Text: Suspend Insulin Pump
+      Scenarios:
+      - Identifier: LS-1-UCA-STAO-1000-1
+        Text: Kernel scheduler issues
+      - Identifier: LS-1-UCA-STAO-1000-2
+        Text: Raspi OS is running slowly
+      - Identifier: LS-2-UCA-STAO-1000-1
+        Text: Timestamping problems, either with component clocks or Raspi OS clock
+  - Identifier: RPD
+    Text: Provide data from other devices to OpenAPS
     Unsafe Control Actions:
-    - Identifier: UCA-SIP-1
-      Text: OpenAPS does not suspend insulin dosing, or at least provide an audible
-        alert for the human to suspend insulin dosing, when the human is experiencing
-        or close to experiencing hypoglycemia
+    - Identifier: UCA-RPD-1
+      Text: Raspi OS does not relay data from other devices to OpenAPS app when OpenAPS
+        is running
       Reason: Not Providing
-    - Identifier: UCA-SIP-100
-      Text: OpenAPS suspends insulin dosing when the human is not close to experiencing
-        hypoglycemia
+      Scenarios:
+      - Identifier: LS-1-UCA-RPD-1-1
+        Text: RasPi OS does not receive data in correct format
+      - Identifier: LS-1-UCA-RPD-1-2
+        Text: RasPi OS does not finish receiving the data
+      - Identifier: LS-1-UCA-RPD-1-3
+        Text: OpenAPS does not pull the data from Raspi OS
+      - Identifier: LS-2-UCA-RPD-1-1
+        Text: '-'
+    - Identifier: UCA-RPD-100
+      Text: Raspi OS relays data from other devices to OpenAPS app inaccurately
       Reason: Providing
-    - Identifier: UCA-SIP-1000
-      Text: OpenAPS suspends insulin dosing more than X minutes after the human is
-        experiencing or close to experiencing hypoglycemia
+      Scenarios:
+      - Identifier: LS-1-UCA-RPD-100-1
+        Text: RasPi OS received the data in the wrong format
+      - Identifier: LS-2-UCA-RPD-100-1
+        Text: Data transmission from other devices back to the Raspi was interfered
+          with
+    - Identifier: UCA-RPD-101
+      Text: Raspi OS relays data from other devices to OpenAPS app when other devices
+        have not sent data to OpenAPS
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-RPD-101-1
+        Text: '-'
+      - Identifier: LS-2-UCA-RPD-101-1
+        Text: Data was sent to the RasPi OS from other components unintentionally
+    - Identifier: UCA-RPD-1000
+      Text: Raspi OS takes more than X seconds to relay data from other devices to
+        OpenAPS app
       Reason: Timing
-    - Identifier: UCA-SIP-10000
-      Text: OpenAPS carries on suspending insulin dosing for more than X (~120, maybe
-        higher depending on factors) minutes after the human was experiencing or close
-        to experiencing hypoglycemia, causing a DKA risk
-      Reason: Duration
-  Controller Constraints:
-  - Identifier: CC-STB-1
-    Text: OpenAPS must set the temporary basal dose when the current insulin dosage
-      is not optimal and it has been over X minutes since the last temporary basal
-      recommendation
+      Scenarios:
+      - Identifier: LS-1-UCA-RPD-1000-1
+        Text: Kernel scheduler issues
+      - Identifier: LS-1-UCA-RPD-1000-2
+        Text: Raspi OS is running slowly
+      - Identifier: LS-2-UCA-RPD-1000-1
+        Text: Timestamping problems, either with component clocks or Raspi OS clock
+  - Identifier: STOO
+    Text: Stop OpenAPS
     Unsafe Control Actions:
-    - UCA-STB-1
-  - Identifier: CC-ROD-1
-    Text: OpenAPS must get data from the insulin pump when it has not received data
-      which is from the last X minutes
-    Unsafe Control Actions:
-    - UCA-ROD-1
-  - Identifier: CC-RG-1
-    Text: OpenAPS must get valid data from the NightScout when it has not received
-      data which is from the last X minutes
-    Unsafe Control Actions:
-    - UCA-RG-1
-  - Identifier: CC-SIP-1
-    Text: OpenAPS must have data coming in from the CGM and OpenAPS algorithm to help
-      with the predicting of hypoglycemia
-    Unsafe Control Actions:
-    - UCA-SIP-1
-  - Identifier: CC-STB-2
-    Text: OpenAPS must set the temporary basal dose when there is no active temporary
-      basal recommendation and there is adequate data available to make a justified
-      recommendation
-    Unsafe Control Actions:
-    - UCA-STB-2
-  - Identifier: CC-SIP-2
-    Text: OpenAPS must suspend insulin dosing when the human is experience or close
-      to experiencing hypoglycemia
-    Unsafe Control Actions:
-    - UCA-SIP-1
-  - Identifier: CC-STB-100
-    Text: OpenAPS algorithm must not recommend a too high temporary basal dosing recommendation
-      when current glucose levels are low and not likely to rise (based on active
-      insulin and human insulin pump input)
-    Unsafe Control Actions:
-    - UCA-STB-100
-  - Identifier: CC-ROD-100
-    Text: OpenAPS must not request (and use) old or missing data from the insulin
-      pump in place of recent data (battery fail option)
-    Unsafe Control Actions:
-    - UCA-ROD-100
-  - Identifier: CC-RG-100
-    Text: OpenAPS must not request (and use) old or missing glucose data in place
-      of recent glucose data
-    Unsafe Control Actions:
-    - UCA-RG-100
-  - Identifier: CC-SIP-100
-    Text: OpenAPS must not suspend insulin dosing by the insulin pump when the human
-      is not close to experiencing hypoglycemia
-    Unsafe Control Actions:
-    - UCA-SIP-100
-  - Identifier: CC-SIP-100
-    Text: OpenAPS must suspend insulin dosing within X minutes after the human is
-      experiencing or close to experiencing hypoglycemia
-    Unsafe Control Actions:
-    - UCA-SIP-1000
-  - Identifier: CC-STB-101
-    Text: OpenAPS algorithm must not recommend too low temporary basal dosing recommendation
-      when current glucose levels are high and not likely to fall (based on current
-      glucose levels, active insulin and human insulin pump input)
-    Unsafe Control Actions:
-    - UCA-STB-101
-  - Identifier: CC-ROD-101
-    Text: OpenAPS must not request data from the insulin pump more than X times a
-      minute
-    Unsafe Control Actions:
-    - UCA-ROD-101
-  - Identifier: CC-RG-101
-    Text: OpenAPS must not get data from the CGM more than X times a minute, if NightScout
-      is not available (consequence
-    Unsafe Control Actions:
-    - UCA-RG-101
-  - Identifier: CC-STB-102
-    Text: OpenAPS must not make a temporary basal recommendation when there is inadequate
-      and incomplete data available to it to justify the dosing recommendation (eg
-      not enough data, data is too conflicting)
-    Unsafe Control Actions:
-    - UCA-STB-102
-  - Identifier: CC-ROD-102
-    Text: OpenAPS must request sufficient data from the insulin pump to make a reliable
-      dosing recommendation
-    Unsafe Control Actions:
-    - UCA-ROD-102
-  - Identifier: CC-RG-102
-    Text: OpenAPS must request sufficient data from NightScout to make a reliable
-      dosing recommendation
-    Unsafe Control Actions:
-    - UCA-RG-102
-  - Identifier: CC-STB-103
-    Text: OpenAPS must not provide a temporary basal dosing rate when the insulin
-      pump settings are not configured correctly for OpenAPS (*1)
-    Unsafe Control Actions:
-    - UCA-STB-103
-  - Identifier: CC-STB-104
-    Text: OpenAPS must not make a temporary basal recommendation when the insulin
-      pump is not in a state to give a dose (no battery, no insulin, infusion set
-      needs changing)
-    Unsafe Control Actions:
-    - UCA-STB-104
-  - Identifier: CC-ROD-1000
-    Text: OpenAPS must get data from the insulin pump at least X seconds before the
-      next dosing recommendation, when X seconds are needed to incorporate the data
-      into the next dosing recommendation
-    Unsafe Control Actions:
-    - UCA-ROD-1000
-  - Identifier: CC-RG-1000
-    Text: OpenAPS must get data from NightScout at least X seconds before the next
-      dosing recommendation, when X seconds are needed to incorporate the data into
-      the next dosing recommendation
-    Unsafe Control Actions:
-    - UCA-RG-1000
-  - Identifier: UCA-SIP-10000
-    Text: The insulin pump should not be suspended for more than X (~120) minutes
-      after the human was experiencing or close to experiencing hypoglycemia,
-    Unsafe Control Actions:
-    - UCA-SIP-10000
-- Text: Human Actor
-  Control Actions:
-  - Identifier: PTR
-    Text: Put together OpenAPS rig
-    Unsafe Control Actions:
-    - Identifier: UCA-PTR-100
-      Text: Human actor sets up the OpenAPS rig wrong or insecurely (this needs more
-        research, hardware will help)
-      Reason: Providing
-    - Identifier: UCA-PTR-101
-      Text: Human actor makes a software update to another device (eg insulin pump,
-        CGM) which makes the device incompatible with OpenAPS
-      Reason: Providing
-  - Identifier: S
-    Text: Install or update OpenAPS software and dependencies
-    Unsafe Control Actions:
-    - Identifier: UCA-S-1
-      Text: Human actor does not install all the dependencies necessary for OpenAPS
+    - Identifier: UCA-STOO-1
+      Text: Raspi OS does not stop OpenAPS when OpenAPS is giving dosing recommendations
+        which are causing suboptimal glucose levels for X minutes
       Reason: Not Providing
-    - Identifier: UCA-S-2
-      Text: Human actor does not update the OpenAPS dependencies when there are available
-        updates which are compatible with the other OpenAPS dependencies
-      Reason: Not Providing
-    - Identifier: UCA-S-100
-      Text: Human actor makes a software update to the software that the OpenAPS rig
-        is using, which makes it incompatible with other device(s) in the system (eg
-        pump, CGM)
+      Scenarios:
+      - Identifier: LS-1-UCA-STOO-1-1
+        Text: OpenAPS does not inform the RasPi to stop OpenAPS when OpenAPS is not
+          working properly
+      - Identifier: LS-1-UCA-STOO-1-2
+        Text: RasPi fails to stop OpenAPS completely and properly
+      - Identifier: LS-1-UCA-STOO-1-3
+        Text: RasPi OS
+      - Identifier: LS-2-UCA-STOO-1-1
+        Text: Breakdown in communication between OpenAPS and the RasPi OS means RasPi
+          OS did not receive the instruction to stop OpenAPS
+    - Identifier: UCA-STOO-100
+      Text: Raspi OS stops OpenAPS when OpenAPS is running effectively and there has
+        been no instruction from the human operator to stop OpenAPS
       Reason: Providing
-    - Identifier: UCA-S-101
-      Text: Human actor installs unecessary additional dependencies for OpenAPS without
-        a "test" configuration
-      Reason: Providing
-  - Identifier: CO
-    Text: Setup and configure OpenAPS loop
-    Unsafe Control Actions:
-    - Identifier: UCA-CO-1
-      Text: There is a change in the OpenAPS loop setup, but the human actor does
-        not update the configurations of OpenAPS accordingly
-      Reason: Not Providing
-    - Identifier: UCA-CO-100
-      Text: Human actor selects an inaccurate option when configuring OpenAPS
-      Reason: Providing
-    - Identifier: UCA-CO-101
-      Text: Human actor configures OpenAPS with a bad algorithm instead of oref0
-      Reason: Providing
-  - Identifier: SO
-    Text: Stop OpenAPS loop
-    Unsafe Control Actions:
-    - Identifier: UCA-SO-1
-      Text: Human actor does not stop the OpenAPS loop when there is a problem with
-        OpenAPS or when OpenAPS is not able to make the insulin pump dose basal in
-        line with its recommendations
-      Reason: Not Providing
-    - Identifier: UCA-SO-100
-      Text: Human actor provides Switch off (hold button goes into reset) when the
-        system is expected to be up and running
-      Reason: Providing
-    - Identifier: UCA-SO-1000
-      Text: Human actor breaks the Power Off button
-      Reason: Duration
-  - Identifier: UD
-    Text: Provide useful data to pump (eg carbs)
-    Unsafe Control Actions:
-    - Identifier: UCA-UD-1
-      Text: Human actor does not provide data to the insulin pump which can improve
-        insulin dosing recommendations (eg carb data at mealtime)
-      Reason: Not Providing
-    - Identifier: UCA-UD-100
-      Text: Human actor provides erroneous input of data affecting insulin dosing
-      Reason: Providing
-    - Identifier: UCA-UD-1000
-      Text: Human actor provides meal data to the insulin pump more than X minutes
-        away from the actual mealtime
+      Scenarios:
+      - Identifier: LS-1-UCA-STOO-100-1
+        Text: RasPi OS crash
+      - Identifier: LS-2-UCA-STOO-100-1
+        Text: Human operator inadvertently stops OpenAPS
+    - Identifier: UCA-STOO-1000
+      Text: Raspi OS takes more than X minutes to stop OpenAPS when OpenAPS is giving
+        dosing recommendations which are causing suboptimal glucose levels for Y minutes
       Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-STOO-1000-1
+        Text: Kernel scheduler issues
+      - Identifier: LS-1-UCA-STOO-1000-2
+        Text: Raspi OS is running slowly
+      - Identifier: LS-2-UCA-STOO-1000-1
+        Text: Timestamping problems, either with component clocks or Raspi OS clock
   - Identifier: SB
-    Text: Set bolus on pump
+    Text: Set Bolus
     Unsafe Control Actions:
+    - Identifier: UCA-SB-1
+      Text: OpenAPS does not set a supermicrobolus for a meal when it is running the
+        oref1 algorithm
+      Reason: Not Providing
     - Identifier: UCA-SB-100
-      Text: Human actor sets a bolus (or basal) which unintentionally permanently
-        overrides OpenAPS temporary basals
+      Text: OpenAPS algorithm recommends a too high bolus dosing recommendation based
+        on current glucose levels, active insulin and human insulin pump input
       Reason: Providing
-  - Identifier: PM
-    Text: Provide mandatory settings for OpenAPS on pump (eg temp basal type as units
-      per hour not %, basal profile, DIA)
-    Unsafe Control Actions:
-    - Identifier: UCA-PM-100
-      Text: Human actor configures insulin pump settings in a way that is not suitable
-        for OpenAPS (Temp Basal rates as units per hour not %, carb ratios to grams
-        not exchange units, max basal rate set too high, basal profile / carb ratios
-        / ISF values not set, DIA too low)
+    - Identifier: UCA-SB-101
+      Text: OpenAPS algorithm recommends a too low bolus dosing recommendation based
+        on current glucose levels, active insulin and human insulin pump input
       Reason: Providing
-  - Identifier: UC
-    Text: Update CGM / CGM receiver
+    - Identifier: UCA-SB-102
+      Text: OpenAPS makes a bolus recommendation when there is inadequate data available
+        to it to justify the dosing recommendation (eg not enough data, data is too
+        conflicting)
+      Reason: Providing
+    - Identifier: UCA-SB-103
+      Text: "OpenAPS makes a bolus dosing recommendation which overrides the human\u2019\
+        s safe requested level"
+      Reason: Providing
+    - Identifier: UCA-SB-104
+      Text: OpenAPS provides a bolus dosing rate when the insulin pump settings are
+        not configurated correctly (*1)
+      Reason: Providing
+    - Identifier: UCA-SB-105
+      Text: OpenAPS makes a bolus recommendation when it is running an algorithm that
+        should only set temporary basal rates
+      Reason: Providing
+    - Identifier: UCA-SB-106
+      Text: OpenAPS makes bolus recommendations too frequently (repetitive stuck)
+      Reason: Providing
+    - Identifier: UCA-STB-107
+      Text: OpenAPS makes a bolus recommendation when the insulin pump is not in a
+        state to give a dose (no battery, no insulin, infusion set needs changing)
+      Reason: Providing
+    - Identifier: UCA-SB-1000
+      Text: OpenAPS provides a bolus recommendation too late after a meal time
+      Reason: Timing
+    - Identifier: UCA-SB-1001
+      Text: OpenAPS provides a bolus recommendation too soon after the last bolus
+        dose from the insulin pump
+      Reason: Timing
+  - Identifier: SI
+    Text: Send instruction to Insulin pump
     Unsafe Control Actions:
-    - Identifier: UCA-UC-1
-      Text: Human does not update CGM when there are updates available for X weeks
-        which can improve glucose data accuracy or prevent problems
+    - Identifier: UCA-SI-1
+      Text: The RasPi OS does not send a command to the insulin pump when the OpenAPS
+        app has requested this
       Reason: Not Providing
-    - Identifier: UCA-UC-100
-      Text: Human updates the CGM when OpenAPS rig is trying to pull data from the
-        CGM
+      Scenarios:
+      - Identifier: LS-1-UCA-SI-1-1
+        Text: RasPi OS does not recognise the insulin pump
+      - Identifier: LS-1-UCA-SI-1-2
+        Text: RasPi OS does not have good network connection (airports / noisy areas)
+      - Identifier: LS-1-UCA-SI-1-3
+        Text: RasPi OS does not believe that it is currently looping
+      - Identifier: LS-1-UCA-SI-1-4
+        Text: RasPi OS does not recognise the command
+      - Identifier: LS-1-UCA-SI-1-5
+        Text: Algorithm does not believe that the command is safe
+      - Identifier: LS-1-UCA-SI-1-6
+        Text: RasPi OS crashes
+      - Identifier: LS-2-UCA-SI-1-1
+        Text: Device had a automatic firmware update and the handshake config has
+          to be updated on RasPi side
+    - Identifier: UCA-SI-100
+      Text: The RasPi OS sends a instruction to the Insulin Pump when it has not been
+        sent a command by the OpenAPS app or a prompt from the recipient
       Reason: Providing
-    - Identifier: UCA-UC-101
-      Text: Human provides wrong CGM update
+      Scenarios:
+      - Identifier: LS-1-UCA-SI-100-1
+        Text: Advesary hacks into RasPi and sends command to Insulin pump
+      - Identifier: LS-1-UCA-SI-100-2
+        Text: Someone has control of raspi by accident (maybe has controls ont their
+          phone) to make it send a command
+      - Identifier: LS-1-UCA-SI-100-3
+        Text: Somebody's rig communicates with somebody else's insulin pump within
+          the network
+      - Identifier: LS-2-UCA-SI-100-1
+        Text: There is a signal from somewhere else that RasPi OS mistakes as a signal
+          from the OpenAPS app
+    - Identifier: UCA-SI-101
+      Text: The RasPi OS sends the wrong command to the Insulin Pump
       Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SI-101-1
+        Text: Bug in RasPi OS command execution
+      - Identifier: LS-1-UCA-SI-101-2
+        Text: The function of a command has changed but this has not been updated
+          in the RasPi OS
+      - Identifier: LS-2-UCA-SI-101-1
+        Text: Intefering signals provide a different command to the RasPi OS to send
+          the wrong command
+      - Identifier: LS-2-UCA-SI-101-2
+        Text: The wrong command is invoked to the RasPi
+    - Identifier: UCA-SI-102
+      Text: The RasPi OS sends a command to the Insulin Pump when the recipient is
+        not able to receive or action the command
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SI-102-1
+        Text: OpenAPS does not have the function to prevent the RasPi OS sending commands
+          to the pump
+      - Identifier: LS-1-UCA-SI-102-2
+        Text: The insulin pump has gone offline recently and OpenAPS sends the command
+          to be queued for when it comes back online
+      - Identifier: LS-1-UCA-SI-102-3
+        Text: RasPi OS recognized that the insulin pump went offline too late and
+          still sends a command (bug)
+      - Identifier: LS-2-UCA-SI-102-1
+        Text: Bug in RasPi OS
+    - Identifier: UCA-SI-103
+      Text: The RasPi OS sends a command to the Insulin Pump based on inaccurate information
+      Reason: Providing
+    - Identifier: UCA-SI-104
+      Text: The RasPi OS sends an unsucessful instruction or data request to the Insulin
+        Pump
+      Reason: Providing
+    - Identifier: UCA-SI-1000
+      Text: The RasPi OS sends an instruction to Insulin pump more than X seconds
+        after the command has been invoked by OpenAPS
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-SI-1000-1
+        Text: Kernel scheduler issue
+      - Identifier: LS-1-UCA-SI-1000-2
+        Text: Command or function in algorithm takes too long or sends too much data
+      - Identifier: LS-2-UCA-SI-1000-1
+        Text: Timestamping issue
+      - Identifier: LS-2-UCA-SI-1000-2
+        Text: Different times on OpenAPS rig and other components
+  - Identifier: SN
+    Text: Send instruction to NightScout
+    Unsafe Control Actions:
+    - Identifier: UCA-SN-1
+      Text: The RasPi OS does not send a command to NightScout when the OpenAPS app
+        has requested this
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SN-1-1
+        Text: RasPi OS does not recognise NightScout
+      - Identifier: LS-1-UCA-SN-1-2
+        Text: RasPi OS does not have good network connection (airports / noisy areas)
+      - Identifier: LS-1-UCA-SN-1-3
+        Text: RasPi OS does not believe that it is currently looping
+      - Identifier: LS-1-UCA-SN-1-4
+        Text: RasPi OS does not recognise the command
+      - Identifier: LS-1-UCA-SN-1-5
+        Text: Algorithm does not believe that the command is safe
+      - Identifier: LS-1-UCA-SN-1-6
+        Text: RasPi OS crashes
+      - Identifier: LS-2-UCA-SN-1-1
+        Text: Device had a automatic firmware update and the handshake config has
+          to be updated on RasPi side
+    - Identifier: UCA-SN-100
+      Text: The RasPi OS sends a instruction to the NightScout when it has not been
+        sent a command by the OpenAPS app or a prompt from the recipient
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SN-100-1
+        Text: Adversary hacks into RasPi and sends command
+      - Identifier: LS-1-UCA-SN-100-2
+        Text: Someone has control of raspi by accident (maybe has controls ont their
+          phone) to make it send a command
+      - Identifier: LS-1-UCA-SN-100-3
+        Text: Rig communicates with somebody else's insulin pump within the network
+      - Identifier: LS-2-UCA-SN-100-1
+        Text: There is a signal from somewhere else that RasPi OS mistakes as a signal
+          from the OpenAPS app
+    - Identifier: UCA-SN-101
+      Text: The RasPi OS sends the wrong command to the NightScout
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SN-101-1
+        Text: Bug in RasPi OS command execution
+      - Identifier: LS-1-UCA-SN-101-2
+        Text: The function of a command has changed but this has not been updated
+          in the RasPi OS
+      - Identifier: LS-2-UCA-SN-101-1
+        Text: Intefering signals provide a different command to the RasPi OS to send
+          the wrong command
+      - Identifier: LS-2-UCA-SN-101-2
+        Text: The wrong command is invoked to the RasPi
+    - Identifier: UCA-SN-102
+      Text: The RasPi OS sends a command to the NightScout when the recipient is not
+        able to receive or action the command
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SN-102-1
+        Text: The component has gone offline recently and OpenAPS sends the command
+          to be queued for when it comes back online
+      - Identifier: LS-1-UCA-SN-102-2
+        Text: RasPi OS recognized that the component went offline too late and still
+          sends a command (bug)
+      - Identifier: LS-2-UCA-SN-102-1
+        Text: Bug in RasPi OS
+      - Identifier: LS-2-UCA-SN-102-2
+        Text: OpenAPS does not have the ability to detect that NightScout is not able
+          to receive or action the command from OpenAPS
+    - Identifier: UCA-SN-103
+      Text: The RasPi OS sends a command to NightScout based on inaccurate information
+      Reason: Providing
+    - Identifier: UCA-SN-104
+      Text: The RasPi OS sends an unsucessful instruction or data request to NightScout
+      Reason: Providing
+    - Identifier: UCA-SN-1000
+      Text: The RasPi OS sends an instruction to NightScout more than X seconds after
+        the command has been invoked by OpenAPS
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-SN-1000-1
+        Text: Kernel scheduler issue
+      - Identifier: LS-1-UCA-SN-1000-2
+        Text: Command or function in algorithm takes too long or sends too much data
+      - Identifier: LS-2-UCA-SN-1000-1
+        Text: Timestamping issue
+      - Identifier: LS-2-UCA-SN-1000-2
+        Text: Different times on OpenAPS rig and other components
   Controller Constraints:
-  - Identifier: CC-S-1
-    Text: Human actor must install all the dependencies necessary for OpenAPS
+  - Identifier: CC-RSA-1
+    Text: When OpenAPS configurations are/become incorrect, this should be detected
+      by or told to the RasPi which should then notify the human operator and if the
+      configuration is dangerous OpenAPS should update the configuration itself and
+      notify the human operator of the new value
     Unsafe Control Actions:
-    - UCA-S-1
-  - Identifier: CC-CO-1
-    Text: Human actor must update the configurations of OpenAPS accordingly if there
-      is a change in the OpenAPS loop setup which affects the configurations
+    - UCA-RSA-1
+  - Identifier: CC-STAO-1
+    Text: If there is a loop set up, when the Raspi OS is turned on it should start
+      the OpenAPS loop
     Unsafe Control Actions:
-    - UCA-CO-1
-  - Identifier: CC-SO-1
-    Text: Human actor must stop the OpenAPS loop when there is a problem with OpenAPS
-      or when OpenAPS is not able to make the insulin pump dose basal in line with
-      its recommendations
+    - UCA-STAO-1
+  - Identifier: CC-RPD-1
+    Text: Raspi OS must relay data from other devices to OpenAPS app when OpenAPS
+      is running.
     Unsafe Control Actions:
-    - UCA-SO-1
-  - Identifier: CC-UD-1
-    Text: Human actor must provide data to the insulin pump which can improve insulin
-      dosing recommendations (eg carb data at mealtime)
+    - UCA-RPD-1
+  - Identifier: CC-STOO-1
+    Text: Raspi OS must stop OpenAPS when OpenAPS is giving dosing recommendations
+      which are causing suboptimal glucose levels for X minutes
     Unsafe Control Actions:
-    - UCA-UD-1
-  - Identifier: CC-S-2
-    Text: Human actor must update dependencies when there are compatible updates available
+    - UCA-STOO-1
+  - Identifier: CC-SI-1
+    Text: The RasPi OS should send a command to the insulin pump when the OpenAPS
+      app has requested this
     Unsafe Control Actions:
-    - UCA-S-2
-  - Identifier: CC-PTR-100
-    Text: Human actor must not set up the OpenAPS rig wrong or insecurely (this needs
-      more research, hardware will help)
+    - UCA-SI-1
+  - Identifier: CC-SN-1
+    Text: The RasPi OS should send a command to the NightScout when the OpenAPS app
+      has requested this
     Unsafe Control Actions:
-    - UCA-PTR-100
-  - Identifier: CC-S-100
-    Text: Human actor must not make a software update to the software that the OpenAPS
-      rig is using which makes it incompatible with other device(s) in the system
-      (eg pump, CGM)
+    - UCA-SN-1
+  - Identifier: CC-RSA-2
+    Text: When the human operator correctly runs the script to set up the algorithm,
+      the RasPi OS must make OpenAPS install and start looping the algorithm
     Unsafe Control Actions:
-    - UCA-S-100
-  - Identifier: CC-CO-100
-    Text: Human actor must not select an inaccurate option when configuring OpenAPS
+    - UCA-RSA-2
+  - Identifier: CC-STAO-2
+    Text: When the OpenAPS loop is set up, Raspi OS should then start the OpenAPS
+      loop
     Unsafe Control Actions:
-    - UCA-CO-100
-  - Identifier: CC-SO-100
-    Text: Human actor must not provide Switch off (hold button goes into reset) when
-      the system is expected to be up and running
+    - UCA-STAO-2
+  - Identifier: CC-RPD-2
+    Text: If OpenAPS has not received any data from Raspi OS in X minutes, OpenAPS
+      should stop controlling the insulin pump.
     Unsafe Control Actions:
-    - UCA-SO-100
-  - Identifier: CC-UD-100
-    Text: Human actor must not provide erroneous input of data affecting insulin dosing
+    - UCA-RPD-1
+  - Identifier: CC-STAO-3
+    Text: After OpenAPS has finished an update and is ready to continue, the Raspi
+      OS should start the OpenAPS loop again or inform the human operator
     Unsafe Control Actions:
-    - UCA-UD-100
-  - Identifier: CC-SB-100
-    Text: Human actor must not set a bolus (or basal) which unintentionally permanently
-      overrides OpenAPS temporary basals
+    - UCA-STAO-3
+  - Identifier: CC-RSA-100
+    Text: When the human operator enters or intends an option when configuring OpenAPS,
+      the Raspi OS must select that option or inform the human operator that their
+      configuration is unsafe and what the new configuration is
     Unsafe Control Actions:
-    - UCA-SB-100
-  - Identifier: CC-PM-100
-    Text: Human actor must not configure insulin pump settings in a way that is not
-      suitable for OpenAPS (Temp Basal rates as units per hour not %, carb ratios
-      to grams not exchange units, max basal rate set too high, basal profile / carb
-      ratios / ISF values not set, DIA too low)
+    - UCA-RSA-100
+  - Identifier: CC-STAO-100
+    Text: OpenAPS should not cause the RasPi to launch a different application
     Unsafe Control Actions:
-    - UCA-PM-100
-  - Identifier: CC-PTR-101
-    Text: Human actor must not make a software update to another device (eg insulin
-      pump, CGM) which makes the device incompatible with OpenAPS
+    - UCA-STAO-100
+  - Identifier: CC-RPD-100
+    Text: Raspi OS must relay data from other devices to OpenAPS app accurately
     Unsafe Control Actions:
-    - UCA-PTR-101
-  - Identifier: CC-S-101
-    Text: Human actor must not install unecessary additional dependencies for OpenAPS
-      without a "test" configuration
+    - UCA-RPD-100
+  - Identifier: CC-STOO-100
+    Text: Raspi OS should not stop OpenAPS when OpenAPS is running effectively and
+      there has been no instruction from the human operator to stop OpenAPS
     Unsafe Control Actions:
-    - UCA-S-101
-  - Identifier: CC-CO-101
-    Text: Human actor must not  configure OpenAPS with a bad algorithm instead of
-      oref0
+    - UCA-STOO-100
+  - Identifier: CC-SI-100
+    Text: The RasPi OS should not send an instruction to the Insulin Pump when it
+      has not been sent a command by the OpenAPS app or a prompt from the recipient
     Unsafe Control Actions:
-    - UCA-CO-101
-  - Identifier: CC-UD-1000
-    Text: Human actor must provide meal data to the insulin pump within X minutes
-      from the actual mealtime
+    - UCA-SI-100
+  - Identifier: CC-SN-100
+    Text: The RasPi OS should not send an instruction to NightScout when it has not
+      been sent a command by the OpenAPS app or a prompt from the recipient
     Unsafe Control Actions:
-    - UCA-UD-1000
-- Text: Infrastructure Developer
+    - UCA-SN-100
+  - Identifier: CC-RSA-101
+    Text: Raspi OS should warn the human operator that OpenAPS is about to be configured
+      with a non-recommended algorithm before proceeding with the setup
+    Unsafe Control Actions:
+    - UCA-RSA-101
+  - Identifier: CC-STAO-101
+    Text: When it is turned on, Raspi OS should launch the latest working version
+      of OpenAPS available
+    Unsafe Control Actions:
+    - UCA-STAO-101
+  - Identifier: CC-RPD-101
+    Text: Raspi OS must not relay data from other devices to OpenAPS app that is not
+      actually from the other devices
+    Unsafe Control Actions:
+    - UCA-RPD-101
+  - Identifier: CC-SI-101
+    Text: The RasPi OS should always send the same command that OpenAPS informed it
+      to to the Insulin Pump
+    Unsafe Control Actions:
+    - UCA-SI-101
+  - Identifier: CC-SN-101
+    Text: The RasPi OS should always send the same command that OpenAPS informed it
+      to to NightScout
+    Unsafe Control Actions:
+    - UCA-SN-101
+  - Identifier: CC-STAO-102
+    Text: By default Raspi OS should just be running OpenAPS once whenever it is turned
+      on
+    Unsafe Control Actions:
+    - UCA-STAO-102
+  - Identifier: CC-SI-102
+    Text: When the RasPi OS sends a command to the Insulin Pump that the Insulin pump
+      is not able to receive or action, the human operator should be informed and
+      if safety critical the insulin pump should stop using the OpenAPS dosing recommendations
+    Unsafe Control Actions:
+    - UCA-SI-102
+  - Identifier: CC-SN-102
+    Text: When the RasPi OS sends a command to the NightScout that NightScout is not
+      able to receive or action, the human operator should be informed and if safety
+      critical the insulin pump should stop using the OpenAPS dosing recommendations
+    Unsafe Control Actions:
+    - UCA-SN-102
+  - Identifier: CC-STAO-103
+    Text: If OpenAPS is generating hazardous glucose levels and still controlling
+      the insulin pump, the Raspi should stop the OpenAPS loop
+    Unsafe Control Actions:
+    - UCA-STAO-103
+  - Identifier: CC-SI-103
+    Text: The RasPi OS should send all commands to the Insulin Pump based on accurate
+      information and calculations
+    Unsafe Control Actions:
+    - UCA-SI-103
+  - Identifier: CC-SN-103
+    Text: The RasPi OS should send all commands to NightScout based on accurate information
+      and calculations
+    Unsafe Control Actions:
+    - UCA-SN-103
+  - Identifier: CC-SI-104
+    Text: When the RasPi OS sends an unsucessful instruction or data request to the
+      Insulin Pump, the human operator should be informed and if safety critical OpenAPS
+      should stop controlling the insulin pump.
+    Unsafe Control Actions:
+    - UCA-SI-104
+  - Identifier: CC-SN-104
+    Text: When the RasPi OS sends an unsucessful instruction or data request to the
+      NightScout, the human operator should be informed and if safety critical OpenAPS
+      should stop controlling the insulin pump.
+    Unsafe Control Actions:
+    - UCA-SN-104
+  - Identifier: CC-RSA-1000
+    Text: If the configuration files for the algorithm have changed but the algorithm
+      is still running with the old configurations, OpenAPS should notify the human
+      operator
+    Unsafe Control Actions:
+    - UCA-RSA-1000
+  - Identifier: CC-STAO-1000
+    Text: Raspi OS should take less than X seconds to start the OpenAPS loop
+    Unsafe Control Actions:
+    - UCA-STAO-1000
+  - Identifier: CC-RPD-1000
+    Text: Raspi OS must take less than X seconds to relay data from other devices
+      to OpenAPS app
+    Unsafe Control Actions:
+    - UCA-RPD-1000
+  - Identifier: CC-STOO-1000
+    Text: Raspi OS should take less than X minutes to stop OpenAPS when OpenAPS is
+      giving dosing recommendations which are causing suboptimal glucose levels for
+      Y minutes
+    Unsafe Control Actions:
+    - UCA-STOO-1000
+  - Identifier: CC-SI-1000
+    Text: The RasPi OS should send instructions to Insulin pump less than X seconds
+      after the command has been invoked by OpenAPS
+    Unsafe Control Actions:
+    - UCA-SI-1000
+  - Identifier: CC-SN-1000
+    Text: The RasPi OS should send instructions to NightScout less than X seconds
+      after the command has been invoked by OpenAPS
+    Unsafe Control Actions:
+    - UCA-SN-1000
+- Text: OpenAPS app
   Control Actions:
-  - Identifier: UI
-    Text: Update Infrastructure
+  - Identifier: OSA
+    Text: Set up algorithm and loop
     Unsafe Control Actions:
-    - Identifier: UCA-UI-1
-      Text: Infrastructure developer does not update the OpenAPS infrastructure when
-        there is a problem with the current infrastructure
+    - Identifier: UCA-OSA-1
+      Text: OpenAPS app does not update the OpenAPS configurations (or prompt the
+        human operator to do so) when there is a change in the OpenAPS loop setup
+        that should affect the configurations
       Reason: Not Providing
-    - Identifier: UCA-UI-100
-      Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
+      Scenarios:
+      - Identifier: LS-1-UCA-OSA-1-1
+        Text: There is no information in the code/configuration that allows for automated
+          compatibility checks
+      - Identifier: LS-1-UCA-OSA-1-2
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the compatibility checks are not implemented or errorneously implemented
+      - Identifier: LS-1-UCA-OSA-1-3
+        Text: The interface detects the configuration mismatch, but does not show
+          this on the UI
+      - Identifier: LS-1-UCA-OSA-1-4
+        Text: OpenAPS is not set up to prompt the human to update configs when it
+          detects a change that should be reflected in configs or detects inaccurate
+          configs
+      - Identifier: LS-2-UCA-OSA-1-1
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the version information is not updated, so that the compatiblity
+          algorithm thinks everything is still on its old configuration
+      - Identifier: LS-2-UCA-OSA-1-2
+        Text: There have been additional configurations added in the latest OpenAPS
+          version so the version that is being used needs to be updated
+    - Identifier: UCA-OSA-2
+      Text: OpenAPS app does not successfully set up the algorithm when the script
+        is run to set up the algorithm
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-OSA-2-1
+        Text: Dependencies on the RaspiOS are not / cannot be the correct version
+          to install the algorithm correctly
+      - Identifier: LS-1-UCA-OSA-2-2
+        Text: OpenAPS does not support RaspiOS software or hardware version or something
+          is interfering from the host side
+      - Identifier: LS-1-UCA-OSA-2-3
+        Text: OpenAPS has packaging problems / broken packages which are causing problems
+          installing dependencies
+      - Identifier: LS-1-UCA-OSA-2-4
+        Text: Bug in the script to run the algorithm
+      - Identifier: LS-2-UCA-OSA-2-1
+        Text: Installation script aborts or crashes partway through
+    - Identifier: UCA-OSA-100
+      Text: OpenAPS app selects a different option to that which the human operator
+        entered or intended when configuring OpenAPS
       Reason: Providing
-    - Identifier: UCA-UI-101
-      Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
-        which makes OpenAPS incompatible with other components in the system being
-        used (Insulin pump, CGM)
+      Scenarios:
+      - Identifier: LS-1-UCA-OSA-100-1
+        Text: OpenAPS bug or malfunction
+      - Identifier: LS-1-UCA-OSA-100-2
+        Text: selection of a different memory section than the one the information
+          entered by the operator is stored at (memory address issue)
+      - Identifier: LS-1-UCA-OSA-100-3
+        Text: Issue with passing the entered information in OpenAPS
+      - Identifier: LS-1-UCA-OSA-100-4
+        Text: Information entered by the human is not valid and OpenAPS has defaulted
+          to a valid setting
+      - Identifier: LS-2-UCA-OSA-100-1
+        Text: Issue with recognizing the operator input
+    - Identifier: UCA-OSA-101
+      Text: OpenAPS sets up an unsafe algorithm
       Reason: Providing
-    - Identifier: UCA-UI-102
-      Text: InfDev makes an incomplete update to the OpenAPS infrastructure (compared
-        with what has been planned/promised/documented)
-      Reason: Providing
-  - Identifier: TI
-    Text: Test
-    Unsafe Control Actions:
-    - Identifier: UCA-T-1
-      Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
-        sufficiently
-      Reason: Not Providing
-    - Identifier: UCA-T-2
-      Text: InfDev does not consider all HW setups/configurations when running/updating
-        the test cases
-      Reason: Not Providing
-    - Identifier: UCA-T-3
-      Text: InfDev does not consider each use case for OpenAPS tools and infrastructure
-        when writing tests
-      Reason: Not Providing
-    - Identifier: UCA-T-4
-      Text: InfDev does not provide analysis of failed tests
-      Reason: Not Providing
-    - Identifier: UCA-T-100
-      Text: Infrastructure developer tests of the system are flawed
-      Reason: Providing
-    - Identifier: UCA-T-1000
-      Text: Infrastructure developer tests the OpenAPS system infrastructure after
-        it's deployed
+      Scenarios:
+      - Identifier: LS-1-UCA-OSA-101-1
+        Text: OpenAPS bug or malfunction
+      - Identifier: LS-1-UCA-OSA-101-2
+        Text: Human confirms that the algorithm is safe when it has not been tested
+          properly
+      - Identifier: LS-1-UCA-OSA-101-3
+        Text: OpenAPS does not stop the human from setting up unsafe algorithms
+      - Identifier: LS-1-UCA-OSA-101-4
+        Text: OpenAPS has a mode which allows any algorithm to be used
+      - Identifier: LS-2-UCA-OSA-101-1
+        Text: Algorithm has safety flaws that noone knows about
+      - Identifier: LS-2-UCA-OSA-101-2
+        Text: OpenAPS misidentifies the algorithm as a recommended algorithm
+      - Identifier: LS-2-UCA-OSA-101-3
+        Text: Algorithm is known to be unsafe but there is no feature on OpenAPS to
+          blacklist this
+    - Identifier: UCA-OSA-1000
+      Text: OpenAPS app updates the algorithm or configurations too late, after OpenAPS
+        has already started to operate, and is instead using previous algorithm settings
       Reason: Timing
-  - Identifier: IF
-    Text: Forum
+      Scenarios:
+      - Identifier: LS-1-UCA-OSA-1000-1
+        Text: Raspi OS bug or malfunction
+      - Identifier: LS-1-UCA-OSA-1000-2
+        Text: Some other action is blocking the update routine
+      - Identifier: LS-1-UCA-OSA-1000-3
+        Text: Scheduling/Interrupt issue
+      - Identifier: LS-2-UCA-OSA-1000-1
+        Text: OpenAPS does not ensure that the configs are updated before running
+          the algorithm
+  - Identifier: OPD
+    Text: Provide data from other devices to algorithm
     Unsafe Control Actions:
-    - Identifier: UCA-IF-1
-      Text: Infrastructure developers are not present on the forum that they provide
+    - Identifier: UCA-OPD-1
+      Text: OpenAPS app does not relay relevant data from other devices to the algorithm
       Reason: Not Providing
-    - Identifier: UCA-IF-2
-      Text: InfDevs are not answering specific types of questions in the forum (bc
-        they are biased, thought somebody else will answer etc), so that some questions
-        just are forgotten
-      Reason: Not Providing
-    - Identifier: UCA-IF-100
-      Text: Infrastructure developers provide a flawed forum (bandwidth issues, software
-        bugs)
+      Scenarios:
+      - Identifier: LS-1-UCA-OPD-1-1
+        Text: OpenAPS does not receive data in correct format
+      - Identifier: LS-1-UCA-OPD-1-2
+        Text: OpenAPS does not finish receiving the data
+      - Identifier: LS-1-UCA-OPD-1-3
+        Text: OpenAPS does not pull the data from Raspi OS
+      - Identifier: LS-2-UCA-OPD-1-1
+        Text: Bug or lack of complexity in the algorithm
+      - Identifier: LS-2-UCA-OPD-1-2
+        Text: OpenAPS does not recognise all the inputs that the algorithm uses
+    - Identifier: UCA-OPD-100
+      Text: OpenAPS app relays data from other devices to algorithm inaccurately
       Reason: Providing
-    - Identifier: UCA-IF-100
-      Text: InfDevs do answer the questions more than X hours after the question has
-        been asked
+      Scenarios:
+      - Identifier: LS-1-UCA-OPD-100-1
+        Text: OpenAPS app received the data in the wrong format
+      - Identifier: LS-2-UCA-OPD-100-1
+        Text: Bug in Raspi data processing
+    - Identifier: UCA-OPD-101
+      Text: OpenAPS app relays data regarding other devices to algorithm when other
+        devices have not sent data to OpenAPS
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-OPD-101-1
+        Text: '-'
+      - Identifier: LS-2-UCA-OPD-101-1
+        Text: Data was sent to the OpenAPS from Raspi OS unintentionally
+    - Identifier: UCA-OPD-1000
+      Text: OpenAPS app takes more than X seconds to relay data from other devices
+        to the algorithm
       Reason: Timing
-    - Identifier: UCA-IF-101
-      Text: InfDevs give wrong information in the forum
+      Scenarios:
+      - Identifier: LS-1-UCA-OPD-1000-1
+        Text: Kernel scheduler issues
+      - Identifier: LS-1-UCA-OPD-1000-2
+        Text: Raspi OS is running slowly
+      - Identifier: LS-1-UCA-OPD-1000-3
+        Text: OpenAPS script has been updated and now takes too long
+      - Identifier: LS-2-UCA-OPD-1000-1
+        Text: Timestamping problems, either with component clocks or Raspi OS clock
+  - Identifier: STOA
+    Text: Stop algorithm
+    Unsafe Control Actions:
+    - Identifier: UCA-STOA-1
+      Text: OpenAPS app does not stop algorithm and fall back to regular pump operation
+        when OpenAPS is giving dosing recommendations which are causing suboptimal
+        glucose levels for X minutes
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STOA-1-1
+        Text: Bug in OpenAPS means that OpenAPS fails to stop the algorithm completely
+          and properly
+      - Identifier: LS-1-UCA-STOA-1-2
+        Text: OpenAPS thinks that it can fix the problem itself by altering dosing
+      - Identifier: LS-1-UCA-STOA-1-3
+        Text: OpenAPS thinks that the problem is resolved and prematurely starts to
+          give dosing recommendations again
+      - Identifier: LS-2-UCA-STOA-1-1
+        Text: CGM is inaccurate
+      - Identifier: LS-2-UCA-STOA-1-2
+        Text: There is a problem with communication to OpenAPS
+    - Identifier: UCA-STOA-100
+      Text: OpenAPS app stops algorithm when OpenAPS is giving good dosing recommendations
+        to the insulin pump and the system is running correctly and there has been
+        no instruction from the human operator to stop OpenAPS
       Reason: Providing
-  - Identifier: IA
-    Text: Answers
-    Unsafe Control Actions: []
-  Controller Constraints: []
-- Text: Algorithm Developer
+      Scenarios:
+      - Identifier: LS-1-UCA-STOA-100-1
+        Text: OpenAPS crash
+    - Identifier: UCA-STOA-1000
+      Text: OpenAPS app takes more than X minutes stop algorithm when the algorithm
+        is giving dosing recommendations which are causing suboptimal glucose levels
+        for Y minutes
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-STOA-1000-1
+        Text: Kernel scheduler issues
+      - Identifier: LS-2-UCA-STOA-1000-1
+        Text: Timestamping / clock issues
+  Controller Constraints:
+  - Identifier: CC-OSA-1
+    Text: When OpenAPS configurations are/become incorrect, this should be detected
+      by OpenAPS which should then notify the human operator and if the configuration
+      is dangerous the OpenAPS rig should update the configuration itself and notify
+      the human operator of the new value
+    Unsafe Control Actions:
+    - UCA-OSA-1
+  - Identifier: CC-OPD-1
+    Text: OpenAPS app must relay data from other devices to algorithm when OpenAPS
+      is running.
+    Unsafe Control Actions:
+    - UCA-OPD-1
+  - Identifier: CC-STOA-1
+    Text: OpenAPS app must stop algorithm and fall back to regular pump operation
+      when OpenAPS is giving dosing recommendations which are causing suboptimal glucose
+      levels for X minutes
+    Unsafe Control Actions:
+    - UCA-STOA-1
+  - Identifier: CC-OSA-2
+    Text: When the human operator correctly runs the script to set up the algorithm,
+      OpenAPS must install and start looping the algorithm
+    Unsafe Control Actions:
+    - UCA-OSA-2
+  - Identifier: CC-OPD-2
+    Text: If algorithm has not received any data from OpenAPS app in X minutes, the
+      algorithm should instruct OpenAPS to stop controlling the insulin pump.
+    Unsafe Control Actions:
+    - UCA-OPD-1
+  - Identifier: CC-OSA-100
+    Text: When the human operator enters or intends an option when configuring OpenAPS,
+      OpenAPS must select that option or inform the human operator that their configuration
+      is unsafe and what the new configuration is
+    Unsafe Control Actions:
+    - UCA-OSA-100
+  - Identifier: CC-OPD-100
+    Text: OpenAPS app must relay data from other devices to the algorithm accurately
+    Unsafe Control Actions:
+    - UCA-OPD-100
+  - Identifier: CC-STOA-100
+    Text: OpenAPS app should not stop the algorithm when OpenAPS is giving good dosing
+      recommendations to the insulin pump and the system is running correctly and
+      there has been no instruction from the human operator to stop OpenAPS
+    Unsafe Control Actions:
+    - UCA-STOA-100
+  - Identifier: CC-OSA-101
+    Text: OpenAPS should warn the human operator that OpenAPS is about to be configured
+      with a non-recommended algorithm before proceeding with the setup
+    Unsafe Control Actions:
+    - UCA-OSA-101
+  - Identifier: CC-OPD-101
+    Text: OpenAPS app must not relay data from other devices to the algorithm that
+      is not actually from the other devices
+    Unsafe Control Actions:
+    - UCA-OPD-101
+  - Identifier: CC-OSA-1000
+    Text: If the configuration files for the algorithm have changed but the algorithm
+      is still running with the old configurations, OpenAPS should notify the human
+      operator
+    Unsafe Control Actions:
+    - UCA-OSA-1000
+  - Identifier: CC-OPD-1000
+    Text: OpenAPS app must take less than X seconds to relay data from other devices
+      to the algorithm
+    Unsafe Control Actions:
+    - UCA-OPD-1000
+  - Identifier: CC-STOA-1000
+    Text: OpenAPS app should take less than X minutes to stop algorithm when the algorithm
+      is giving dosing recommendations which are causing suboptimal glucose levels
+      for Y minutes
+    Unsafe Control Actions:
+    - UCA-STOA-1000
+- Text: Infrastructure developer
   Control Actions:
-  - Identifier: UA
-    Text: Update Algorithm
+  - Identifier: IDEN
+    Text: Email notification (to human operator)
     Unsafe Control Actions:
-    - Identifier: UCA-UA-1
-      Text: Infrastructure developor does not update the OpenAPS infrastructure when
-        there is a problem with the current infrastructure
+    - Identifier: UCA-IDEN-1
+      Text: InfDev does not send an e-mail and the HuOp does not know that the OpenAPS
+        app has been updated
       Reason: Not Providing
-    - Identifier: UCA-UA-100
-      Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
-      Reason: Providing
-    - Identifier: UCA-UA-101
-      Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
-        which makes OpenAPS incompatible with other components in the system being
-        used (Insulin pump, CGM)
-      Reason: Providing
-  - Identifier: TA
-    Text: Test
-    Unsafe Control Actions:
-    - Identifier: UCA-TA-1
-      Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
-        sufficiently
+    - Identifier: UCA-IDEN-2
+      Text: InfDev does not send an email, when there should be one to communicate
+        safety critical information
       Reason: Not Providing
-    - Identifier: UCA-TA-100
-      Text: Infrastructure developer tests of the system are flawed
+    - Identifier: UCA-IDEN-100
+      Text: InfDev sends out an email about something that is not there or an update
+        that has not happened
       Reason: Providing
-    - Identifier: UCA-TA-1000
-      Text: Infrastructure developer tests the OpenAPS system infrastructure after
-        it's deployed
+    - Identifier: UCA-IDEN-101
+      Text: InfDev sends out an email with wrong information
+      Reason: Providing
+    - Identifier: UCA-IDEN-102
+      Text: InfDev sends a duplicate e-mail message to the HuOp that the OpenAPS app
+        has been updated, causing the HuOp to be confused
+      Reason: Providing
+    - Identifier: UCA-IDEN-103
+      Text: InfDev sends out an email with missing information
+      Reason: Providing
+    - Identifier: UCA-IDEN-104
+      Text: InfDev sends out an email in the wrong language
+      Reason: Providing
+    - Identifier: UCA-IDEN-1000
+      Text: InfDev sends out an email with safety critical information X hours too
+        late
       Reason: Timing
-  - Identifier: AF
-    Text: Forum
+    - Identifier: UCA-IDEN-1001
+      Text: InfDev sends out an email too early, before the implementation/change
+        is actually available
+      Reason: Timing
+    - Identifier: UCA-IDEN-10000
+      Text: InfDev sends out an email with incomplete information (so it seems everything
+        is ok, but actually some important information is missing)
+      Reason: Duration
+    - Identifier: UCA-IDEN-10001
+      Text: InfDev sends out an email that contains both valid information and information
+        about features/changes/implementations that are not yet there.
+      Reason: Duration
+  - Identifier: INFO
+    Text: Forum (to human operator)
     Unsafe Control Actions:
-    - Identifier: UCA-AF-1
-      Text: Infrastructure developers are not present on the forum that they provide
+    - Identifier: UCA-INFO-1
+      Text: InfDev does not provide a forum and the HuOp is not aware of any concerns
+        or known issues for the Algorithm or able to contact the InfDev
       Reason: Not Providing
-    - Identifier: UCA-AF-100
-      Text: Infrastructure developers provide a flawed forum
+    - Identifier: UCA-INFO-2
+      Text: InfDev fails to update the forum and the HuOp is not aware of a new issue
+        found for the algorithm
+      Reason: Not Providing
+    - Identifier: UCA-INFO-3
+      Text: InfDev does not provide an answer to a question from the HuOp
+      Reason: Not Providing
+    - Identifier: UCA-INFO-4
+      Text: InfDev does not update an answer when it becomes false
+      Reason: Not Providing
+    - Identifier: UCA-INFO-100
+      Text: InfDev provides erroneous information on the forum
       Reason: Providing
-  - Identifier: AA
-    Text: Answers
-    Unsafe Control Actions: []
-  Controller Constraints: []
+    - Identifier: UCA-INFO-101
+      Text: InfDev provides an insufficient answer
+      Reason: Providing
+    - Identifier: UCA-INFO-102
+      Text: InfDev provides their answer to the wrong question
+      Reason: Providing
+    - Identifier: UCA-INFO-1000
+      Text: InfDev updates the forum to reflect an OpenAPS app change that is not
+        available yet
+      Reason: Timing
+    - Identifier: UCA-INFO-1001
+      Text: InfDev updates the forum well after the OpenAPS app has been updated
+      Reason: Timing
+  - Identifier: UTOO
+    Text: Update (to OpenAPS app)
+    Unsafe Control Actions:
+    - Identifier: UCA-UTOO-1
+      Text: InfDev fails to update the OpenAPS app to address a known issue
+      Reason: Not Providing
+    - Identifier: UCA-UTOO-100
+      Text: InfDev provides an erroneous OpenAPS app update, e.g. installs an older
+        version of the OpenAPS app
+      Reason: Providing
+    - Identifier: UCA-UTOO-1000
+      Text: InfDev is slow in updating the OpenAPS app
+      Reason: Timing
+  Controller Constraints:
+  - Identifier: CC-IDEN-1
+    Text: When the OpenAPS app has been updated, the InfDev must send a notification
+      to inform the HuOp
+    Unsafe Control Actions:
+    - UCA-IDEN-1
+  - Identifier: CC-INFO-1
+    Text: InfDev must provide a forum for the HuOps to comment on
+    Unsafe Control Actions:
+    - UCA-INFO-1
+  - Identifier: CC-UTOO-1
+    Text: InfDev should update the OpenAPS app to address a known issue or instruct
+      the HuOp to do this
+    Unsafe Control Actions:
+    - UCA-UTOO-1
+  - Identifier: CC-IDEN-2
+    Text: When there is safety critical information related to the OpenAPS app, the
+      InfDev must send a notification to inform the HuOp
+    Unsafe Control Actions:
+    - UCA-IDEN-2
+  - Identifier: CC-INFO-2
+    Text: InfDev must update the forum with urgent information (all other important
+      information can be communicated through e-mail)
+    Unsafe Control Actions:
+    - UCA-INFO-2
+  - Identifier: CC-INFO-3
+    Text: InfDev must provide an answer to all unanswered questions from the HuOp
+      on the forum
+    Unsafe Control Actions:
+    - UCA-INFO-3
+  - Identifier: CC-INFO-4
+    Text: InfDev should update answers to common FAQs within X hours when they become
+      false (if there is an FAQs section)
+    Unsafe Control Actions:
+    - UCA-INFO-4
+  - Identifier: CC-IDEN-100
+    Text: The InfDev should not send out a false e-mail and if they do then they should
+      send out another notification when they become aware of this
+    Unsafe Control Actions:
+    - UCA-IDEN-100
+  - Identifier: CC-INFO-100
+    Text: InfDev should not provide erroneous information on the forum and if they
+      do then they should update this when they become aware of this
+    Unsafe Control Actions:
+    - UCA-INFO-100
+  - Identifier: CC-UTOO-100
+    Text: The InfDev should test any OpenAPS app update and make sure they provide
+      the correct tested version to the HuOps
+    Unsafe Control Actions:
+    - UCA-UTOO-100
+  - Identifier: CC-IDEN-101
+    Text: The InfDev should not send out a false e-mail and if they do then they should
+      send out another notification when they become aware of this (same as CC-IDEN-100)
+    Unsafe Control Actions:
+    - UCA-IDEN-101
+  - Identifier: CC-INFO-101
+    Text: InfDev should make sure that they provide all necessary information in their
+      answers to forum questions and the HuOp should have means to communicate if
+      they are not satisfied with the answer
+    Unsafe Control Actions:
+    - UCA-INFO-101
+  - Identifier: CC-IDEN-102
+    Text: The InfDev should not send a duplicate e-mail message to the HuOp that the
+      OpenAPS app has been updated (it is very unlikely that they will)
+    Unsafe Control Actions:
+    - UCA-IDEN-102
+  - Identifier: CC-INFO-102
+    Text: It should be clear to which question the answer from the InfDev is for
+    Unsafe Control Actions:
+    - UCA-INFO-102
+  - Identifier: CC-IDEN-103
+    Text: Notification e-mails from the InfDev should contain all helpful information
+      which is not basic knowledge, or links to this information
+    Unsafe Control Actions:
+    - UCA-IDEN-103
+  - Identifier: CC-IDEN-104
+    Text: Notification e-mails from the InfDev should always be in the default language
+      of English, unless the addressee has requested otherwise
+    Unsafe Control Actions:
+    - UCA-IDEN-104
+  - Identifier: CC-IDEN-1000
+    Text: InfDev should send out an email with safety critical information within
+      X hours of discovering this information
+    Unsafe Control Actions:
+    - UCA-IDEN-1000
+  - Identifier: CC-INFO-1000
+    Text: If the InfDev is updating the forum before the implementation/change is
+      actually available, this should be mentioned in the forum update
+    Unsafe Control Actions:
+    - UCA-INFO-1000
+  - Identifier: CC-UTOO-1000
+    Text: When the OpenAPS app has a safety-critical bug, the InfDev should update
+      the OpenAPS app to fix this within X hours
+    Unsafe Control Actions:
+    - UCA-UTOO-1000
+  - Identifier: CC-IDEN-1001
+    Text: If the InfDev is sending out an email before the implementation/change is
+      actually available, this should be mentioned in the e-mail
+    Unsafe Control Actions:
+    - UCA-IDEN-1001
+  - Identifier: CC-INFO-1001
+    Text: InfDev should update the forum with safety critical information within X
+      hours of discovering this information
+    Unsafe Control Actions:
+    - UCA-INFO-1001
+  - Identifier: CC-IDEN-10000
+    Text: The InfDev should not send out a false e-mail and if they do then they should
+      send out another notification when they become aware of this (same as CC-IDEN-100)
+    Unsafe Control Actions:
+    - UCA-IDEN-10000
+  - Identifier: CC-IDEN-10001
+    Text: The InfDev should not send out a false e-mail and if they do then they should
+      send out another notification when they become aware of this (same as CC-IDEN-100)
+    Unsafe Control Actions:
+    - UCA-IDEN-10001
+
+Losses:
+- Identifier: L1
+  Text: Loss of life or cognitive ability (hypoglycemia, hyperglycemia, DKA)
+- Identifier: L2
+  Text: Loss of or damage to equipment
+- Identifier: L3
+  Text: High variance of glucose levels
+Hazards:
+- Identifier: H1
+  Text: Too much insulin
+  Losses:
+  - L1
+  - L3
+- Identifier: H2
+  Text: Too little insulin
+  Losses:
+  - L1
+  - L3
+- Identifier: H3
+  Text: Electrical malfunction
+  Losses:
+  - L1
+  - L2
+  - L3
+- Identifier: H4
+  Text: Too much burden on system
+  Losses:
+  - L2
+Constraints:
+- Identifier: S1
+  Text: OpenAPS should not recommend an insulin dose of more than X mg in any 1 hour
+  Hazards:
+  - H1
+- Identifier: S2
+  Text: OpenAPS should not recommend an insulin dose of less than X mg in any 1 hour
+  Hazards:
+  - H2
+- Identifier: S3
+  Text: If OpenAPS recognises that the user has hazardous levels of insulin or glucose,
+    OpenAPS should alert the human operator
+  Hazards:
+  - H1
+  - H2
+- Identifier: S4
+  Text: OpenAPS should not send signals to other components which might make those
+    other components malfunction
+  Hazards:
+  - H3
+- Identifier: S5
+  Text: OpenAPS should not send so many signals per hour to other system components
+    such that the other components drain battery too quickly
+  Hazards:
+  - H4
