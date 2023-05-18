@@ -147,5 +147,5 @@ def convert_purpose_to_yml(xlsx_file, purpose_sheet):
     return yaml.dump(purpose_dict, sort_keys=False)
 
 
-print(convert_UCAs_and_loss_scenarios_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Level 1 UCAs', 'Level 1 Loss Scenario Analysis'))
-print(convert_purpose_to_yml('/home/milanlakhani/vsc/openaps-stpa.xlsx', 'Losses, Hazards and SCs'))
+print(convert_UCAs_and_loss_scenarios_to_yml('xlsx_file.xlsx', 'Level 2 UCAs', 'Level 2 Loss Scenario Analysis'))
+print(convert_purpose_to_yml('xlsx_file.xlsx', 'Losses, Hazards and SCs'))
