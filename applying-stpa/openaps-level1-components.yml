@@ -1,0 +1,1322 @@
+Components:
+- Text: OpenAPS
+  Control Actions:
+  - Identifier: STB
+    Text: Set Temporary Basal
+    Unsafe Control Actions:
+    - Identifier: UCA-STB-1
+      Text: OpenAPS does not set the temporary basal dose when the current insulin
+        dosage is not optimal and it has been over X minutes since the last temporary
+        basal recommendation
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-1-1
+        Text: OpenAPS rig does not have adequate data to make a dosing recommendation
+      - Identifier: LS-1-UCA-STB-1-2
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-STB-1: OpenAPS does not
+          set the temporary basal dose when the current insulin dosage is not optimal
+          and it has been over X minutes since the last temporary basal recommendation)'
+      - Identifier: LS-1-UCA-STB-1-3
+        Text: OpenAPS rig hardware has not been set up correctly
+      - Identifier: LS-1-UCA-STB-1-4
+        Text: OpenAPS rig has run out of power
+      - Identifier: LS-1-UCA-STB-1-5
+        Text: OpenAPS rig dependencies / software has been updated and OpenAPS now
+          lacks compatibiliity with the insulin pump
+      - Identifier: LS-1-UCA-STB-1-6
+        Text: OpenAPS insulin dose recommendation algorithm is taking too long
+      - Identifier: LS-1-UCA-STB-1-7
+        Text: Flawed OpenAPS dosing calculation algorithm
+      - Identifier: LS-1-UCA-STB-1-8
+        Text: OpenAPS processes glucose data from NightScout incorrectly
+      - Identifier: LS-1-UCA-STB-1-9
+        Text: OpenAPS processes data from the insulin pump incorrectly
+      - Identifier: LS-1-UCA-STB-1-10
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-STB-1-11
+        Text: OpenAPS rig is hacked by an imposter
+      - Identifier: LS-2-UCA-STB-1-1
+        Text: OpenAPS has received inaccurate glucose data from NightScout
+      - Identifier: LS-2-UCA-STB-1-2
+        Text: 'OpenAPS has gone out of range from NightScout and not received updated
+          glucose information
+
+          OpenAPS has had wireless interference from NightScout and not received updated
+          glucose information'
+      - Identifier: LS-2-UCA-STB-1-3
+        Text: 'OpenAPS has gone out of range from the insulin pump and not received
+          updated operating information
+
+          OpenAPS has had wireless interference from the insulin pump and not received
+          updated operating information'
+      - Identifier: LS-2-UCA-STB-1-4
+        Text: Insulin pump clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-STB-1-5
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-STB-1-6
+        Text: OpenAPS has received inaccurate glucose data from the human to override
+          glucose data from NightScout
+      - Identifier: LS-2-UCA-STB-1-7
+        Text: The disk for RaspberryPi fills up and prevents the operating system
+          from running and completing its processes
+    - Identifier: UCA-STB-2
+      Text: OpenAPS does not set the temporary basal dose when there is no active
+        temporary basal recommendation and there is adequate data available to make
+        a justified recommendation
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-2-1
+        Text: 'Flawed OpenAPS decision making algorithm (eg after pausing for a breakdown
+          it does not resume issueing doses) (UCA-STB-2: OpenAPS does not set the
+          temporary basal rate when there is no active temporary basal recommendation
+          and there is adequate data available to make a justified recommendation)'
+      - Identifier: LS-1-UCA-STB-2-2
+        Text: OpenAPS rig components are not connected together properly
+      - Identifier: LS-1-UCA-STB-2-3
+        Text: OpenAPS rig has run out of power
+      - Identifier: LS-1-UCA-STB-2-4
+        Text: OpenAPS rig dependencies / software has been updated and OpenAPS now
+          lacks compatibiliity with the insulin pump
+      - Identifier: LS-1-UCA-STB-2-5
+        Text: OpenAPS insulin dose calculation algorithm taking too long
+      - Identifier: LS-1-UCA-STB-2-6
+        Text: OpenAPS has not been configured correctly
+      - Identifier: LS-1-UCA-STB-2-7
+        Text: OpenAPS rig is hacked by an imposter
+      - Identifier: LS-1-UCA-STB-2-8
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-STB-2-9
+        Text: OpenAPS bug causes it to process data from the insulin pump incorrectly
+          such that OpenAPS believes its recommendation is still active when informed
+          that it's not)
+      - Identifier: LS-1-UCA-STB-2-10
+        Text: 'Flawed OpenAPS decision making algorithm (either accidently or because
+          the human engineer thinks that more information is needed to make a dosing
+          recommendation than is actually necessary) (UCA-STB-2: OpenAPS does not
+          set the temporary basal rate when there is no active temporary basal recommendation
+          and there is adequate data available to make a justified recommendation)'
+      - Identifier: LS-2-UCA-STB-2-1
+        Text: OpenAPS rig has differing timestamps to the insulin pump and believes
+          the last recommendation was made recently
+      - Identifier: LS-2-UCA-STB-2-2
+        Text: OpenAPS has received incorrect data from the human actor which conflicts
+          with the rest of the current data and prevents a recommendation
+      - Identifier: LS-2-UCA-STB-2-3
+        Text: Lack of algorithm programmer understanding of the information level
+          required to make a dosing recommendation
+      - Identifier: LS-2-UCA-STB-2-4
+        Text: OpenAPS rig has differing timestamps to the insulin pump and believes
+          the last recommendation was made recently
+    - Identifier: UCA-STB-100
+      Text: OpenAPS algorithm recommends too high temporary basal dosing recommendation
+        when current glucose levels are low and not likely to rise (bases on active
+        insulin and human insulin pump input)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-100-1
+        Text: Flawed OpenAPS dosing calculation algorithm
+      - Identifier: LS-1-UCA-STB-100-2
+        Text: OpenAPS is using the wrong glucose data from NightScout
+      - Identifier: LS-1-UCA-STB-100-3
+        Text: OpenAPS does not account for human bolus dosing
+      - Identifier: LS-1-UCA-STB-100-4
+        Text: Flawed OpenAPS data analysis / projection of future glucose level
+      - Identifier: LS-1-UCA-STB-100-5
+        Text: OpenAPS rig is hacked by an imposter
+      - Identifier: LS-2-UCA-STB-100-1
+        Text: OpenAPS has received inaccurate glucose data from NightScout
+      - Identifier: LS-2-UCA-STB-100-2
+        Text: Human actor has input too many carbs or gives incorrect information
+          relating to exercise / other factors
+      - Identifier: LS-2-UCA-STB-100-3
+        Text: OpenAPS is not informed of human bolus dosing
+      - Identifier: LS-2-UCA-STB-100-4
+        Text: Insulin pump is configured with the wrong DIA / ISF / carb ratio settings
+      - Identifier: LS-2-UCA-STB-100-5
+        Text: OpenAPS does not know that the human has missed a meal / unusual circumstances
+          / travelling
+    - Identifier: UCA-STB-101
+      Text: OpenAPS algorithm recommends too low temporary basal dosing recommendation
+        when current glucose levels are high and not likely to fall (based on current
+        glucose levels, active insulin and human insulin pump input)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-101-1
+        Text: Flawed OpenAPS dosing calculation algorithm
+      - Identifier: LS-1-UCA-STB-101-2
+        Text: OpenAPS is using the wrong glucose data from NightScout
+      - Identifier: LS-1-UCA-STB-101-3
+        Text: Flawed OpenAPS data analysis / projection of future glucose level
+      - Identifier: LS-1-UCA-STB-101-4
+        Text: OpenAPS rig is hacked by an imposter
+      - Identifier: LS-2-UCA-STB-101-1
+        Text: OpenAPS has received inaccurate glucose data from NightScout
+      - Identifier: LS-2-UCA-STB-101-2
+        Text: Human actor has input too few carbs or gives incorrect information relating
+          to exercise / other factors
+      - Identifier: LS-2-UCA-STB-101-3
+        Text: Insulin pump is not operating correctly but OpenAPS is not informed
+          of this
+      - Identifier: LS-2-UCA-STB-101-4
+        Text: Insulin pump is configured with the wrong DIA / ISF / carb ratio settings
+      - Identifier: LS-2-UCA-STB-101-5
+        Text: Human suddenly consumes a lot of food / sugar
+    - Identifier: UCA-STB-102
+      Text: OpenAPS makes a temporary basal recommendation when there is inadequate
+        data available to it to justify the dosing recommendation (eg not enough data,
+        data is too conflicting)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-102-1
+        Text: OpenAPS is using old / missing / corrupt data
+      - Identifier: LS-1-UCA-STB-102-2
+        Text: Flawed OpenAPS data analysis / projection of future glucose level
+      - Identifier: LS-1-UCA-STB-102-3
+        Text: 'Flawed OpenAPS decision making algorithm (either a bug or because the
+          human engineer thinks that less information is needed to make a dosing recommendation
+          than is actually necessary) (UCA-STB-102: OpenAPS makes a temporary basal
+          recommendation when there is inadequate data available to it to justify
+          the dosing recommendation (eg not enough data, data is too conflicting))'
+      - Identifier: LS-2-UCA-STB-102-1
+        Text: OpenAPS may lack some information that conflicts with information that
+          it has, which means it should hold back on making a decision
+      - Identifier: LS-2-UCA-STB-102-2
+        Text: OpenAPS has not received correct data from the human actor which would
+          conflict with the rest of the current data and prevent a recommendation
+      - Identifier: LS-2-UCA-STB-102-3
+        Text: OpenAPS has received inaccurate glucose data from NightScout
+      - Identifier: LS-2-UCA-STB-102-4
+        Text: OpenAPS has received inaccurate glucose data from the human to override
+          glucose data from NightScout
+    - Identifier: UCA-STB-103
+      Text: OpenAPS provides a temporary basal dosing rate when the insulin pump settings
+        are not configured correctly for OpenAPS(*1)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-103-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-STB-103: OpenAPS provides
+          a temporary basal dosing rate when the insulin pump settings are not configured
+          correctly for OpenAPS (*1))'
+      - Identifier: LS-1-UCA-STB-103-2
+        Text: 'Insulin pump misconfiguration is not fatal for OpenAPS, and OpenAPS
+          is able to adjust its dosing to cause the correct glucose levels (UCA-STB-103
+          : OpenAPS provides a temporary basal dosing rate when the insulin pump settings
+          are not configured correctly for OpenAPS (*1))'
+      - Identifier: LS-1-UCA-STB-103-3
+        Text: Human has not entered some of the optional insulin pump settings and
+          OpenAPS default values for insulin pump settings in preferences.json are
+          not suitable for the user
+      - Identifier: LS-1-UCA-STB-103-4
+        Text: OpenAPS does not verify insulin pump configurations
+      - Identifier: LS-2-UCA-STB-103-1
+        Text: OpenAPS does not pull all of the relevant insulin pump configuration
+          information from the insulin pump
+      - Identifier: LS-2-UCA-STB-103-2
+        Text: OpenAPS is having problems communicating with insulin pump
+    - Identifier: UCA-STB-104
+      Text: OpenAPS makes a temporary basal recommendation when the insulin pump is
+        not in a state to give a dose (no battery, no insulin, infusion set needs
+        changing)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-STB-104-1
+        Text: OpenAPS is making recommendations in case the insulin pump comes back
+          online
+      - Identifier: LS-1-UCA-STB-104-2
+        Text: 'Flawed OpenAPS decision making algorithm (eg is not designed to stop
+          making recommendations / readjust its algorithms when the insulin pump is
+          not in a state to give a dose) (UCA-STB-104 : OpenAPS makes a temporary
+          basal recommendation when the insulin pump is not in a state to give a dose)'
+      - Identifier: LS-1-UCA-STB-104-3
+        Text: OpenAPS does not verify whether the insulin pump is online and delivering
+          the insulin doses
+      - Identifier: LS-1-UCA-STB-104-4
+        Text: OpenAPS bug causes it to process data from the insulin pump incorrectly
+          such that OpenAPS believes that the insulin pump is operating and dosing
+          properly when it is not
+      - Identifier: LS-2-UCA-STB-104-1
+        Text: There is no feedback from the insulin pump to OpenAPS indicating that
+          the insulin pump is not in a state to give a dosing recommendation
+      - Identifier: LS-2-UCA-STB-104-2
+        Text: Insulin pump is not aware that it is not in a state to make a dosing
+          recommendation
+  - Identifier: ROD
+    Text: Request operating data (from the insulin pump)
+    Unsafe Control Actions:
+    - Identifier: UCA-ROD-1
+      Text: OpenAPS does not get data from the insulin pump when it has not received
+        data which is from the last X minutes
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-ROD-1-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-ROD-1: OpenAPS does not
+          get data from the insulin pump when it has not received data from the last
+          X minutes)'
+      - Identifier: LS-1-UCA-ROD-1-2
+        Text: OpenAPS only pulls data from the insulin pump when it detects changes
+          on the insulin pump (not a problem, just a different method)
+      - Identifier: LS-1-UCA-ROD-1-3
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-ROD-1-4
+        Text: OpenAPS assumes that since data has just been pulled it is new data,
+          when actually new data was not available and null, old or corrupt data was
+          pulled
+      - Identifier: LS-2-UCA-ROD-1-1
+        Text: Insulin pump clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-ROD-1-2
+        Text: Insulin pump is not aware that it is not in a state to make a dosing
+          recommendation
+    - Identifier: UCA-ROD-100
+      Text: OpenAPS requests (and uses) old or missing data from the insulin pump
+        in place of recent data (battery fail option)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-ROD-100-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-ROD-100: OpenAPS requests
+          data from the insulin pump that''s missing (battery fail option))'
+      - Identifier: LS-1-UCA-ROD-100-2
+        Text: OpenAPS assumes that since data has just been pulled it is new data,
+          when actually new data was not available and null, old or corrupt data was
+          pulled
+      - Identifier: LS-1-UCA-ROD-100-3
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-ROD-100-1
+        Text: Insulin pump is not aware that it is not in a state to make a dosing
+          recommendation
+      - Identifier: LS-2-UCA-ROD-100-2
+        Text: Insulin pump sends data to OpenAPS with the current timestamp rather
+          than the time that the data was from
+      - Identifier: LS-2-UCA-ROD-100-3
+        Text: Insulin pump sends data without including any indicator that the data
+          is not valid, recent data
+      - Identifier: LS-2-UCA-ROD-100-4
+        Text: Insulin pump clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+    - Identifier: UCA-ROD-101
+      Text: OpenAPS requests data from the insulin pump more than X times a minute
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-ROD-101-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-ROD-101: OpenAPS requests
+          data from the insulin pump too frequently, so that the pump is overloaded
+          with requests (?))'
+      - Identifier: LS-1-UCA-ROD-101-2
+        Text: ''
+      - Identifier: LS-2-UCA-ROD-101-1
+        Text: The battery and performance of an insulin pump is not tracked against
+          the use and non-use of OpenAPS
+    - Identifier: UCA-ROD-102
+      Text: OpenAPS requests insufficient data from the insulin pump to make a reliable
+        dosing recommendation
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-ROD-102-1
+        Text: OpenAPS believes that no other relevant information is available to
+          be requested when there is
+      - Identifier: LS-1-UCA-ROD-102-2
+        Text: 'The other information is (at least believed by OpenAPS to be) attainable
+          from other components in the system so doesn''t request all the data from
+          the insulin pump (UCA-ROD-102: OpenAPS requests insufficient data from the
+          insulin pump to make a reliable dosing recommendation)'
+      - Identifier: LS-1-UCA-ROD-102-3
+        Text: 'Flawed OpenAPS decision making algorithm (perhaps not taking into account
+          the possibility of null data or conflicting data) (UCA-ROD-102: OpenAPS
+          requests insufficient data from the insulin pump to make a reliable dosing
+          recommendation)'
+      - Identifier: LS-2-UCA-ROD-102-1
+        Text: Lack of algorithm programmer understanding of the information level
+          required to make a dosing recommendation
+      - Identifier: LS-2-UCA-ROD-102-2
+        Text: Data is sent from the insulin pump which is actually null data or dummy
+          data
+    - Identifier: UCA-ROD-1000
+      Text: OpenAPS gets data from the insulin pump < X seconds before the next dosing
+        recommendation, when X seconds are needed to incorporate the data into the
+        next dosing recommendation
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-ROD-1000-1
+        Text: OpenAPS requests information at an independent time to giving dosing
+          recommendations
+      - Identifier: LS-1-UCA-ROD-1000-2
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-ROD-1000-3
+        Text: The time that it takes for OpenAPS to make a dosing recommendation from
+          receiving information has been lengthened, but the OpenAPS algorithm has
+          not been adjusted for this
+      - Identifier: LS-1-UCA-ROD-1000-4
+        Text: Poor task scheduling from OpenAPS, - operating system, badly implemented
+          call-flow
+      - Identifier: LS-1-UCA-ROD-1000-5
+        Text: Poor task scheduling from OpenAPS - wrong order algorithm, the dosing
+          recommendation is always calculated before reading data and the recommendation
+          is always made on the base of old data
+      - Identifier: LS-2-UCA-ROD-1000-1
+        Text: OpenAPS is not informed of other processes in the schedule
+  - Identifier: RG
+    Text: Request glucose level (from nightscout)
+    Unsafe Control Actions:
+    - Identifier: UCA-RG-1
+      Text: OpenAPS does not get valid data from the NightScout when it has not received
+        data which is from the last X minutes
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-RG-1-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-RG-1: OpenAPS does not
+          get data from NightScout when it has not received data from the last X minutes)'
+      - Identifier: LS-1-UCA-RG-1-2
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-RG-1-3
+        Text: OpenAPS assumes that since data has just been pulled it is new data,
+          when actually new data was not available and null, old or corrupt data was
+          pulled
+      - Identifier: LS-2-UCA-RG-1-1
+        Text: CGM clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-RG-1-2
+        Text: NightScout sends data to OpenAPS with the current timestamp rather than
+          the time that the data was from
+      - Identifier: LS-2-UCA-RG-1-3
+        Text: Lack of glucose data verification
+      - Identifier: LS-2-UCA-RG-1-4
+        Text: OpenAPS has received inaccurate glucose data from NightScout
+    - Identifier: UCA-RG-100
+      Text: OpenAPS requests (and uses) old or missing glucose data in place of recent
+        glucose data
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-RG-100-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-RG-100: OpenAPS requests
+          missing glucose data)'
+      - Identifier: LS-1-UCA-RG-100-2
+        Text: OpenAPS assumes that since data has just been pulled it is new data,
+          when actually new data was not available and null, old or corrupt data was
+          pulled
+      - Identifier: LS-1-UCA-RG-100-3
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-RG-100-1
+        Text: CGM clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-2-UCA-RG-100-2
+        Text: CGM sends data to OpenAPS with the current timestamp rather than the
+          time that the data was from
+    - Identifier: UCA-RG-101
+      Text: OpenAPS gets data from the CGM more than X times a minute, if NightScout
+        is not available (consequence
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-RG-101-1
+        Text: 'Flawed OpenAPS decision making algorithm (UCA-RG-101: OpenAPS gets
+          data from the CGM too frequently, if NightScout is not available (consequence:
+          could diminish battery of or wear out the CGM))'
+      - Identifier: LS-2-UCA-RG-101-1
+        Text: The battery and performance of an insulin pump is not tracked against
+          the use and non-use of OpenAPS
+    - Identifier: UCA-RG-102
+      Text: OpenAPS requests insufficient data from the NightScout to make a reliable
+        dosing recommendation
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-RG-102-1
+        Text: OpenAPS believes that no other relevant information is available to
+          be requested when there is
+      - Identifier: LS-1-UCA-RG-102-2
+        Text: The other information is (at least believed by OpenAPS to be) attainable
+          from other components in the system so doesn't request all the data from
+          the NightScout
+      - Identifier: LS-1-UCA-RG-102-3
+        Text: 'Flawed OpenAPS decision making algorithm (perhaps not taking into account
+          the possibility of null data or conflicting data) (UCA-RG-102: OpenAPS requests
+          insufficient data from the NightScout to make a reliable dosing recommendation)'
+      - Identifier: LS-2-UCA-RG-102-1
+        Text: Lack of algorithm programmer understanding of the information level
+          required to make a dosing recommendation
+      - Identifier: LS-2-UCA-RG-102-2
+        Text: Data is sent from the insulin pump which is actually null data or dummy
+          data
+    - Identifier: UCA-RG-1000
+      Text: OpenAPS gets data from the NightScout < X seconds before the next dosing
+        recommendation, when X seconds are needed to incorporate the data into the
+        next dosing recommendation
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-RG-1000-1
+        Text: OpenAPS requests information independently of giving dosing recommendations
+      - Identifier: LS-1-UCA-RG-1000-2
+        Text: OpenAPS clock is set to the wrong time (changing timezone and recalibrating
+          to local time, clocks changing, clock 'error' over time)
+      - Identifier: LS-1-UCA-RG-1000-3
+        Text: The time that it takes for OpenAPS to make a dosing recommendation from
+          receiving information has been lengthened, but the OpenAPS algorithm has
+          not been adjusted for this
+      - Identifier: LS-1-UCA-RG-1000-4
+        Text: Poor task scheduling from OpenAPS, - operating system, badly implemented
+          call-flow
+      - Identifier: LS-1-UCA-RG-1000-5
+        Text: Poor task scheduling from OpenAPS - wrong order algorithm, the dosing
+          recommendation is always calculated before reading data and the recommendation
+          is always made on the base of old data
+      - Identifier: LS-2-UCA-RG-1000-1
+        Text: OpenAPS is not informed of other processes in the schedule
+  - Identifier: SIP
+    Text: Suspend Insulin Pump
+    Unsafe Control Actions:
+    - Identifier: UCA-SIP-1
+      Text: OpenAPS does not suspend insulin dosing, or at least provide an audible
+        alert for the human to suspend insulin dosing, when the human is experiencing
+        or close to experiencing hypoglycemia
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SIP-1-1
+        Text: The OpenAPS algorithm never suspends the insulin pump, instead falling
+          back to standard non-OpenAPS operation when it is not working as intended
+      - Identifier: LS-1-UCA-SIP-1-2
+        Text: The human turns the pump on again and OpenAPS is only configured to
+          suspend the pump once
+      - Identifier: LS-2-UCA-SIP-1-1
+        Text: CGM / algorithm is giving the wrong reading for the current glucose
+          level
+      - Identifier: LS-2-UCA-SIP-1-2
+        Text: OpenAPS wrongly projects that the human is not heading towards hypoglyclemia
+    - Identifier: UCA-SIP-100
+      Text: OpenAPS suspends insulin dosing when the human is not close to experiencing
+        hypoglycemia
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SIP-100-1
+        Text: Bug in the OpenAPS algorithm
+      - Identifier: LS-1-UCA-SIP-100-2
+        Text: OpenAPS algorithm suspends the insulin pump when there is some problem
+          with the insulin pump itself
+      - Identifier: LS-1-UCA-SIP-100-3
+        Text: OpenAPS algorithm involves suspending the pump when glucose levels are
+          falling and it is in the upper part of the range
+      - Identifier: LS-2-UCA-SIP-100-1
+        Text: CGM / algorithm is giving the wrong reading for the current glucose
+          level
+      - Identifier: LS-2-UCA-SIP-100-2
+        Text: OpenAPS wrongly calculates that the human is heading towards hypoglyclemia
+    - Identifier: UCA-SIP-1000
+      Text: OpenAPS suspends insulin dosing more than X minutes after the human is
+        experiencing or close to experiencing hypoglycemia
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-SIP-1000-1
+        Text: Kernel scheduler issue
+      - Identifier: LS-1-UCA-SIP-1000-2
+        Text: OpenAPS algorithm takes too long
+      - Identifier: LS-1-UCA-SIP-1000-3
+        Text: Processor hanging / Device overheating / systemic problems / low voltage
+          / battery (these should be covered)
+      - Identifier: LS-2-UCA-SIP-1000-1
+        Text: OpenAPS or insulin pump clock is set to the wrong time (changing timezone
+          and recalibrating to local time, clocks changing, clock 'error' over time)
+    - Identifier: UCA-SIP-10000
+      Text: OpenAPS carries on suspending insulin dosing for more than X (~120, maybe
+        higher depending on factors) minutes after the human was experiencing or close
+        to experiencing hypoglycemia, causing a DKA risk
+      Reason: Duration
+      Scenarios:
+      - Identifier: LS-1-UCA-SIP-10000-1
+        Text: OpenAPS turns off after suspending insulin pumping
+      - Identifier: LS-1-UCA-SIP-10000-2
+        Text: Bug in OpenAPS algorithm means it does not resume insulin pumping
+      - Identifier: LS-1-UCA-SIP-10000-3
+        Text: OpenAPS disconnects from the network after suspending insulin pumping
+      - Identifier: LS-2-UCA-SIP-10000-1
+        Text: OpenAPS algorithm is not programmed to resume insulin pumping
+  Controller Constraints:
+  - Identifier: CC-STB-1
+    Text: OpenAPS must set the temporary basal dose when the current insulin dosage
+      is not optimal and it has been over X minutes since the last temporary basal
+      recommendation
+    Unsafe Control Actions:
+    - UCA-STB-1
+  - Identifier: CC-ROD-1
+    Text: OpenAPS must get data from the insulin pump when it has not received data
+      which is from the last X minutes
+    Unsafe Control Actions:
+    - UCA-ROD-1
+  - Identifier: CC-RG-1
+    Text: OpenAPS must get valid data from the NightScout when it has not received
+      data which is from the last X minutes
+    Unsafe Control Actions:
+    - UCA-RG-1
+  - Identifier: CC-SIP-1
+    Text: OpenAPS must have data coming in from the CGM and OpenAPS algorithm to help
+      with the predicting of hypoglycemia
+    Unsafe Control Actions:
+    - UCA-SIP-1
+  - Identifier: CC-STB-2
+    Text: OpenAPS must set the temporary basal dose when there is no active temporary
+      basal recommendation and there is adequate data available to make a justified
+      recommendation
+    Unsafe Control Actions:
+    - UCA-STB-2
+  - Identifier: CC-SIP-2
+    Text: OpenAPS must suspend insulin dosing when the human is experience or close
+      to experiencing hypoglycemia
+    Unsafe Control Actions:
+    - UCA-SIP-1
+  - Identifier: CC-STB-100
+    Text: OpenAPS algorithm must not recommend a too high temporary basal dosing recommendation
+      when current glucose levels are low and not likely to rise (based on active
+      insulin and human insulin pump input)
+    Unsafe Control Actions:
+    - UCA-STB-100
+  - Identifier: CC-ROD-100
+    Text: OpenAPS must not request (and use) old or missing data from the insulin
+      pump in place of recent data (battery fail option)
+    Unsafe Control Actions:
+    - UCA-ROD-100
+  - Identifier: CC-RG-100
+    Text: OpenAPS must not request (and use) old or missing glucose data in place
+      of recent glucose data
+    Unsafe Control Actions:
+    - UCA-RG-100
+  - Identifier: CC-SIP-100
+    Text: OpenAPS must not suspend insulin dosing by the insulin pump when the human
+      is not close to experiencing hypoglycemia
+    Unsafe Control Actions:
+    - UCA-SIP-100
+  - Identifier: CC-SIP-100
+    Text: OpenAPS must suspend insulin dosing within X minutes after the human is
+      experiencing or close to experiencing hypoglycemia
+    Unsafe Control Actions:
+    - UCA-SIP-1000
+  - Identifier: CC-STB-101
+    Text: OpenAPS algorithm must not recommend too low temporary basal dosing recommendation
+      when current glucose levels are high and not likely to fall (based on current
+      glucose levels, active insulin and human insulin pump input)
+    Unsafe Control Actions:
+    - UCA-STB-101
+  - Identifier: CC-ROD-101
+    Text: OpenAPS must not request data from the insulin pump more than X times a
+      minute
+    Unsafe Control Actions:
+    - UCA-ROD-101
+  - Identifier: CC-RG-101
+    Text: OpenAPS must not get data from the CGM more than X times a minute, if NightScout
+      is not available (consequence
+    Unsafe Control Actions:
+    - UCA-RG-101
+  - Identifier: CC-STB-102
+    Text: OpenAPS must not make a temporary basal recommendation when there is inadequate
+      and incomplete data available to it to justify the dosing recommendation (eg
+      not enough data, data is too conflicting)
+    Unsafe Control Actions:
+    - UCA-STB-102
+  - Identifier: CC-ROD-102
+    Text: OpenAPS must request sufficient data from the insulin pump to make a reliable
+      dosing recommendation
+    Unsafe Control Actions:
+    - UCA-ROD-102
+  - Identifier: CC-RG-102
+    Text: OpenAPS must request sufficient data from NightScout to make a reliable
+      dosing recommendation
+    Unsafe Control Actions:
+    - UCA-RG-102
+  - Identifier: CC-STB-103
+    Text: OpenAPS must not provide a temporary basal dosing rate when the insulin
+      pump settings are not configured correctly for OpenAPS (*1)
+    Unsafe Control Actions:
+    - UCA-STB-103
+  - Identifier: CC-STB-104
+    Text: OpenAPS must not make a temporary basal recommendation when the insulin
+      pump is not in a state to give a dose (no battery, no insulin, infusion set
+      needs changing)
+    Unsafe Control Actions:
+    - UCA-STB-104
+  - Identifier: CC-ROD-1000
+    Text: OpenAPS must get data from the insulin pump at least X seconds before the
+      next dosing recommendation, when X seconds are needed to incorporate the data
+      into the next dosing recommendation
+    Unsafe Control Actions:
+    - UCA-ROD-1000
+  - Identifier: CC-RG-1000
+    Text: OpenAPS must get data from NightScout at least X seconds before the next
+      dosing recommendation, when X seconds are needed to incorporate the data into
+      the next dosing recommendation
+    Unsafe Control Actions:
+    - UCA-RG-1000
+  - Identifier: UCA-SIP-10000
+    Text: The insulin pump should not be suspended for more than X (~120) minutes
+      after the human was experiencing or close to experiencing hypoglycemia,
+    Unsafe Control Actions:
+    - UCA-SIP-10000
+- Text: Human Actor
+  Control Actions:
+  - Identifier: PTR
+    Text: Put together OpenAPS rig
+    Unsafe Control Actions:
+    - Identifier: UCA-PTR-100
+      Text: Human actor sets up the OpenAPS rig wrong or insecurely (this needs more
+        research, hardware will help)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-PTR-100-1
+        Text: 'Human error (accident) UCA-PTR-100: Human actor sets up the OpenAPS
+          rig wrong or insecurely'
+      - Identifier: LS-1-UCA-PTR-100-2
+        Text: Human - Human actor is experimenting
+      - Identifier: LS-1-UCA-PTR-100-3
+        Text: Human - Human actor is rushing or thinks that they already know how
+          to set up the rig
+      - Identifier: LS-1-UCA-PTR-100-4
+        Text: Human - Human actor reads old / deprecated instructions
+      - Identifier: LS-1-UCA-PTR-100-5
+        Text: Human - Human does not see the SD card information in the documentation
+          and uses the wrong SD card
+      - Identifier: LS-2-UCA-PTR-100-1
+        Text: Human - Error in OpenAPS instructions (Wrong version number of the software)
+      - Identifier: LS-2-UCA-PTR-100-2
+        Text: Human - Incomplete instructions
+      - Identifier: LS-2-UCA-PTR-100-3
+        Text: Human - Flaw in the OpenAPS rig hardware setup which the creators don't
+          realise
+      - Identifier: LS-2-UCA-PTR-100-4
+        Text: 'Human - Docs out of date (UCA-PTR-100: Human actor sets up the OpenAPS
+          rig wrong or insecurely)'
+      - Identifier: LS-2-UCA-PTR-100-5
+        Text: Human - OpenAPS gives the wrong information to the human (possible wrong
+          version number, possible multiple instances of same program etc.)
+      - Identifier: LS-2-UCA-PTR-100-6
+        Text: Human - Human actor cannot find information
+    - Identifier: UCA-PTR-101
+      Text: Human actor makes a software update to another device (eg insulin pump,
+        CGM) which makes the device incompatible with OpenAPS
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-PTR-101-1
+        Text: 'Human error (accident) UCA-PTR-101: Human actor makes a software update
+          to another device (eg insulin pump, CGM), which makes it incompatible with
+          OpenAPS'
+      - Identifier: LS-1-UCA-PTR-101-2
+        Text: Human - Human misreads compatible version numbers
+      - Identifier: LS-1-UCA-PTR-101-3
+        Text: Human - Human actor reads old / deprecated instructions
+      - Identifier: LS-1-UCA-PTR-101-4
+        Text: 'Human - Human thinks that they already know how to set up the rig and
+          don''t check instructions (UCA-PTR-101: Human actor makes a software update
+          to another device (eg insulin pump, CGM), which makes it incompatible with
+          OpenAPS)'
+      - Identifier: LS-2-UCA-PTR-101-1
+        Text: Human - Error in OpenAPS instructions
+      - Identifier: LS-2-UCA-PTR-101-2
+        Text: Human - Incomplete instructions
+      - Identifier: LS-2-UCA-PTR-101-3
+        Text: Human - New insulin pump software has not been properly tested with
+          OpenAPS
+      - Identifier: LS-2-UCA-PTR-101-4
+        Text: Human - OpenAPS gives the wrong information to the human (possible wrong
+          version number, possible multiple instances of same program etc.)
+      - Identifier: LS-2-UCA-PTR-101-5
+        Text: Human - Docs out of date (when software has been updated)
+      - Identifier: LS-2-UCA-PTR-101-6
+        Text: Human - Human actor cannot find information
+  - Identifier: S
+    Text: Install or update OpenAPS software and dependencies
+    Unsafe Control Actions:
+    - Identifier: UCA-S-1
+      Text: Human actor does not install all the dependencies necessary for OpenAPS
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-S-1-1
+        Text: 'Human error (accident) (UCA-S-1: Human actor does not install all the
+          dependencies necessary for OpenAPS)'
+      - Identifier: LS-1-UCA-S-1-2
+        Text: Human - Human actor reads old / deprecated instructions
+      - Identifier: LS-2-UCA-S-1-1
+        Text: Human - Human actor cannot find information (installing dependencies)
+      - Identifier: LS-2-UCA-S-1-2
+        Text: Human - Docs out of date (Dependencies script out of date)
+      - Identifier: LS-2-UCA-S-1-3
+        Text: Human - Bug in dependencies script
+      - Identifier: LS-2-UCA-S-1-4
+        Text: Human - Vulnerability with one of the dependencies / software that OpenAPS
+          people are unaware of
+    - Identifier: UCA-S-2
+      Text: Human actor does not update the OpenAPS dependencies when there are available
+        updates which are compatible with the other OpenAPS dependencies
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-S-2-1
+        Text: 'Human error (accident) (UCA-S-2: Human actor does not update OpenAPS
+          dependencies when there are compatible updates available)'
+      - Identifier: LS-1-UCA-S-2-2
+        Text: Human - Human does not check their notifications / e-mail
+      - Identifier: LS-2-UCA-S-2-1
+        Text: Human - Human is not notified when there are updates to OpenAPS are
+          available
+      - Identifier: LS-2-UCA-S-2-2
+        Text: Human - Nobody at all is checking whether there are updates to OpenAPS
+          dependencies available
+      - Identifier: LS-2-UCA-S-2-3
+        Text: Human - Nobody monitors and tests the latest updates to determine if
+          they are compatible with OpenAPS
+      - Identifier: LS-2-UCA-S-2-4
+        Text: Human - Human is not prompted to update dependencies after the initial
+          install (?)
+    - Identifier: UCA-S-100
+      Text: Human actor makes a software update to the software that the OpenAPS rig
+        is using, which makes it incompatible with other device(s) in the system (eg
+        pump, CGM)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-S-100-1
+        Text: 'Human error (accident) UCA-S-100: Human actor makes a software update
+          to the software that OpenAPS is using, which makes it incompatible with
+          other device(s) in the system (eg pump, CGM)'
+      - Identifier: LS-1-UCA-S-100-2
+        Text: Human - Human error (Human actor defaults to installing the latest software
+          and dependencies and doesn't consider that this could cause a failiure)
+      - Identifier: LS-1-UCA-S-100-3
+        Text: Human - Human actor reads old / deprecated instructions
+      - Identifier: LS-1-UCA-S-100-4
+        Text: Human - Human actor does not read the instructions about which software
+          versions work
+      - Identifier: LS-2-UCA-S-100-1
+        Text: Human - Error in OpenAPS instructions
+      - Identifier: LS-2-UCA-S-100-2
+        Text: Human - Incomplete instructions
+      - Identifier: LS-2-UCA-S-100-3
+        Text: Human - New OpenAPS software has not been properly tested with all the
+          other devices (insulin pumps, CGM)
+      - Identifier: LS-2-UCA-S-100-4
+        Text: Human - Human actor cannot find information (working version)
+      - Identifier: LS-2-UCA-S-100-5
+        Text: Human - Docs out of date (working versions information)
+    - Identifier: UCA-S-101
+      Text: Human actor installs unecessary additional dependencies for OpenAPS without
+        a "test" configuration
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-S-101-1
+        Text: 'Human error (accident) UCA-S-101: Human actor installs unecessary additional
+          dependencies for OpenAPS'
+      - Identifier: LS-1-UCA-S-101-2
+        Text: Human - Human actor is experimenting
+      - Identifier: LS-1-UCA-S-101-3
+        Text: 'Human - Human misunderstanding (UCA-S-101: Human actor installs unecessary
+          additional dependencies for OpenAPS)'
+      - Identifier: LS-2-UCA-S-101-1
+        Text: 'Human - Human actor cannot find information (UCA-S-101: Human actor
+          installs unecessary additional dependencies for OpenAPS)'
+      - Identifier: LS-2-UCA-S-101-2
+        Text: Human - Incomplete docs
+      - Identifier: LS-2-UCA-S-101-3
+        Text: 'Human - Docs out of date (UCA-S-101: Human actor installs unecessary
+          additional dependencies for OpenAPS)'
+  - Identifier: CO
+    Text: Setup and configure OpenAPS loop
+    Unsafe Control Actions:
+    - Identifier: UCA-CO-1
+      Text: There is a change in the OpenAPS loop setup, but the human actor does
+        not update the configurations of OpenAPS accordingly
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-CO-1-1
+        Text: 'Human error (accident) UCA-CO-1: There is a change in the OpenAPS loop
+          setup, but the human actor does not update the configurations of OpenAPS
+          accordingly'
+      - Identifier: LS-1-UCA-CO-1-2
+        Text: Human - Human forgets about the contents of the configurations or that
+          they need to update the configs at all
+      - Identifier: LS-1-UCA-CO-1-3
+        Text: Human - Human does not read docs
+      - Identifier: LS-2-UCA-CO-1-1
+        Text: 'Human - Human actor cannot find information (UCA-CO-1: There is a change
+          in the OpenAPS loop setup, but the human actor does not update the configurations
+          of OpenAPS accordingly)'
+      - Identifier: LS-2-UCA-CO-1-2
+        Text: Human - Incomplete or inaccurate docs, missing out a configuration setting
+      - Identifier: LS-2-UCA-CO-1-3
+        Text: Human - There's a new potential device that hasn't been included in
+          the configs
+      - Identifier: LS-2-UCA-CO-1-4
+        Text: Human - Vulnerability to malicious actor interacting
+    - Identifier: UCA-CO-100
+      Text: Human actor selects an inaccurate option when configuring OpenAPS
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-CO-100-1
+        Text: 'Human error (accident) UCA-CO-100: Human actor selects the wrong option
+          when configuring OpenAPS'
+      - Identifier: LS-1-UCA-CO-100-2
+        Text: Human - Human does not read docs
+      - Identifier: LS-2-UCA-CO-100-1
+        Text: 'Human - Human actor cannot find information (UCA-CO-100: Human actor
+          selects the wrong option when configuring OpenAPS)'
+      - Identifier: LS-2-UCA-CO-100-2
+        Text: Human - Incomplete or inaccurate docs, missing out a configuration setting
+      - Identifier: LS-2-UCA-CO-100-3
+        Text: Human - Vulnerability to malicious actor interacting
+      - Identifier: LS-2-UCA-CO-100-4
+        Text: Human - Error in OpenAPS instructions
+    - Identifier: UCA-CO-101
+      Text: Human actor configures OpenAPS with a bad algorithm instead of oref0
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-CO-101-1
+        Text: 'Human error (accident) UCA-CO-101: Human actor configures OpenAPS with
+          an algorithm other than the latest oref0'
+      - Identifier: LS-1-UCA-CO-101-2
+        Text: Human - Human does not want to change working algorithm even though
+          latest has more bug fixes
+      - Identifier: LS-1-UCA-CO-101-3
+        Text: Human - Human is prototyping a new algorithm
+      - Identifier: LS-1-UCA-CO-101-4
+        Text: Human - Human is not checking for algorithm updates
+      - Identifier: LS-2-UCA-CO-101-1
+        Text: Human - Incomplete or inaccurate docs surrounding an algorithm
+      - Identifier: LS-2-UCA-CO-101-2
+        Text: 'Human - Human actor doesn''t get a notification email (UCA-CO-101:
+          Human actor configures OpenAPS with an algorithm other than the latest oref0)'
+  - Identifier: SO
+    Text: Stop OpenAPS loop
+    Unsafe Control Actions:
+    - Identifier: UCA-SO-1
+      Text: Human actor does not stop the OpenAPS loop when there is a problem with
+        OpenAPS or when OpenAPS is not able to make the insulin pump dose basal in
+        line with its recommendations
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SO-1-1
+        Text: 'Human error (accident) UCA-SO-1: Human actor does not stop the OpenAPS
+          loop when there is a problem with OpenAPS / OpenAPS communication with other
+          devices (eg when OpenAPS is not able to make the insulin pump dose basal
+          in line with its recommendations), but the OpenAPS loop is still issuing
+          insulin doses'
+      - Identifier: LS-1-UCA-SO-1-2
+        Text: Human - Human actor tries to stop the loop but it is not stopping
+      - Identifier: LS-1-UCA-SO-1-3
+        Text: 'Human - Human keeps OpenAPS operational in case the doses start going
+          through (UCA-SO-1: Human actor does not stop the OpenAPS loop when there
+          is a problem with OpenAPS / OpenAPS communication with other devices)'
+      - Identifier: LS-2-UCA-SO-1-1
+        Text: Human - Lack of feedback from OpenAPS (Human actor does not stop the
+          loop when there is a problem with OpenAPS but OpenAPS is still issuing insulin
+          doses)
+      - Identifier: LS-2-UCA-SO-1-2
+        Text: Human - OpenAPS rig does not 'realise' it's not working well
+      - Identifier: LS-2-UCA-SO-1-3
+        Text: 'Human - OpenAPS does not pull feedback from insulin pump (UCA-SO-1:
+          Human actor does not stop the OpenAPS loop when there is a problem with
+          OpenAPS / OpenAPS communication with other devices, but the OpenAPS loop
+          is still issuing insulin doses)'
+      - Identifier: LS-2-UCA-SO-1-4
+        Text: Human - OpenAPS rig does not 'realise' the insulin pump is not dosing
+          as instructed
+    - Identifier: UCA-SO-100
+      Text: Human actor provides Switch off (hold button goes into reset) when the
+        system is expected to be up and running
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SO-100-1
+        Text: Human - Human actor suddenly needs to remove the insulin pump and OpenAPS
+          rig
+      - Identifier: LS-1-UCA-SO-100-2
+        Text: Human - Human actor wants to change something with the OpenAPS rig /
+          insulin pump and switches off the OpenAPS rig
+      - Identifier: LS-1-UCA-SO-100-3
+        Text: Human - Human actor knows of a hazard which OpenAPS doesn't
+      - Identifier: LS-1-UCA-SO-100-4
+        Text: Human - Human actor accidently turns off or disconnects the OpenAPS
+          rig (battery falls out, wires caught, human takes rig out of range of pump
+          etc)
+      - Identifier: LS-1-UCA-SO-100-5
+        Text: Human - Human actor mistinterprets a signal from the OpenAPS rig or
+          pump or logs
+      - Identifier: LS-1-UCA-SO-100-6
+        Text: 'Human - Human actor believes the insulin dosing is wrong or not working
+          (UCA-SO-100: Human actor provides Switch off (hold button goes into reset
+          or another way) when the system is expected to be up and running)'
+      - Identifier: LS-1-UCA-SO-100-7
+        Text: Human - OpenAPS is taking a while to begin and the human thinks this
+          means it's not working properly
+      - Identifier: LS-1-UCA-SO-100-8
+        Text: 'Human - Human confusion (UCA-SO-100: Human actor provides Switch off
+          (hold button goes into reset or another way) when the system is expected
+          to be up and running)'
+      - Identifier: LS-2-UCA-SO-100-1
+        Text: Human - OpenAPS algorithm has a bug which makes it indicate that the
+          OpenAPS system needs switching off when it doesn't
+      - Identifier: LS-2-UCA-SO-100-2
+        Text: Human - Lack of feedback from rig or pump indicating that the OpenAPS
+          looping is working (especially when dosing hasn't begun quite yet)
+    - Identifier: UCA-SO-1000
+      Text: Human actor breaks the Power Off button
+      Reason: Duration
+      Scenarios:
+      - Identifier: LS-1-UCA-SO-1000-1
+        Text: 'Human error (accident) (UCA-SO-1000: Human actor breaks the Power Off
+          button (or another part of the OpenAPS rig))'
+      - Identifier: LS-1-UCA-SO-1000-2
+        Text: Human - Human does not see warning
+      - Identifier: LS-2-UCA-SO-1000-1
+        Text: Human - There is no warning on the OpenAPS rig that OpenAPS is vulnerable
+          to being broken
+      - Identifier: LS-2-UCA-SO-1000-2
+        Text: Human - Human does not see warning
+  - Identifier: UD
+    Text: Provide useful data to pump (eg carbs)
+    Unsafe Control Actions:
+    - Identifier: UCA-UD-1
+      Text: Human actor does not provide data to the insulin pump which can improve
+        insulin dosing recommendations (eg carb data at mealtime)
+      Reason: Not Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-UD-1-1
+        Text: Human - Human is too busy or cannot be bothered to input data to the
+          insulin pump
+      - Identifier: LS-1-UCA-UD-1-2
+        Text: 'Human error (accident) UCA-UD-1: Human actor does not provide data
+          to the insulin pump which can improve insulin dosing recommendations (eg
+          carb data at mealtime)'
+      - Identifier: LS-1-UCA-UD-1-3
+        Text: Human - Human has not read the instructions of the insulin pump properly
+          / read wrong instructions
+      - Identifier: LS-1-UCA-UD-1-4
+        Text: Human - Human has read insulin pump instructions but does not know how
+          to input data into current insulin pump in use
+      - Identifier: LS-1-UCA-UD-1-5
+        Text: Human - Human forgets to input data or that they can input data which
+          is useful
+      - Identifier: LS-2-UCA-UD-1-1
+        Text: 'Human - Error in insulin pump instructions (UCA-UD-1: Human actor does
+          not provide data to the insulin pump which can improve insulin dosing recommendations
+          (eg carb data at mealtime)'
+      - Identifier: LS-2-UCA-UD-1-2
+        Text: Human - Incomplete insulin pump instructions
+      - Identifier: LS-2-UCA-UD-1-3
+        Text: Human - Insulin pump doesn't accomodate for the useful data
+    - Identifier: UCA-UD-100
+      Text: Human actor provides erroneous input of data affecting insulin dosing
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-UD-100-1
+        Text: Human - Human actor is experimenting
+      - Identifier: LS-1-UCA-UD-100-2
+        Text: 'Human error (accident) UCA-UD-100: Human actor provides erroneous input
+          of data affecting insulin dosing'
+      - Identifier: LS-1-UCA-UD-100-3
+        Text: 'Human - Human actor has not read the insulin pump instructions (UCA-UD-100:
+          Human actor provides erroneous input of data affecting insulin dosing)'
+      - Identifier: LS-1-UCA-UD-100-4
+        Text: Human - Human actor has not read or understood OpenAPS instructions
+          for inputting data into the insulin pump
+      - Identifier: LS-1-UCA-UD-100-5
+        Text: Human - Human actor has read old / deprecated instructions
+      - Identifier: LS-1-UCA-UD-100-6
+        Text: Human - Instructions are complex and Human actor has forgetten them
+      - Identifier: LS-2-UCA-UD-100-1
+        Text: 'Human - Error in insulin pump instructions (UCA-UD-100: Human actor
+          provides erroneous input of data affecting insulin dosing)'
+      - Identifier: LS-2-UCA-UD-100-2
+        Text: Human - Incomplete insulin pump or OpenAPS instructions
+      - Identifier: LS-2-UCA-UD-100-3
+        Text: Human - Human actor is a different person to the user and doesn't know
+          the accurate data of the user (parent doesn't know kid had some extra candy)
+      - Identifier: LS-2-UCA-UD-100-4
+        Text: Human - Error in OpenAPS instructions
+    - Identifier: UCA-UD-1000
+      Text: Human actor provides meal data to the insulin pump more than X minutes
+        away from the actual mealtime
+      Reason: Timing
+      Scenarios:
+      - Identifier: LS-1-UCA-UD-1000-1
+        Text: 'Human error (accident) UCA-UD-1000: Human actor provides meal data
+          to the insulin pump more than X minutes away from the actual mealtime'
+      - Identifier: LS-1-UCA-UD-1000-2
+        Text: 'Human - Human trying to influence insulin dosing / glucose levels (UCA-UD-1000:
+          Human actor provides meal data to the insulin pump more than X minutes away
+          from the actual mealtime)'
+      - Identifier: LS-1-UCA-UD-1000-3
+        Text: Human - Human does not read docs
+      - Identifier: LS-2-UCA-UD-1000-1
+        Text: Human - Lack of information in docs (Human actor provides meal data
+          to the insulin pump more than X minutes away from the actual mealtime)
+  - Identifier: SB
+    Text: Set bolus on pump
+    Unsafe Control Actions:
+    - Identifier: UCA-SB-100
+      Text: Human actor sets a bolus (or basal) which unintentionally permanently
+        overrides OpenAPS temporary basals
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-SB-100-1
+        Text: Human - Human user wants their bolus dose rather than the basal recommendation
+          (if they have additional information about their current state or upcoming
+          activities)
+      - Identifier: LS-1-UCA-SB-100-2
+        Text: 'Human error (accident) UCA-SB-100: Human actor sets a bolus (or basal)
+          which unintentionally overrides OpenAPS temporary basals'
+      - Identifier: LS-1-UCA-SB-100-3
+        Text: Human - Human actor has not read or understood the OpenAPS instructions
+      - Identifier: LS-2-UCA-SB-100-1
+        Text: Human - Error in OpenAPS instructions
+      - Identifier: LS-2-UCA-SB-100-2
+        Text: Human - Incomplete OpenAPS instructions
+      - Identifier: LS-2-UCA-SB-100-3
+        Text: Human - Another old set of OpenAPS instructions is available
+      - Identifier: LS-2-UCA-SB-100-4
+        Text: Human - Human actor cannot find information
+  - Identifier: PM
+    Text: Provide mandatory settings for OpenAPS on pump (eg temp basal type as units
+      per hour not %, basal profile, DIA)
+    Unsafe Control Actions:
+    - Identifier: UCA-PM-100
+      Text: Human actor configures insulin pump settings in a way that is not suitable
+        for OpenAPS (Temp Basal rates as units per hour not %, carb ratios to grams
+        not exchange units, max basal rate set too high, basal profile / carb ratios
+        / ISF values not set, DIA too low)
+      Reason: Providing
+      Scenarios:
+      - Identifier: LS-1-UCA-PM-100-1
+        Text: Human - Human actor is experimenting
+      - Identifier: LS-1-UCA-PM-100-2
+        Text: 'Human error (accident) UCA-PM-100: Human actor configures insulin pump
+          settings in a way that is not suitable for OpenAPS'
+      - Identifier: LS-1-UCA-PM-100-3
+        Text: Human - Human actor believes the OpenAPS instructions are wrong
+      - Identifier: LS-1-UCA-PM-100-4
+        Text: Human - Human actor has read old / deprecated instructions
+      - Identifier: LS-1-UCA-PM-100-5
+        Text: Human - Human actor has not read or understood the OpenAPS instructions
+      - Identifier: LS-1-UCA-PM-100-6
+        Text: 'Human - Human actor has forgetten the OpenAPS instructions (UCA-PM-100:
+          Human actor configures insulin pump settings in a way that is not suitable
+          for OpenAPS)'
+      - Identifier: LS-2-UCA-PM-100-1
+        Text: 'Human - OpenAPS instructions have an error (UCA-PM-100: Human actor
+          configures insulin pump settings in a way that is not suitable for OpenAPS)'
+      - Identifier: LS-2-UCA-PM-100-2
+        Text: 'Human - OpenAPS instructions are incomplete (UCA-PM-100: Human actor
+          configures insulin pump settings in a way that is not suitable for OpenAPS)'
+      - Identifier: LS-2-UCA-PM-100-3
+        Text: Human - OpenAPS does not make sure that the insulin pump settings are
+          suitable for OpenAPS to operate
+  - Identifier: UC
+    Text: Update CGM / CGM receiver
+    Unsafe Control Actions:
+    - Identifier: UCA-UC-1
+      Text: Human does not update CGM when there are updates available for X weeks
+        which can improve glucose data accuracy or prevent problems
+      Reason: Not Providing
+      Scenarios: []
+    - Identifier: UCA-UC-100
+      Text: Human updates the CGM when OpenAPS rig is trying to pull data from the
+        CGM
+      Reason: Providing
+      Scenarios: []
+    - Identifier: UCA-UC-101
+      Text: Human provides wrong CGM update
+      Reason: Providing
+      Scenarios: []
+  Controller Constraints:
+  - Identifier: CC-S-1
+    Text: Human actor must install all the dependencies necessary for OpenAPS
+    Unsafe Control Actions:
+    - UCA-S-1
+  - Identifier: CC-CO-1
+    Text: Human actor must update the configurations of OpenAPS accordingly if there
+      is a change in the OpenAPS loop setup which affects the configurations
+    Unsafe Control Actions:
+    - UCA-CO-1
+  - Identifier: CC-SO-1
+    Text: Human actor must stop the OpenAPS loop when there is a problem with OpenAPS
+      or when OpenAPS is not able to make the insulin pump dose basal in line with
+      its recommendations
+    Unsafe Control Actions:
+    - UCA-SO-1
+  - Identifier: CC-UD-1
+    Text: Human actor must provide data to the insulin pump which can improve insulin
+      dosing recommendations (eg carb data at mealtime)
+    Unsafe Control Actions:
+    - UCA-UD-1
+  - Identifier: CC-S-2
+    Text: Human actor must update dependencies when there are compatible updates available
+    Unsafe Control Actions:
+    - UCA-S-2
+  - Identifier: CC-PTR-100
+    Text: Human actor must not set up the OpenAPS rig wrong or insecurely (this needs
+      more research, hardware will help)
+    Unsafe Control Actions:
+    - UCA-PTR-100
+  - Identifier: CC-S-100
+    Text: Human actor must not make a software update to the software that the OpenAPS
+      rig is using which makes it incompatible with other device(s) in the system
+      (eg pump, CGM)
+    Unsafe Control Actions:
+    - UCA-S-100
+  - Identifier: CC-CO-100
+    Text: Human actor must not select an inaccurate option when configuring OpenAPS
+    Unsafe Control Actions:
+    - UCA-CO-100
+  - Identifier: CC-SO-100
+    Text: Human actor must not provide Switch off (hold button goes into reset) when
+      the system is expected to be up and running
+    Unsafe Control Actions:
+    - UCA-SO-100
+  - Identifier: CC-UD-100
+    Text: Human actor must not provide erroneous input of data affecting insulin dosing
+    Unsafe Control Actions:
+    - UCA-UD-100
+  - Identifier: CC-SB-100
+    Text: Human actor must not set a bolus (or basal) which unintentionally permanently
+      overrides OpenAPS temporary basals
+    Unsafe Control Actions:
+    - UCA-SB-100
+  - Identifier: CC-PM-100
+    Text: Human actor must not configure insulin pump settings in a way that is not
+      suitable for OpenAPS (Temp Basal rates as units per hour not %, carb ratios
+      to grams not exchange units, max basal rate set too high, basal profile / carb
+      ratios / ISF values not set, DIA too low)
+    Unsafe Control Actions:
+    - UCA-PM-100
+  - Identifier: CC-PTR-101
+    Text: Human actor must not make a software update to another device (eg insulin
+      pump, CGM) which makes the device incompatible with OpenAPS
+    Unsafe Control Actions:
+    - UCA-PTR-101
+  - Identifier: CC-S-101
+    Text: Human actor must not install unecessary additional dependencies for OpenAPS
+      without a "test" configuration
+    Unsafe Control Actions:
+    - UCA-S-101
+  - Identifier: CC-CO-101
+    Text: Human actor must not  configure OpenAPS with a bad algorithm instead of
+      oref0
+    Unsafe Control Actions:
+    - UCA-CO-101
+  - Identifier: CC-UD-1000
+    Text: Human actor must provide meal data to the insulin pump within X minutes
+      from the actual mealtime
+    Unsafe Control Actions:
+    - UCA-UD-1000
+- Text: Infrastructure Developer
+  Control Actions:
+  - Identifier: UI
+    Text: Update Infrastructure
+    Unsafe Control Actions:
+    - Identifier: UCA-UI-1
+      Text: Infrastructure developer does not update the OpenAPS infrastructure when
+        there is a problem with the current infrastructure
+      Reason: Not Providing
+    - Identifier: UCA-UI-100
+      Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
+      Reason: Providing
+    - Identifier: UCA-UI-101
+      Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
+        which makes OpenAPS incompatible with other components in the system being
+        used (Insulin pump, CGM)
+      Reason: Providing
+    - Identifier: UCA-UI-102
+      Text: InfDev makes an incomplete update to the OpenAPS infrastructure (compared
+        with what has been planned/promised/documented)
+      Reason: Providing
+  - Identifier: TI
+    Text: Test
+    Unsafe Control Actions:
+    - Identifier: UCA-T-1
+      Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
+        sufficiently
+      Reason: Not Providing
+    - Identifier: UCA-T-2
+      Text: InfDev does not consider all HW setups/configurations when running/updating
+        the test cases
+      Reason: Not Providing
+    - Identifier: UCA-T-3
+      Text: InfDev does not consider each use case for OpenAPS tools and infrastructure
+        when writing tests
+      Reason: Not Providing
+    - Identifier: UCA-T-4
+      Text: InfDev does not provide analysis of failed tests
+      Reason: Not Providing
+    - Identifier: UCA-T-100
+      Text: Infrastructure developer tests of the system are flawed
+      Reason: Providing
+    - Identifier: UCA-T-1000
+      Text: Infrastructure developer tests the OpenAPS system infrastructure after
+        it's deployed
+      Reason: Timing
+  - Identifier: IF
+    Text: Forum
+    Unsafe Control Actions:
+    - Identifier: UCA-IF-1
+      Text: Infrastructure developers are not present on the forum that they provide
+      Reason: Not Providing
+    - Identifier: UCA-IF-2
+      Text: InfDevs are not answering specific types of questions in the forum (bc
+        they are biased, thought somebody else will answer etc), so that some questions
+        just are forgotten
+      Reason: Not Providing
+    - Identifier: UCA-IF-100
+      Text: Infrastructure developers provide a flawed forum (bandwidth issues, software
+        bugs)
+      Reason: Providing
+    - Identifier: UCA-IF-100
+      Text: InfDevs do answer the questions more than X hours after the question has
+        been asked
+      Reason: Timing
+    - Identifier: UCA-IF-101
+      Text: InfDevs give wrong information in the forum
+      Reason: Providing
+  - Identifier: IA
+    Text: Answers
+    Unsafe Control Actions: []
+  Controller Constraints: []
+- Text: Algorithm Developer
+  Control Actions:
+  - Identifier: UA
+    Text: Update Algorithm
+    Unsafe Control Actions:
+    - Identifier: UCA-UA-1
+      Text: Infrastructure developor does not update the OpenAPS infrastructure when
+        there is a problem with the current infrastructure
+      Reason: Not Providing
+    - Identifier: UCA-UA-100
+      Text: Infrastructure developor makes a faulty update to the OpenAPS infrastructure
+      Reason: Providing
+    - Identifier: UCA-UA-101
+      Text: Infrastructure develepor makes an update to the OpenAPS infrastructure
+        which makes OpenAPS incompatible with other components in the system being
+        used (Insulin pump, CGM)
+      Reason: Providing
+  - Identifier: TA
+    Text: Test
+    Unsafe Control Actions:
+    - Identifier: UCA-TA-1
+      Text: Infrastructure developer does not test the OpenAPS tools and infrastrucure
+        sufficiently
+      Reason: Not Providing
+    - Identifier: UCA-TA-100
+      Text: Infrastructure developer tests of the system are flawed
+      Reason: Providing
+    - Identifier: UCA-TA-1000
+      Text: Infrastructure developer tests the OpenAPS system infrastructure after
+        it's deployed
+      Reason: Timing
+  - Identifier: AF
+    Text: Forum
+    Unsafe Control Actions:
+    - Identifier: UCA-AF-1
+      Text: Infrastructure developers are not present on the forum that they provide
+      Reason: Not Providing
+    - Identifier: UCA-AF-100
+      Text: Infrastructure developers provide a flawed forum
+      Reason: Providing
+  - Identifier: AA
+    Text: Answers
+    Unsafe Control Actions: []
+  Controller Constraints: []
