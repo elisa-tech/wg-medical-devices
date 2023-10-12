@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023 ELISA <medical-devices@lists.elisa.tech>
+# SPDX-License-Identifier: LGPL-2.1-or-later
+
 import yaml
 import pandas as pd
 from functools import cmp_to_key
@@ -17,11 +20,10 @@ def convert_UCAs_and_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scenari
         if type(data["UCA"]) is str:
             curr_key = data["UCA"].split(": ")
             curr_key = curr_key[0].strip()
-            uca_scenarios.update({curr_key: {"ls1":[], "ls2":[]}})
-        if type(data["Loss Scenario Type 1"]) is str:
-            uca_scenarios[curr_key]['ls1'].append(data["Loss Scenario Type 1"].strip())    
-        if type(data["Loss Scenario Type 2"]) is str:
-            uca_scenarios[curr_key]["ls2"].append(data["Loss Scenario Type 2"].strip())
+            uca_scenarios.update({curr_key: {"ls":[]}})
+        for i in range(1,9):
+            if f"Loss Scenario Type {str(i)}" in data and type(data[f"Loss Scenario Type {str(i)}"]) is str:
+                uca_scenarios[curr_key]['ls'].append(data[f"Loss Scenario Type {str(i)}"].split("(UCA-")[0].split("Human -")[-1].strip())
     uca_categories = ["Providing", "Not Providing", "Timing", "Duration"]
     cc_labels = {"Providing":"P", "Not Providing":"NP", "Timing": "T", "Duration": "D"}
     components = []
@@ -63,21 +65,13 @@ def convert_UCAs_and_loss_scenarios_to_yml(xlsx_file, uca_sheet, l1_loss_scenari
                         "Scenarios": []
                     })
                     i = 1
-                    for ls1 in uca_scenarios[split_uca[0].strip()]['ls1']:
-                        identifier = "LS-1-"+split_uca[0].strip()+"-"+str(i)
+                    for ls in uca_scenarios[split_uca[0].strip()]['ls']:
+                        identifier = "LS-"+split_uca[0].strip()+"-"+str(i)
                         i = i + 1
                         control_action["Unsafe Control Actions"][-1]["Scenarios"].append({
                             "Identifier": identifier, 
-                            "Text": ls1
+                            "Text": ls
                         })
-                    i = 1
-                    for ls2 in uca_scenarios[split_uca[0].strip()]['ls2']:
-                        identifier = "LS-2-"+split_uca[0].strip()+"-"+str(i)
-                        i = i + 1
-                        control_action["Unsafe Control Actions"][-1]["Scenarios"].append({
-                            "Identifier": identifier, 
-                            "Text": ls2
-                        })    
                 if type(data[cc_labels[category]+" Controller Constraints"]) is str:
                     if not data[cc_labels[category]+" Controller Constraints"].strip():
                         continue
