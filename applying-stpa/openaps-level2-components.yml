@@ -10,84 +10,84 @@ Components:
         affect the configurations
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RSA-1-1
+      - Identifier: LS-UCA-RSA-1-1
         Text: There is no information in the code/configuration that allows for automated
           compatibility checks
-      - Identifier: LS-1-UCA-RSA-1-2
-        Text: If there is information in the code/configuration that allows compatibility
-          checks, the compatibility checks are not implemented or errorneously implemented
-      - Identifier: LS-1-UCA-RSA-1-3
-        Text: The interface detects the configuration mismatch, but does not show
-          this on the UI
-      - Identifier: LS-1-UCA-RSA-1-4
-        Text: OpenAPS is not set up to prompt the human to update configs when it
-          detects a change that should be reflected in configs or detects inaccurate
-          configs
-      - Identifier: LS-2-UCA-RSA-1-1
+      - Identifier: LS-UCA-RSA-1-2
         Text: If there is information in the code/configuration that allows compatibility
           checks, the version information is not updated, so that the compatiblity
           algorithm thinks everything is still on its old configuration
-      - Identifier: LS-2-UCA-RSA-1-2
+      - Identifier: LS-UCA-RSA-1-3
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the compatibility checks are not implemented or errorneously implemented
+      - Identifier: LS-UCA-RSA-1-4
         Text: There have been additional configurations added in the latest OpenAPS
           version so the version that is being used needs to be updated
+      - Identifier: LS-UCA-RSA-1-5
+        Text: The interface detects the configuration mismatch, but does not show
+          this on the UI
+      - Identifier: LS-UCA-RSA-1-6
+        Text: OpenAPS is not set up to prompt the human to update configs when it
+          detects a change that should be reflected in configs or detects inaccurate
+          configs
     - Identifier: UCA-RSA-2
       Text: Raspi OS does not successfully set up the algorithm when the human operator
         runs the script to set up the algorithm
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RSA-2-1
+      - Identifier: LS-UCA-RSA-2-1
         Text: Dependencies on the RaspiOS are not / cannot be the correct version
           to install the algorithm correctly
-      - Identifier: LS-1-UCA-RSA-2-2
+      - Identifier: LS-UCA-RSA-2-2
+        Text: Installation script aborts or crashes partway through
+      - Identifier: LS-UCA-RSA-2-3
         Text: Raspi OS version is not supported by OpenAPS
-      - Identifier: LS-1-UCA-RSA-2-3
+      - Identifier: LS-UCA-RSA-2-4
         Text: Raspi OS has packaging problems / broken packages which are causing
           problems installing dependencies
-      - Identifier: LS-2-UCA-RSA-2-1
-        Text: Installation script aborts or crashes partway through
     - Identifier: UCA-RSA-100
       Text: Raspi OS selects a different option to that which the human operator entered
         or intended when configuring OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RSA-100-1
+      - Identifier: LS-UCA-RSA-100-1
         Text: Raspi OS bug or malfunction
-      - Identifier: LS-1-UCA-RSA-100-2
+      - Identifier: LS-UCA-RSA-100-2
+        Text: Issue with recognizing the operator input
+      - Identifier: LS-UCA-RSA-100-3
         Text: selection of a different memory section than the one the information
           entered by the operator is stored at (memory address issue)
-      - Identifier: LS-1-UCA-RSA-100-3
+      - Identifier: LS-UCA-RSA-100-4
         Text: issue with passing the entered information on to beyond the user interface
-      - Identifier: LS-2-UCA-RSA-100-1
-        Text: Issue with recognizing the operator input
     - Identifier: UCA-RSA-101
       Text: Raspi OS configures OpenAPS with a nonoptimal algorithm instead of oref0
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RSA-101-1
+      - Identifier: LS-UCA-RSA-101-1
         Text: Raspi OS bug or malfunction
-      - Identifier: LS-1-UCA-RSA-101-2
+      - Identifier: LS-UCA-RSA-101-2
+        Text: Algorithm has safety flaws that noone knows about
+      - Identifier: LS-UCA-RSA-101-3
         Text: Human confirms that the algorithm is safe when it has not been tested
           properly
-      - Identifier: LS-2-UCA-RSA-101-1
-        Text: Algorithm has safety flaws that noone knows about
-      - Identifier: LS-2-UCA-RSA-101-2
+      - Identifier: LS-UCA-RSA-101-4
         Text: Linux UI misidentifies the algorithm as a recommended algorithm
     - Identifier: UCA-RSA-1000
       Text: Raspi OS updates the algorithm or configurations too late, after OpenAPS
         has already started to operate, and is instead using previous algorithm settings
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-RSA-1000-1
+      - Identifier: LS-UCA-RSA-1000-1
         Text: Raspi OS bug or malfunction
-      - Identifier: LS-1-UCA-RSA-1000-2
+      - Identifier: LS-UCA-RSA-1000-2
+        Text: Issue with scheduling the tasks
+      - Identifier: LS-UCA-RSA-1000-3
         Text: Some other action is blocking the update routine
-      - Identifier: LS-1-UCA-RSA-1000-3
+      - Identifier: LS-UCA-RSA-1000-4
         Text: Scheduling/Interrupt issue
-      - Identifier: LS-1-UCA-RSA-1000-4
+      - Identifier: LS-UCA-RSA-1000-5
         Text: The Human operator starts running the algorithm before reconfiguring
           which algorithm to run
-      - Identifier: LS-2-UCA-RSA-1000-1
-        Text: Issue with scheduling the tasks
   - Identifier: STAO
     Text: Start OpenAPS
     Unsafe Control Actions:
@@ -96,79 +96,79 @@ Components:
         an OpenAPS loop set up
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-1-1
+      - Identifier: LS-UCA-STAO-1-1
         Text: Bug in OpenAPS code
-      - Identifier: LS-1-UCA-STAO-1-2
-        Text: Incompatible OpenAPS and RasPi versions
-      - Identifier: LS-1-UCA-STAO-1-3
-        Text: Instruction to start OpenAPS has been cleared from Raspi OS boot instructions
-      - Identifier: LS-1-UCA-STAO-1-4
-        Text: Raspi OS was booted abnormally
-      - Identifier: LS-1-UCA-STAO-1-5
-        Text: Raspi OS crash
-      - Identifier: LS-2-UCA-STAO-1-1
+      - Identifier: LS-UCA-STAO-1-2
         Text: OpenAPS loop is set up in the wrong location on RasPi OS
-      - Identifier: LS-2-UCA-STAO-1-2
+      - Identifier: LS-UCA-STAO-1-3
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-UCA-STAO-1-4
         Text: OpenAPS files have been corrupted
+      - Identifier: LS-UCA-STAO-1-5
+        Text: Instruction to start OpenAPS has been cleared from Raspi OS boot instructions
+      - Identifier: LS-UCA-STAO-1-6
+        Text: Raspi OS was booted abnormally
+      - Identifier: LS-UCA-STAO-1-7
+        Text: Raspi OS crash
     - Identifier: UCA-STAO-2
       Text: Raspi OS does not start OpenAPS when the OpenAPS loop is installed
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-2-1
+      - Identifier: LS-UCA-STAO-2-1
         Text: Bug in OpenAPS code
-      - Identifier: LS-1-UCA-STAO-2-2
-        Text: Incompatible OpenAPS and RasPi versions
-      - Identifier: LS-1-UCA-STAO-2-3
-        Text: Human operator cancelled the RasPi set up
-      - Identifier: LS-1-UCA-STAO-2-4
-        Text: Raspi OS crash
-      - Identifier: LS-2-UCA-STAO-2-1
+      - Identifier: LS-UCA-STAO-2-2
         Text: OpenAPS loop is set up in the wrong location on RasPi OS
-      - Identifier: LS-2-UCA-STAO-2-2
+      - Identifier: LS-UCA-STAO-2-3
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-UCA-STAO-2-4
         Text: OpenAPS files have been corrupted
+      - Identifier: LS-UCA-STAO-2-5
+        Text: Human operator cancelled the RasPi set up
+      - Identifier: LS-UCA-STAO-2-6
+        Text: Raspi OS crash
     - Identifier: UCA-STAO-3
       Text: Raspi OS does not start OpenAPS after there has been a completed update
         to OpenAPS
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-3-1
+      - Identifier: LS-UCA-STAO-3-1
         Text: Bug in OpenAPS code
-      - Identifier: LS-1-UCA-STAO-3-2
-        Text: Incompatible OpenAPS and RasPi versions
-      - Identifier: LS-1-UCA-STAO-3-3
-        Text: Human operator cancelled the RasPi set up
-      - Identifier: LS-1-UCA-STAO-3-4
-        Text: Raspi OS crash
-      - Identifier: LS-2-UCA-STAO-3-1
+      - Identifier: LS-UCA-STAO-3-2
         Text: OpenAPS files have been corrupted
-      - Identifier: LS-2-UCA-STAO-3-2
+      - Identifier: LS-UCA-STAO-3-3
+        Text: Incompatible OpenAPS and RasPi versions
+      - Identifier: LS-UCA-STAO-3-4
         Text: OpenAPS does not communicate to RasPi OS that there has been a completed
           update and OpenAPS needs to run again
+      - Identifier: LS-UCA-STAO-3-5
+        Text: Human operator cancelled the RasPi set up
+      - Identifier: LS-UCA-STAO-3-6
+        Text: Raspi OS crash
     - Identifier: UCA-STAO-100
       Text: Raspi OS starts a different application and not OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-100-1
+      - Identifier: LS-UCA-STAO-100-1
         Text: There is another file called OpenAPS
-      - Identifier: LS-1-UCA-STAO-100-2
-        Text: OpenAPS is set up in the wrong location
-      - Identifier: LS-2-UCA-STAO-100-1
+      - Identifier: LS-UCA-STAO-100-2
         Text: There is another instance of OpenAPS set as the default
+      - Identifier: LS-UCA-STAO-100-3
+        Text: OpenAPS is set up in the wrong location
     - Identifier: UCA-STAO-101
       Text: Raspi OS starts an older version of OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-101-1
+      - Identifier: LS-UCA-STAO-101-1
         Text: Raspi OS bug
-      - Identifier: LS-2-UCA-STAO-101-1
+      - Identifier: LS-UCA-STAO-101-2
         Text: Configs show the wrong OpenAPS version and have not been updated
     - Identifier: UCA-STAO-102
       Text: Raspi OS starts OpenAPS twice
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-102-1
+      - Identifier: LS-UCA-STAO-102-1
         Text: Raspi OS processer hangs as it is starting OpenAPS
-      - Identifier: LS-2-UCA-STAO-102-1
+      - Identifier: LS-UCA-STAO-102-2
         Text: '-'
     - Identifier: UCA-STAO-103
       Text: Raspi OS starts OpenAPS loop when OpenAPS is not working properly
@@ -178,12 +178,12 @@ Components:
       Text: Raspi OS takes more than X seconds to start the OpenAPS loop
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-STAO-1000-1
+      - Identifier: LS-UCA-STAO-1000-1
         Text: Kernel scheduler issues
-      - Identifier: LS-1-UCA-STAO-1000-2
-        Text: Raspi OS is running slowly
-      - Identifier: LS-2-UCA-STAO-1000-1
+      - Identifier: LS-UCA-STAO-1000-2
         Text: Timestamping problems, either with component clocks or Raspi OS clock
+      - Identifier: LS-UCA-STAO-1000-3
+        Text: Raspi OS is running slowly
   - Identifier: RPD
     Text: Provide data from other devices to OpenAPS
     Unsafe Control Actions:
@@ -192,21 +192,21 @@ Components:
         is running
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RPD-1-1
+      - Identifier: LS-UCA-RPD-1-1
         Text: RasPi OS does not receive data in correct format
-      - Identifier: LS-1-UCA-RPD-1-2
-        Text: RasPi OS does not finish receiving the data
-      - Identifier: LS-1-UCA-RPD-1-3
-        Text: OpenAPS does not pull the data from Raspi OS
-      - Identifier: LS-2-UCA-RPD-1-1
+      - Identifier: LS-UCA-RPD-1-2
         Text: '-'
+      - Identifier: LS-UCA-RPD-1-3
+        Text: RasPi OS does not finish receiving the data
+      - Identifier: LS-UCA-RPD-1-4
+        Text: OpenAPS does not pull the data from Raspi OS
     - Identifier: UCA-RPD-100
       Text: Raspi OS relays data from other devices to OpenAPS app inaccurately
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RPD-100-1
+      - Identifier: LS-UCA-RPD-100-1
         Text: RasPi OS received the data in the wrong format
-      - Identifier: LS-2-UCA-RPD-100-1
+      - Identifier: LS-UCA-RPD-100-2
         Text: Data transmission from other devices back to the Raspi was interfered
           with
     - Identifier: UCA-RPD-101
@@ -214,21 +214,21 @@ Components:
         have not sent data to OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-RPD-101-1
+      - Identifier: LS-UCA-RPD-101-1
         Text: '-'
-      - Identifier: LS-2-UCA-RPD-101-1
+      - Identifier: LS-UCA-RPD-101-2
         Text: Data was sent to the RasPi OS from other components unintentionally
     - Identifier: UCA-RPD-1000
       Text: Raspi OS takes more than X seconds to relay data from other devices to
         OpenAPS app
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-RPD-1000-1
+      - Identifier: LS-UCA-RPD-1000-1
         Text: Kernel scheduler issues
-      - Identifier: LS-1-UCA-RPD-1000-2
-        Text: Raspi OS is running slowly
-      - Identifier: LS-2-UCA-RPD-1000-1
+      - Identifier: LS-UCA-RPD-1000-2
         Text: Timestamping problems, either with component clocks or Raspi OS clock
+      - Identifier: LS-UCA-RPD-1000-3
+        Text: Raspi OS is running slowly
   - Identifier: STOO
     Text: Stop OpenAPS
     Unsafe Control Actions:
@@ -237,36 +237,36 @@ Components:
         which are causing suboptimal glucose levels for X minutes
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STOO-1-1
+      - Identifier: LS-UCA-STOO-1-1
         Text: OpenAPS does not inform the RasPi to stop OpenAPS when OpenAPS is not
           working properly
-      - Identifier: LS-1-UCA-STOO-1-2
-        Text: RasPi fails to stop OpenAPS completely and properly
-      - Identifier: LS-1-UCA-STOO-1-3
-        Text: RasPi OS
-      - Identifier: LS-2-UCA-STOO-1-1
+      - Identifier: LS-UCA-STOO-1-2
         Text: Breakdown in communication between OpenAPS and the RasPi OS means RasPi
           OS did not receive the instruction to stop OpenAPS
+      - Identifier: LS-UCA-STOO-1-3
+        Text: RasPi fails to stop OpenAPS completely and properly
+      - Identifier: LS-UCA-STOO-1-4
+        Text: RasPi OS
     - Identifier: UCA-STOO-100
       Text: Raspi OS stops OpenAPS when OpenAPS is running effectively and there has
         been no instruction from the human operator to stop OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STOO-100-1
+      - Identifier: LS-UCA-STOO-100-1
         Text: RasPi OS crash
-      - Identifier: LS-2-UCA-STOO-100-1
+      - Identifier: LS-UCA-STOO-100-2
         Text: Human operator inadvertently stops OpenAPS
     - Identifier: UCA-STOO-1000
       Text: Raspi OS takes more than X minutes to stop OpenAPS when OpenAPS is giving
         dosing recommendations which are causing suboptimal glucose levels for Y minutes
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-STOO-1000-1
+      - Identifier: LS-UCA-STOO-1000-1
         Text: Kernel scheduler issues
-      - Identifier: LS-1-UCA-STOO-1000-2
-        Text: Raspi OS is running slowly
-      - Identifier: LS-2-UCA-STOO-1000-1
+      - Identifier: LS-UCA-STOO-1000-2
         Text: Timestamping problems, either with component clocks or Raspi OS clock
+      - Identifier: LS-UCA-STOO-1000-3
+        Text: Raspi OS is running slowly
   - Identifier: SB
     Text: Set Bolus
     Unsafe Control Actions:
@@ -321,67 +321,67 @@ Components:
         app has requested this
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SI-1-1
+      - Identifier: LS-UCA-SI-1-1
         Text: RasPi OS does not recognise the insulin pump
-      - Identifier: LS-1-UCA-SI-1-2
-        Text: RasPi OS does not have good network connection (airports / noisy areas)
-      - Identifier: LS-1-UCA-SI-1-3
-        Text: RasPi OS does not believe that it is currently looping
-      - Identifier: LS-1-UCA-SI-1-4
-        Text: RasPi OS does not recognise the command
-      - Identifier: LS-1-UCA-SI-1-5
-        Text: Algorithm does not believe that the command is safe
-      - Identifier: LS-1-UCA-SI-1-6
-        Text: RasPi OS crashes
-      - Identifier: LS-2-UCA-SI-1-1
+      - Identifier: LS-UCA-SI-1-2
         Text: Device had a automatic firmware update and the handshake config has
           to be updated on RasPi side
+      - Identifier: LS-UCA-SI-1-3
+        Text: RasPi OS does not have good network connection (airports / noisy areas)
+      - Identifier: LS-UCA-SI-1-4
+        Text: RasPi OS does not believe that it is currently looping
+      - Identifier: LS-UCA-SI-1-5
+        Text: RasPi OS does not recognise the command
+      - Identifier: LS-UCA-SI-1-6
+        Text: Algorithm does not believe that the command is safe
+      - Identifier: LS-UCA-SI-1-7
+        Text: RasPi OS crashes
     - Identifier: UCA-SI-100
       Text: The RasPi OS sends a instruction to the Insulin Pump when it has not been
         sent a command by the OpenAPS app or a prompt from the recipient
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SI-100-1
+      - Identifier: LS-UCA-SI-100-1
         Text: Advesary hacks into RasPi and sends command to Insulin pump
-      - Identifier: LS-1-UCA-SI-100-2
-        Text: Someone has control of raspi by accident (maybe has controls ont their
-          phone) to make it send a command
-      - Identifier: LS-1-UCA-SI-100-3
-        Text: Somebody's rig communicates with somebody else's insulin pump within
-          the network
-      - Identifier: LS-2-UCA-SI-100-1
+      - Identifier: LS-UCA-SI-100-2
         Text: There is a signal from somewhere else that RasPi OS mistakes as a signal
           from the OpenAPS app
+      - Identifier: LS-UCA-SI-100-3
+        Text: Someone has control of raspi by accident (maybe has controls ont their
+          phone) to make it send a command
+      - Identifier: LS-UCA-SI-100-4
+        Text: Somebody's rig communicates with somebody else's insulin pump within
+          the network
     - Identifier: UCA-SI-101
       Text: The RasPi OS sends the wrong command to the Insulin Pump
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SI-101-1
+      - Identifier: LS-UCA-SI-101-1
         Text: Bug in RasPi OS command execution
-      - Identifier: LS-1-UCA-SI-101-2
-        Text: The function of a command has changed but this has not been updated
-          in the RasPi OS
-      - Identifier: LS-2-UCA-SI-101-1
+      - Identifier: LS-UCA-SI-101-2
         Text: Intefering signals provide a different command to the RasPi OS to send
           the wrong command
-      - Identifier: LS-2-UCA-SI-101-2
+      - Identifier: LS-UCA-SI-101-3
+        Text: The function of a command has changed but this has not been updated
+          in the RasPi OS
+      - Identifier: LS-UCA-SI-101-4
         Text: The wrong command is invoked to the RasPi
     - Identifier: UCA-SI-102
       Text: The RasPi OS sends a command to the Insulin Pump when the recipient is
         not able to receive or action the command
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SI-102-1
+      - Identifier: LS-UCA-SI-102-1
         Text: OpenAPS does not have the function to prevent the RasPi OS sending commands
           to the pump
-      - Identifier: LS-1-UCA-SI-102-2
+      - Identifier: LS-UCA-SI-102-2
+        Text: Bug in RasPi OS
+      - Identifier: LS-UCA-SI-102-3
         Text: The insulin pump has gone offline recently and OpenAPS sends the command
           to be queued for when it comes back online
-      - Identifier: LS-1-UCA-SI-102-3
+      - Identifier: LS-UCA-SI-102-4
         Text: RasPi OS recognized that the insulin pump went offline too late and
           still sends a command (bug)
-      - Identifier: LS-2-UCA-SI-102-1
-        Text: Bug in RasPi OS
     - Identifier: UCA-SI-103
       Text: The RasPi OS sends a command to the Insulin Pump based on inaccurate information
       Reason: Providing
@@ -394,13 +394,13 @@ Components:
         after the command has been invoked by OpenAPS
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-SI-1000-1
+      - Identifier: LS-UCA-SI-1000-1
         Text: Kernel scheduler issue
-      - Identifier: LS-1-UCA-SI-1000-2
-        Text: Command or function in algorithm takes too long or sends too much data
-      - Identifier: LS-2-UCA-SI-1000-1
+      - Identifier: LS-UCA-SI-1000-2
         Text: Timestamping issue
-      - Identifier: LS-2-UCA-SI-1000-2
+      - Identifier: LS-UCA-SI-1000-3
+        Text: Command or function in algorithm takes too long or sends too much data
+      - Identifier: LS-UCA-SI-1000-4
         Text: Different times on OpenAPS rig and other components
   - Identifier: SN
     Text: Send instruction to NightScout
@@ -410,64 +410,64 @@ Components:
         has requested this
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SN-1-1
+      - Identifier: LS-UCA-SN-1-1
         Text: RasPi OS does not recognise NightScout
-      - Identifier: LS-1-UCA-SN-1-2
-        Text: RasPi OS does not have good network connection (airports / noisy areas)
-      - Identifier: LS-1-UCA-SN-1-3
-        Text: RasPi OS does not believe that it is currently looping
-      - Identifier: LS-1-UCA-SN-1-4
-        Text: RasPi OS does not recognise the command
-      - Identifier: LS-1-UCA-SN-1-5
-        Text: Algorithm does not believe that the command is safe
-      - Identifier: LS-1-UCA-SN-1-6
-        Text: RasPi OS crashes
-      - Identifier: LS-2-UCA-SN-1-1
+      - Identifier: LS-UCA-SN-1-2
         Text: Device had a automatic firmware update and the handshake config has
           to be updated on RasPi side
+      - Identifier: LS-UCA-SN-1-3
+        Text: RasPi OS does not have good network connection (airports / noisy areas)
+      - Identifier: LS-UCA-SN-1-4
+        Text: RasPi OS does not believe that it is currently looping
+      - Identifier: LS-UCA-SN-1-5
+        Text: RasPi OS does not recognise the command
+      - Identifier: LS-UCA-SN-1-6
+        Text: Algorithm does not believe that the command is safe
+      - Identifier: LS-UCA-SN-1-7
+        Text: RasPi OS crashes
     - Identifier: UCA-SN-100
       Text: The RasPi OS sends a instruction to the NightScout when it has not been
         sent a command by the OpenAPS app or a prompt from the recipient
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SN-100-1
+      - Identifier: LS-UCA-SN-100-1
         Text: Adversary hacks into RasPi and sends command
-      - Identifier: LS-1-UCA-SN-100-2
-        Text: Someone has control of raspi by accident (maybe has controls ont their
-          phone) to make it send a command
-      - Identifier: LS-1-UCA-SN-100-3
-        Text: Rig communicates with somebody else's insulin pump within the network
-      - Identifier: LS-2-UCA-SN-100-1
+      - Identifier: LS-UCA-SN-100-2
         Text: There is a signal from somewhere else that RasPi OS mistakes as a signal
           from the OpenAPS app
+      - Identifier: LS-UCA-SN-100-3
+        Text: Someone has control of raspi by accident (maybe has controls ont their
+          phone) to make it send a command
+      - Identifier: LS-UCA-SN-100-4
+        Text: Rig communicates with somebody else's insulin pump within the network
     - Identifier: UCA-SN-101
       Text: The RasPi OS sends the wrong command to the NightScout
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SN-101-1
+      - Identifier: LS-UCA-SN-101-1
         Text: Bug in RasPi OS command execution
-      - Identifier: LS-1-UCA-SN-101-2
-        Text: The function of a command has changed but this has not been updated
-          in the RasPi OS
-      - Identifier: LS-2-UCA-SN-101-1
+      - Identifier: LS-UCA-SN-101-2
         Text: Intefering signals provide a different command to the RasPi OS to send
           the wrong command
-      - Identifier: LS-2-UCA-SN-101-2
+      - Identifier: LS-UCA-SN-101-3
+        Text: The function of a command has changed but this has not been updated
+          in the RasPi OS
+      - Identifier: LS-UCA-SN-101-4
         Text: The wrong command is invoked to the RasPi
     - Identifier: UCA-SN-102
       Text: The RasPi OS sends a command to the NightScout when the recipient is not
         able to receive or action the command
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-SN-102-1
+      - Identifier: LS-UCA-SN-102-1
         Text: The component has gone offline recently and OpenAPS sends the command
           to be queued for when it comes back online
-      - Identifier: LS-1-UCA-SN-102-2
+      - Identifier: LS-UCA-SN-102-2
+        Text: Bug in RasPi OS
+      - Identifier: LS-UCA-SN-102-3
         Text: RasPi OS recognized that the component went offline too late and still
           sends a command (bug)
-      - Identifier: LS-2-UCA-SN-102-1
-        Text: Bug in RasPi OS
-      - Identifier: LS-2-UCA-SN-102-2
+      - Identifier: LS-UCA-SN-102-4
         Text: OpenAPS does not have the ability to detect that NightScout is not able
           to receive or action the command from OpenAPS
     - Identifier: UCA-SN-103
@@ -481,13 +481,13 @@ Components:
         the command has been invoked by OpenAPS
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-SN-1000-1
+      - Identifier: LS-UCA-SN-1000-1
         Text: Kernel scheduler issue
-      - Identifier: LS-1-UCA-SN-1000-2
-        Text: Command or function in algorithm takes too long or sends too much data
-      - Identifier: LS-2-UCA-SN-1000-1
+      - Identifier: LS-UCA-SN-1000-2
         Text: Timestamping issue
-      - Identifier: LS-2-UCA-SN-1000-2
+      - Identifier: LS-UCA-SN-1000-3
+        Text: Command or function in algorithm takes too long or sends too much data
+      - Identifier: LS-UCA-SN-1000-4
         Text: Different times on OpenAPS rig and other components
   Controller Constraints:
   - Identifier: CC-RSA-1
@@ -682,95 +682,95 @@ Components:
         that should affect the configurations
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OSA-1-1
+      - Identifier: LS-UCA-OSA-1-1
         Text: There is no information in the code/configuration that allows for automated
           compatibility checks
-      - Identifier: LS-1-UCA-OSA-1-2
-        Text: If there is information in the code/configuration that allows compatibility
-          checks, the compatibility checks are not implemented or errorneously implemented
-      - Identifier: LS-1-UCA-OSA-1-3
-        Text: The interface detects the configuration mismatch, but does not show
-          this on the UI
-      - Identifier: LS-1-UCA-OSA-1-4
-        Text: OpenAPS is not set up to prompt the human to update configs when it
-          detects a change that should be reflected in configs or detects inaccurate
-          configs
-      - Identifier: LS-2-UCA-OSA-1-1
+      - Identifier: LS-UCA-OSA-1-2
         Text: If there is information in the code/configuration that allows compatibility
           checks, the version information is not updated, so that the compatiblity
           algorithm thinks everything is still on its old configuration
-      - Identifier: LS-2-UCA-OSA-1-2
+      - Identifier: LS-UCA-OSA-1-3
+        Text: If there is information in the code/configuration that allows compatibility
+          checks, the compatibility checks are not implemented or errorneously implemented
+      - Identifier: LS-UCA-OSA-1-4
         Text: There have been additional configurations added in the latest OpenAPS
           version so the version that is being used needs to be updated
+      - Identifier: LS-UCA-OSA-1-5
+        Text: The interface detects the configuration mismatch, but does not show
+          this on the UI
+      - Identifier: LS-UCA-OSA-1-6
+        Text: OpenAPS is not set up to prompt the human to update configs when it
+          detects a change that should be reflected in configs or detects inaccurate
+          configs
     - Identifier: UCA-OSA-2
       Text: OpenAPS app does not successfully set up the algorithm when the script
         is run to set up the algorithm
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OSA-2-1
+      - Identifier: LS-UCA-OSA-2-1
         Text: Dependencies on the RaspiOS are not / cannot be the correct version
           to install the algorithm correctly
-      - Identifier: LS-1-UCA-OSA-2-2
+      - Identifier: LS-UCA-OSA-2-2
+        Text: Installation script aborts or crashes partway through
+      - Identifier: LS-UCA-OSA-2-3
         Text: OpenAPS does not support RaspiOS software or hardware version or something
           is interfering from the host side
-      - Identifier: LS-1-UCA-OSA-2-3
+      - Identifier: LS-UCA-OSA-2-4
         Text: OpenAPS has packaging problems / broken packages which are causing problems
           installing dependencies
-      - Identifier: LS-1-UCA-OSA-2-4
+      - Identifier: LS-UCA-OSA-2-5
         Text: Bug in the script to run the algorithm
-      - Identifier: LS-2-UCA-OSA-2-1
-        Text: Installation script aborts or crashes partway through
     - Identifier: UCA-OSA-100
       Text: OpenAPS app selects a different option to that which the human operator
         entered or intended when configuring OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OSA-100-1
+      - Identifier: LS-UCA-OSA-100-1
         Text: OpenAPS bug or malfunction
-      - Identifier: LS-1-UCA-OSA-100-2
+      - Identifier: LS-UCA-OSA-100-2
+        Text: Issue with recognizing the operator input
+      - Identifier: LS-UCA-OSA-100-3
         Text: selection of a different memory section than the one the information
           entered by the operator is stored at (memory address issue)
-      - Identifier: LS-1-UCA-OSA-100-3
+      - Identifier: LS-UCA-OSA-100-4
         Text: Issue with passing the entered information in OpenAPS
-      - Identifier: LS-1-UCA-OSA-100-4
+      - Identifier: LS-UCA-OSA-100-5
         Text: Information entered by the human is not valid and OpenAPS has defaulted
           to a valid setting
-      - Identifier: LS-2-UCA-OSA-100-1
-        Text: Issue with recognizing the operator input
     - Identifier: UCA-OSA-101
       Text: OpenAPS sets up an unsafe algorithm
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OSA-101-1
+      - Identifier: LS-UCA-OSA-101-1
         Text: OpenAPS bug or malfunction
-      - Identifier: LS-1-UCA-OSA-101-2
+      - Identifier: LS-UCA-OSA-101-2
+        Text: Algorithm has safety flaws that noone knows about
+      - Identifier: LS-UCA-OSA-101-3
         Text: Human confirms that the algorithm is safe when it has not been tested
           properly
-      - Identifier: LS-1-UCA-OSA-101-3
-        Text: OpenAPS does not stop the human from setting up unsafe algorithms
-      - Identifier: LS-1-UCA-OSA-101-4
-        Text: OpenAPS has a mode which allows any algorithm to be used
-      - Identifier: LS-2-UCA-OSA-101-1
-        Text: Algorithm has safety flaws that noone knows about
-      - Identifier: LS-2-UCA-OSA-101-2
+      - Identifier: LS-UCA-OSA-101-4
         Text: OpenAPS misidentifies the algorithm as a recommended algorithm
-      - Identifier: LS-2-UCA-OSA-101-3
+      - Identifier: LS-UCA-OSA-101-5
+        Text: OpenAPS does not stop the human from setting up unsafe algorithms
+      - Identifier: LS-UCA-OSA-101-6
         Text: Algorithm is known to be unsafe but there is no feature on OpenAPS to
           blacklist this
+      - Identifier: LS-UCA-OSA-101-7
+        Text: OpenAPS has a mode which allows any algorithm to be used
     - Identifier: UCA-OSA-1000
       Text: OpenAPS app updates the algorithm or configurations too late, after OpenAPS
         has already started to operate, and is instead using previous algorithm settings
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-OSA-1000-1
+      - Identifier: LS-UCA-OSA-1000-1
         Text: Raspi OS bug or malfunction
-      - Identifier: LS-1-UCA-OSA-1000-2
-        Text: Some other action is blocking the update routine
-      - Identifier: LS-1-UCA-OSA-1000-3
-        Text: Scheduling/Interrupt issue
-      - Identifier: LS-2-UCA-OSA-1000-1
+      - Identifier: LS-UCA-OSA-1000-2
         Text: OpenAPS does not ensure that the configs are updated before running
           the algorithm
+      - Identifier: LS-UCA-OSA-1000-3
+        Text: Some other action is blocking the update routine
+      - Identifier: LS-UCA-OSA-1000-4
+        Text: Scheduling/Interrupt issue
   - Identifier: OPD
     Text: Provide data from other devices to algorithm
     Unsafe Control Actions:
@@ -778,46 +778,46 @@ Components:
       Text: OpenAPS app does not relay relevant data from other devices to the algorithm
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OPD-1-1
+      - Identifier: LS-UCA-OPD-1-1
         Text: OpenAPS does not receive data in correct format
-      - Identifier: LS-1-UCA-OPD-1-2
-        Text: OpenAPS does not finish receiving the data
-      - Identifier: LS-1-UCA-OPD-1-3
-        Text: OpenAPS does not pull the data from Raspi OS
-      - Identifier: LS-2-UCA-OPD-1-1
+      - Identifier: LS-UCA-OPD-1-2
         Text: Bug or lack of complexity in the algorithm
-      - Identifier: LS-2-UCA-OPD-1-2
+      - Identifier: LS-UCA-OPD-1-3
+        Text: OpenAPS does not finish receiving the data
+      - Identifier: LS-UCA-OPD-1-4
         Text: OpenAPS does not recognise all the inputs that the algorithm uses
+      - Identifier: LS-UCA-OPD-1-5
+        Text: OpenAPS does not pull the data from Raspi OS
     - Identifier: UCA-OPD-100
       Text: OpenAPS app relays data from other devices to algorithm inaccurately
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OPD-100-1
+      - Identifier: LS-UCA-OPD-100-1
         Text: OpenAPS app received the data in the wrong format
-      - Identifier: LS-2-UCA-OPD-100-1
+      - Identifier: LS-UCA-OPD-100-2
         Text: Bug in Raspi data processing
     - Identifier: UCA-OPD-101
       Text: OpenAPS app relays data regarding other devices to algorithm when other
         devices have not sent data to OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-OPD-101-1
+      - Identifier: LS-UCA-OPD-101-1
         Text: '-'
-      - Identifier: LS-2-UCA-OPD-101-1
+      - Identifier: LS-UCA-OPD-101-2
         Text: Data was sent to the OpenAPS from Raspi OS unintentionally
     - Identifier: UCA-OPD-1000
       Text: OpenAPS app takes more than X seconds to relay data from other devices
         to the algorithm
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-OPD-1000-1
+      - Identifier: LS-UCA-OPD-1000-1
         Text: Kernel scheduler issues
-      - Identifier: LS-1-UCA-OPD-1000-2
-        Text: Raspi OS is running slowly
-      - Identifier: LS-1-UCA-OPD-1000-3
-        Text: OpenAPS script has been updated and now takes too long
-      - Identifier: LS-2-UCA-OPD-1000-1
+      - Identifier: LS-UCA-OPD-1000-2
         Text: Timestamping problems, either with component clocks or Raspi OS clock
+      - Identifier: LS-UCA-OPD-1000-3
+        Text: Raspi OS is running slowly
+      - Identifier: LS-UCA-OPD-1000-4
+        Text: OpenAPS script has been updated and now takes too long
   - Identifier: STOA
     Text: Stop algorithm
     Unsafe Control Actions:
@@ -827,25 +827,25 @@ Components:
         glucose levels for X minutes
       Reason: Not Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STOA-1-1
+      - Identifier: LS-UCA-STOA-1-1
         Text: Bug in OpenAPS means that OpenAPS fails to stop the algorithm completely
           and properly
-      - Identifier: LS-1-UCA-STOA-1-2
+      - Identifier: LS-UCA-STOA-1-2
+        Text: CGM is inaccurate
+      - Identifier: LS-UCA-STOA-1-3
         Text: OpenAPS thinks that it can fix the problem itself by altering dosing
-      - Identifier: LS-1-UCA-STOA-1-3
+      - Identifier: LS-UCA-STOA-1-4
+        Text: There is a problem with communication to OpenAPS
+      - Identifier: LS-UCA-STOA-1-5
         Text: OpenAPS thinks that the problem is resolved and prematurely starts to
           give dosing recommendations again
-      - Identifier: LS-2-UCA-STOA-1-1
-        Text: CGM is inaccurate
-      - Identifier: LS-2-UCA-STOA-1-2
-        Text: There is a problem with communication to OpenAPS
     - Identifier: UCA-STOA-100
       Text: OpenAPS app stops algorithm when OpenAPS is giving good dosing recommendations
         to the insulin pump and the system is running correctly and there has been
         no instruction from the human operator to stop OpenAPS
       Reason: Providing
       Scenarios:
-      - Identifier: LS-1-UCA-STOA-100-1
+      - Identifier: LS-UCA-STOA-100-1
         Text: OpenAPS crash
     - Identifier: UCA-STOA-1000
       Text: OpenAPS app takes more than X minutes stop algorithm when the algorithm
@@ -853,9 +853,9 @@ Components:
         for Y minutes
       Reason: Timing
       Scenarios:
-      - Identifier: LS-1-UCA-STOA-1000-1
+      - Identifier: LS-UCA-STOA-1000-1
         Text: Kernel scheduler issues
-      - Identifier: LS-2-UCA-STOA-1000-1
+      - Identifier: LS-UCA-STOA-1000-2
         Text: Timestamping / clock issues
   Controller Constraints:
   - Identifier: CC-OSA-1
