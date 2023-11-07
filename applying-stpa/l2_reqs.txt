@@ -136,4 +136,6 @@
  ('REQ-136', 'Algorithm must use OpenAPS commands in the correct context'),
  ('REQ-137', 'OpenAPS app commands must be clearly documented'),
  ('REQ-138', 'Developers should be informed about which commands have changed behaviours in different versions'),
- ('REQ-139', 'OpenAPS should warn user when other components have different timestamps and also refactor the incoming timestamps of other components in this case')]
+ ('REQ-139', 'OpenAPS should warn user when other components have different timestamps and also refactor the incoming timestamps of other components in this case'),
+ ('REQ-140','OpenAPS should retry connecting or notify user if connection between OpenAPS and insulin pump is lost'),
+ ('REQ-141','OpenAPS should require authentication')]
