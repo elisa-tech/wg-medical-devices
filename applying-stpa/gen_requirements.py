@@ -3,8 +3,11 @@
 
 import yaml
 import pandas as pd
+import click
 import pprint
 from functools import cmp_to_key
+
+# TODO: Make the xlsx_file an argument when calling this script
 
 filter_out_list = ["above", "Either", "EIther", "Fallback", "scope", "overed"]
 
@@ -13,7 +16,11 @@ def compare_items(item1, item2):
     item2_number = int(item2[0].split("-")[-1])
     return item1_number - item2_number
 
-def gen_requirements(xlsx_file, loss_scenarios_sheet):
+@click.command()
+@click.option('--xlsx_file', help='OpenAPS STPA spreadsheet file')
+@click.option('--loss_scenarios_sheet', help='Sheet in OpenAPS STPA spreadsheet file')
+@click.option('--output_file', help='Output txt file')
+def gen_requirements(xlsx_file, loss_scenarios_sheet, output_file):
     scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=loss_scenarios_sheet)
     requirement_columns = 0
     all_requirements = {}
@@ -21,6 +28,7 @@ def gen_requirements(xlsx_file, loss_scenarios_sheet):
 
     for row in scenario_df.iterrows():
         data = row[1]
+        In = False
         for i in range(1, 9):
             if f"Requirement {str(i)}" in data and type(data[f"Requirement {str(i)}"]) is str:
                 requirements = data[f"Requirement {str(i)}"].split("\n")
@@ -30,6 +38,16 @@ def gen_requirements(xlsx_file, loss_scenarios_sheet):
                             all_requirements[f"REQ-{identifier}"] = requirement
                             identifier += 1
 
-    return sorted(all_requirements.items(), key=cmp_to_key(compare_items))
+    req_string = "\n".join([": ".join(req) for req in sorted(all_requirements.items(), key=cmp_to_key(compare_items))])
 
-pprint.pprint(gen_requirements('xlsx_file.xlsx', 'Level 2 Loss Scenario Analysis'), width=800)
+    with open(output_file, "w") as file:
+        file.write(req_string)
+        # my_file.write("I hope you're doing well today \n")
+        # my_file.write("This is a text file \n")
+        # my_file.write("Have a nice time \n")
+    pprint.pprint(sorted(all_requirements.items(), key=cmp_to_key(compare_items)), width=800)
+
+    return req_string
+
+if __name__ == '__main__':
+    gen_requirements()
