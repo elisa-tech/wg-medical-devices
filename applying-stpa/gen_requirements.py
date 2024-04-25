@@ -42,9 +42,6 @@ def gen_requirements(xlsx_file, loss_scenarios_sheet, output_file):
 
     with open(output_file, "w") as file:
         file.write(req_string)
-        # my_file.write("I hope you're doing well today \n")
-        # my_file.write("This is a text file \n")
-        # my_file.write("Have a nice time \n")
     pprint.pprint(sorted(all_requirements.items(), key=cmp_to_key(compare_items)), width=800)
 
     return req_string
