@@ -18,7 +18,7 @@ def compare_items(item1, item2):
 
 @click.command()
 @click.option('--xlsx_file', help='OpenAPS STPA spreadsheet file')
-@click.option('--loss_scenarios_sheet', help='Sheet in OpenAPS STPA spreadsheet file')
+@click.option('--loss_scenarios_sheet', help='Sheet in OpenAPS STPA spreadsheet file, eg "Level 1 Loss Scenario Analysis"')
 @click.option('--output_file', help='Output txt file')
 def gen_requirements(xlsx_file, loss_scenarios_sheet, output_file):
     scenario_df = pd.read_excel(xlsx_file, engine='openpyxl', sheet_name=loss_scenarios_sheet)

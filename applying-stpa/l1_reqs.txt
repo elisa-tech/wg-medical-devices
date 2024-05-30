@@ -211,7 +211,7 @@ REQ-210: OpenAPS documentation should make it clear that the human will be able 
 REQ-211: OpenAPS should give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human should still have ability to make decision (repeated requirement)
 REQ-212: OpenAPS documentation should make it clear that the human will be able to operate the pump manually, before the human puts the loop in place
 REQ-213: If mealtime data hasn't been entered into the insulin pump or OpenAPS rig for a long time, OpenAPS should estimate the meal data or prompt the human to enter their meal data
-REQ-214: OpenAPS should give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human should still have ability to make decision
+REQ-214: OpenAPS should give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human should still have ability to make decision.
 REQ-215: If the user data given to OpenAPS is causing recommendations which are leading to a non-optimal glucose level, OpenAPS should adjust it's dosing recommendation and remind the human user to check the calibration of the CGM
 REQ-216: OpenAPS should not provide dosing recommendations if the insulin pump is not configured correctly for OpenAPS use
 REQ-217: OpenAPS instructions and any complexities should be as clear as possible
