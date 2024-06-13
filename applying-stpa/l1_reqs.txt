@@ -19,7 +19,7 @@ REQ-18: User manual must specify the correct hardware setup.
 REQ-19: Software must check that all required OpenAPS dependencies are present.
 REQ-20: Hardware connections need to be set up to match the configuration the human entered to the openAPS configuration.
 REQ-21: Communication between components must have an integrity check.
-REQ-22: Must have watchdog timer or heartbeat communications between systems to detect if insulin pump is working properly and if not warn the user.
+REQ-22: Must have watchdog timer or heartbeat communications between systems to detect if insulin pump is working properly and warn the user if it is not.
 REQ-23: OpenAPS must alert human actor if the insulin pump has stopped giving feedback.
 REQ-24: OpenAPS should be able to interpret error signals from insulin pump and convey to the human actor.
 REQ-25: The OpenAPS rig must have as long a battery life as possible.
