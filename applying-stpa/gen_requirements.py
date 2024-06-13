@@ -9,7 +9,7 @@ from functools import cmp_to_key
 
 # TODO: Make the xlsx_file an argument when calling this script
 
-filter_out_list = ["above", "Either", "EIther", "Fallback", "scope", "overed"]
+filter_out_list = ["Covered"]
 
 def compare_items(item1, item2):
     item1_number = int(item1[0].split("-")[-1])
@@ -33,10 +33,13 @@ def gen_requirements(xlsx_file, loss_scenarios_sheet, output_file):
             if f"Requirement {str(i)}" in data and type(data[f"Requirement {str(i)}"]) is str:
                 requirements = data[f"Requirement {str(i)}"].split("\n")
                 for requirement in requirements:
-                    if requirement and requirement not in all_requirements.values() and requirement != "-":
-                        if all(word not in requirement for word in filter_out_list):
-                            all_requirements[f"REQ-{identifier}"] = requirement
-                            identifier += 1
+                    if requirement:
+                        if requirement[-1] != ".":
+                    	    requirement += "."
+                        if requirement not in all_requirements.values() and requirement != "-":
+                            if all(word not in requirement for word in filter_out_list):
+                                all_requirements[f"REQ-{identifier}"] = requirement
+                                identifier += 1
 
     req_string = "\n".join([": ".join(req) for req in sorted(all_requirements.items(), key=cmp_to_key(compare_items))])
 
