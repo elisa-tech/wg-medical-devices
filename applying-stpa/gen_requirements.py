@@ -9,7 +9,7 @@ from functools import cmp_to_key
 
 # TODO: Make the xlsx_file an argument when calling this script
 
-filter_out_list = ["Covered"]
+filter_out_list = ["Covered", "---"]
 
 def compare_items(item1, item2):
     item1_number = int(item1[0].split("-")[-1])
