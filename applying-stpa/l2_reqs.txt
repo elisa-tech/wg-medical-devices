@@ -2,12 +2,12 @@ REQ-1: OpenAPS shall be able to detect if dependencies are completely installed 
 REQ-2: Raspberry OS is up to date.
 REQ-3: Human shall make sure that the script has been run successfully.
 REQ-4: Human shall make sure OpenAPS installation has been successful.
-REQ-5: OpenAPS shall have a script which can be run to detect if all dependencies are completely installed.
+REQ-5: SEE REQ-1 (OpenAPS shall have a script which can be run to detect if all dependencies are completely installed.)
 REQ-6: OpenAPS installation script must be reviewed.
-REQ-7: There shall be a script to test that all the required dependencies have been installed which is seperate to the installation script .
-REQ-8: OpenAPS install script shall have pre-install and post-install scripts, pre-install makes sure that OpenAPS has dependencies before the installation of OpenAPS, post install makes sure that everything which is required has been installed.
+REQ-7: SEE REQ-1 (There shall be a script to test that all the required dependencies have been installed which is seperate to the installation script .)
+REQ-8: SEE REQ-1 (OpenAPS install script shall have pre-install and post-install scripts, pre-install makes sure that OpenAPS has dependencies before the installation of OpenAPS, post install makes sure that everything which is required has been installed.)
 REQ-9: OpenAPS shall check whether the software update is effective and conforming to OpenAPS recommendatoins in the context of the versions of the other components in the users system.
-REQ-10: OpenAPS shall require specific versions of dependencies which have been tested to be compatible with all of the components.
+REQ-10: SEE REQ-9 (OpenAPS shall require specific versions of dependencies which have been tested to be compatible with all of the components.)
 REQ-11: Human shall be warned in documentation not to install too many packages.
 REQ-12: There shall be continuous testing of OpenAPS dependencies with updated OS.
 REQ-13: When there are software updates on the RasPi, OpenAPS shall stop making recommendations.
@@ -24,7 +24,7 @@ REQ-23: Algorithm installation script shall be tested on all versions of Raspbia
 REQ-24: RasPi OS must not have broken dependencies and packages.
 REQ-25: OpenAPS developers shall validate that the OpenAPS API work with the version of Raspi OS and project supported hardware.
 REQ-26: OpenAPS shall allow the user to select the keyboard that they are using.
-REQ-27: OpenAPS developers shall specify the versions of RaspiOS which are support on each version of OpenAPS.
+REQ-27: SEE REQ-21 (OpenAPS developers shall specify the versions of RaspiOS which are supported on each version of OpenAPS.)
 REQ-28: OpenAPS app shall do a compatibility check on whether it is compatible with the current RaspiOS version.
 REQ-29: On boot, RaspiOS shall automatically start OpenAPS.
 REQ-30: The OpenAPS loop shall provide an "I'm alive!" signal whenever it is running so the user knows it is active.
@@ -56,10 +56,10 @@ REQ-55: Timestamp to include error checking, redundancies, or counter to reduce 
 REQ-56: RasPi OS shall be able to recognise all devices that OpenAPS is expecting.
 REQ-57: Include version checking in the apps that will warn user to update the Raspbian OS version if this occurs.
 REQ-58: If a command from OpenAPS is not received by an external devices (eg for network reasons), if not safety-critical place command in queue to resend later.
-REQ-59: If a command from OpenAPS is not received by an external devices (eg for network reasons), if safety-critical warn the user and fallback to regular operation.
+REQ-59: If the algorithm determines that a command is unsafe, the system shall fallback to regular insulin pump operation and the user shall be notified.
 REQ-60: Implement flag structure in loop that will only get set when it is looping and warn user/shut down if not looping (may need external monitoring device).
 REQ-61: RasPi OS shall recognise all commands that it has been issued by the OpenAPS app.
-REQ-62: If the algorithm determines that a command is unsafe, the system shall fallback to regular insulin pump operation and the user shall be notified.
+REQ-62: SEE REQ-59 (If a command from OpenAPS is not received by an external devices (eg for network reasons), if safety-critical warn the user and fallback to regular operation.)
 REQ-63: Implement external monitoring device that can detect crash and reset Raspberry Pi.
 REQ-64: Industry-standard security techniques shall be used to prevent hacking.
 REQ-65: Monitoring software that can detect unexpected or dangerous commands shall be implemented.
@@ -70,7 +70,7 @@ REQ-69: Include error-checking or redundancies in all commands that will reduce 
 REQ-70: Compatible versions of Raspbian OS with OpenAPS shold make sure all the latest openaps packages are installed.
 REQ-71: OpenAPS shall send commands to be queued, wait for acknowledgement from NightScout; otherwise keep in queue and attempt to resend again.
 REQ-72: If there is a bug in Raspberry Pi OS, the user shall be warned, the system shall fallback to regular operation and that version of Raspberry Pi OS shall be marked as incompatible in the OpenAPS documentation.
-REQ-73: Wait for acknowledge from NightScout; otherwise keep in queue and attempt to resend again.
+REQ-73: SEE REQ-71 (Wait for acknowledgement from NightScout; otherwise keep in queue and attempt to resend again.)
 REQ-74: OpenAPS shall be able to detect whether the other component is able to receive and action command.
 REQ-75: Standardize timesource or use timesource separate from the main system clocks.
 REQ-76: When RasPi processor is hung, insulin pump must fall back to regular operation.
@@ -84,8 +84,8 @@ REQ-83: The OpenAPS documentation shall list any new config settings that need t
 REQ-84: When the user updates the version of OpenAPS, they shall run the setup script again.
 REQ-85: If OpenAPS detects that one of the config values are not optimally set, it must indicate this on the UI.
 REQ-86: Algorithm installation script shall be tested on all versions of OpenAPS that expected to be supported and the results shall be feed into the documentation supported versions.
-REQ-87: If there are accessories of the hardware that intefere with OpenAPS or the drivers that OpenAPS uses, this shall be documented. .
-REQ-88: OpenAPS must not have broken dependencies and packages.
+REQ-87: If there are accessories of the hardware that intefere with OpenAPS or the drivers that OpenAPS uses, this shall be documented.
+REQ-88: SEE REQ-24 (OpenAPS must not have broken dependencies and packages.)
 REQ-89: OpenAPS install script must run successfully for all valid setups of OpenAPS.
 REQ-90: OpenAPS must differentiate between user-enacted configurations and system-enacted configurations and must prioritze the user configurations over system configurations.
 REQ-91: OpenAPS must confirm the entered information (as stored/used) with the user.
@@ -99,10 +99,10 @@ REQ-98: OpenAPS shall provide a service to test the safety of algorithms.
 REQ-99: OpenAPS shall have a facility to allow the human to test an algorithm, while running a different algorithm, and compare dosing recommendations.
 REQ-100: When new settings have been set, OpenAPS must update based on these settings before the next loop.
 REQ-101: OpenAPS shall have a fixed spot to check for and implement updates, either new settings or software updates, in every (~5 minute) OpenAPS loop.
-REQ-102: OpenAPS shall have a fixed spot to check for and implement updates in every (~5 minute) OpenAPS loop.
+REQ-102: SEE REQ-101 (OpenAPS shall have a fixed spot to check for and implement updates in every (~5 minute) OpenAPS loop.)
 REQ-103: Data formats that OpenAPS works with must be specified.
 REQ-104: If data that has an unexpected data format/data content is received, OpenAPS must be able to detect it.
-REQ-105: There must be a defined reaction of OpenAPS to unexpected data (to alarm the user or the other device/s).
+REQ-105: SEE REQ-104 (There must be a defined reaction of OpenAPS to unexpected data (to alarm the user or the other device/s).)
 REQ-106: Data faults that cannot be detected by OpenAPS must be avoided or mitigated by the other devices.
 REQ-107: There must be verification measures to ensure that all used interfaces are defined and implemented.
 REQ-108: There must be a control flow monitoring to ensure all OpenAPS routines are run as planned.
