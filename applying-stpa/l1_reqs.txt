@@ -10,7 +10,7 @@ REQ-9: The OpenAPS algorithm must set a temporary basal dosing recommendation if
 REQ-10: OpenAPS algorithm shall be tested, validated in realtime for accuracy and designed securely.
 REQ-11: If OpenAPS is having problems communicating with other devices in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.
 REQ-12: OpenAPS shall warn the human actor if it is no longer connected to and/or no longer receiving information from Nightscout.
-REQ-13: There shall be checks for wireless interference every X minutes, and OpenAPS shall send a warning to the user if there is a positive result.
+REQ-13: There shall be checks for wireless interference on a periodic basis as defined by TBD, and OpenAPS shall send a warning to the user if interference is detected.
 REQ-14: OpenAPS plausibility check shall include examination of the raw data from the insulin pump to ensure the data is in its expected range.
 REQ-15: OpenAPS must inform the human actor if the insulin pump is set to use the wrong units.
 REQ-16: If the OpenAPS rig components are not connected together properly there must be an alarm, warning or error.
