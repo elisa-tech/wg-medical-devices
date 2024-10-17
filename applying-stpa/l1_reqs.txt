@@ -1,0 +1,228 @@
+REQ-1: The OpenAPS rig must pull required data from the other components of the system on a user defined periodic basis.
+REQ-2: If OpenAPS believes that data is insufficient for a dosing recommendation to be made, OpenAPS shall still predict the effect of the fallback dosing recommendation and if this is far out of the targets it shall make a dosing recommendation anyway, with a warning.
+REQ-3: There shall be a way for the human manually to override glucose data from the CGM / Nightscout.
+REQ-4: OpenAPS shall prompt the user every week to calibrate the CGM.
+REQ-5: The OpenAPS rig shall emit a warning if it's going out of range of the insulin pump.
+REQ-6: If the insulin pump goes out of range of OpenAPS, it shall fall back to normal operation.
+REQ-7: OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.
+REQ-8: If the Insulin Pump is on low battery, OpenAPS shall stop sending it commands and let it fall back to normal operation.
+REQ-9: The OpenAPS algorithm must set a temporary basal dosing recommendation if the insulin dosage is not optimal and it has been over a defined period defined by TBD since the last temporary basal recommendation.
+REQ-10: OpenAPS algorithm shall be tested, validated in realtime for accuracy.
+REQ-11: If OpenAPS is having problems communicating with other devices in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.
+REQ-12: OpenAPS shall warn the human actor if it is no longer connected to and/or no longer receiving information from Nightscout.
+REQ-13: There shall be checks for wireless interference on a periodic basis as defined by TBD, and OpenAPS shall send a warning to the user if interference is detected.
+REQ-14: OpenAPS plausibility check shall include examination of the raw data from the insulin pump to ensure the data is in its expected range.
+REQ-15: OpenAPS must inform the human actor if the insulin pump is set to use the wrong units.
+REQ-16: If the OpenAPS rig components are not connected together properly there must be notification provided to the user.
+REQ-17: The OpenAPS rig components must connect together securely.
+REQ-18: The OpenAPS User Manual must specify the correct hardware setup.
+REQ-19: Software must check that all required OpenAPS software dependencies are present.
+REQ-20: Hardware connections need to be set up to match the configuration the human entered to the openAPS configuration.
+REQ-21: All physical system components must have a communication integrity check.
+REQ-22: SEE REQ-7 (OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.)
+REQ-23: OpenAPS must alert human actor if the insulin pump has stopped giving feedback.
+REQ-24: OpenAPS shall be able to interpret error signals from insulin pump and convey to the human actor.
+REQ-25: The OpenAPS rig must have as long a battery life as possible.
+REQ-26: The OpenAPS rig must alert the user when on low power.
+REQ-27: The OpenAPS rig must have a safe exit process.
+REQ-28: The OpenAPS User Manual must have guidelines on avoiding a low power supply.
+REQ-29: SEE-REQ-11 (If OpenAPS is having problems communicating with other devies in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.)
+REQ-30: OpenAPS wireless network signals must have a radio frequency in a user defined range specified in  MegaHertz.
+REQ-31: OpenAPS User Manual must direct the human actor to incorporate the right OpenAPS software dependencies.
+REQ-32: If the human actor updates to incompatible software dependencies, there must be a way to restore software dependencies that work for OpenAPS.
+REQ-33: When backward compatibility is affected by an update, it needs to be clearly flagged.
+REQ-34: SEE REQ-7 (OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.)
+REQ-35: SEE REQ-9 (When the OpenAPS system is running, there shall not be a period of X seconds with no active dosing recommendation from OpenAPS.)
+REQ-36: OpenAPS application shall have a monitoring task that will check if tasks are taking longer than X seconds to execute and warn the user if this occurs.
+REQ-37: The insulin pump must be set to the correct time by the openAPS user.
+REQ-38: OpenAPS shall notify user when other components' clock time differs from rig system clock.
+REQ-39: SEE REQ-3 (OpenAPS shall be able to register human input of glucose levels.)
+REQ-40: Insulin pump and OpenAPS rig must not be blocked off physically to the extent that they cannot connect, and this shall be explained in the OpenAPS user manual.
+REQ-41: When changing time zone, OpenAPS must either change to the correct time automatically or prompt the human actor to change the time.
+REQ-42: OpenAPS shall have a hardware integrity check.
+REQ-43: OpenAPS glucose level value must match glucose data from the CGM, unless it has been overriden by a human input.
+REQ-44: Processing of glucose data shall to be continuously tested and monitored.
+REQ-45: SEE REQ-43 (OpenAPS glucose level value must match glucose data from the CGM, unless it has been overriden by a human input.)
+REQ-46: OpenAPS must verify that all systems are set to the same time.
+REQ-47: SEE REQ-41 (OpenAPS shall detect the local timezone and prompt the user to change the time when this changes.)
+REQ-48: The OpenAPS rig and it's potentially sensitive information packets must be secure and protected from being hacked into.
+REQ-49: SEE REQ-16 (If the OpenAPS rig components are not connected together properly there must be a warning or error.)
+REQ-50: OpenAPS shall make the human verify that the data they enter is correct.
+REQ-51: If the OpenAPS rig has run out of power the pump must fall back to normal non-OpenAPS operation.
+REQ-52: OpenAPS must check to see if the dependencies are on a 'compatible list' before allowing the user to make an update to OpenAPS dependencies.
+REQ-53: If there are new updates to OpenAPS dependencies which would be compatible with the rest of the system, they shall be added to the compatible list.
+REQ-54: The time between OpenAPS being sent the data to make the dosing calculation and OpenAPS issuing and insulin dose must not exceed X seconds.
+REQ-55: OpenAPS must be configured according to the openAPS user manual.
+REQ-56: OpenAPS must be set to the correct time.
+REQ-57: OpenAPS must be aware of the correct IOB and active dosing.
+REQ-58: OpenAPS must have an accurate model of the data necessary to make a recommendation.
+REQ-59: OpenAPS algorithm must use a correct insulin to glucose calculation.
+REQ-60: OpenAPS must use recent glucose level data from Nightscout at all times.
+REQ-61: Nightscout glucose level data must be regularly checked for accuracy by human manual glucose reading.
+REQ-62: OpenAPS shall only use glucose data that has been validated from Nightscout.
+REQ-63: Nightscout data shall be checked regarding plausibility of its data in comparison with the valid ranges approved by the FDA (e.g. the ones used be the pump and glucose monitor).
+REQ-64: Nightscout data shall be checked regarding plausibility of state changes.
+REQ-65: Nightscout data shall be checked regarding corruption and shall have integrity checks.
+REQ-66: OpenAPS shall give a warning when human actor has provided abnormal carb data.
+REQ-67: OpenAPS must include human bolus dosing in its IOB value.
+REQ-68: SEE REQ-67 (Human bolus dosing shall be encorparated into the OpenAPS IOB / active insulin figure.)
+REQ-69: OpenAPS must make a valid prediction of future glucose levels based on available data.
+REQ-70: OpenAPS must take as much useful data as possible for its data analysis.
+REQ-71: OpenAPS docs must advise human actor how they can determine the correct settings for DIA / ISF / carb ratio.
+REQ-72: OpenAPS shall advise human actor if something seems incorrect with the insulin pump settings.
+REQ-73: OpenAPS shall prompt the human for data if glucose levels are X mg lower than expected.
+REQ-74: OpenAPS shall get feedback from insulin pump about whether the pump has applied the dosing recommendation from OpenAPS.
+REQ-75: OpenAPS shall prompt the human for data if the human hasn't entered data in a long time or if glucose levels are X mg higher than expected.
+REQ-76: Human actor must not suddenly consume more than X mg of sugar.
+REQ-77: Algorithm values for glucose levels must be accurate.
+REQ-78: OpenAPS shall prompt and possibly force glucose monitor information to be consistently manually tested by the human.
+REQ-79: If there is no data or insufficient available, this should be indicated to the user.
+REQ-80: Validity of used data must be checked. Only correct data shall be used for the openAPS algorithms.
+REQ-81: SEE REQ-50 (OpenAPS shall prompt the human with the data it has and get human to verify that it shall be applied.)
+REQ-82: SEE REQ-9 (If the data OpenAPS is programmed to required is received, OpenAPS must make a dosing recommendation.)
+REQ-83: Insulin pump shall not make dosing recommendations if there are incorrect configurations which could ruin OpenAPS recommendations.
+REQ-84: OpenAPS shall request the insulin pump settings / configurations and compare them to recommended values.
+REQ-85: If there are wrong configurations, the human actor shall be prompted to change these.
+REQ-86: If OpenAPS cannot pull configurations from the insulin pump, the pump shall go back to its normal operating mode.
+REQ-87: Irregularities in the communication must be detected and actions/safe states used during communication problems.
+REQ-88: Documentation must clearly request the human actor how to correctly test and apply all the insulin pump settings which would be necessary to give good dosing recommendations.
+REQ-89: OpenAPS shall verify whether insulin pump settings are configured correctly for OpenAPS if it is not human dependent.
+REQ-90: SEE REQ-57 (OpenAPS must be aware of the correct IOB and active dosing.)
+REQ-91: SEE REQ-57 (OpenAPS must be aware of the correct IOB and active dosing.)
+REQ-92: SEE REQ-38 (If OpenAPS is using a different time to the insulin pump, OpenAPS shall notify the human actor.)
+REQ-93: OpenAPS shall only share information to authorised individuals.
+REQ-94: OpenAPS shall receive warning from Nightscout if there is an operating request from another party and warn the human actor.
+REQ-95: OpenAPS must have access to a timestamp of when insulin pump data was from, not just when it was sent.
+REQ-96: OpenAPS data requests must always be comprehensible by the insulin pump.
+REQ-97: Compatible insulin pump software and hardware versions must be specified.
+REQ-98: Correct OpenAPS request formatting must be specified, verified and monitored.
+REQ-99: Add configuration check between systems including of their software/firmware versions used and only allow system to work with insulin pumps that have been properly tested.
+REQ-100: OpenAPS rig and docs shall be able to indicate which insulin pump software versions have been tested.
+REQ-101: Compatible Nightscout versions must be specified.
+REQ-102: OpenAPS shall give a warning if it is connected to incompatible devices or software versions in these devices.
+REQ-103: OpenAPS must make checksums and other checks to ensure the data it is using is valid.
+REQ-104: OpenAPS must check the timestamps of when the data it's using is originally from to make sure it's recent data.
+REQ-105: OpenAPS does not check the data to make sure that it is valid data from the correct time.
+REQ-106: OpenAPS shall have a time expectation of when it receives data from the insulin pump and compare the time expectation with the timestamp - plausibility check.
+REQ-107: OpenAPS plausibility check shall examine raw data received from the insulin pump to ensure that the data has not been corrupted.
+REQ-108: SEE REQ-1 (OpenAPS must check every X minutes for all the latest information.)
+REQ-109: OpenAPS must not use information older than X minutes for dosing recommendation; if OpenAPS has incomplete data, the insulin pump shall use the human's programmed basal rates.
+REQ-110: All code shall be reviewed by somebody with the required knowledge before merge.
+REQ-111: SEE REQ-21 (OpenAPS must validate data received from insulin pump.)
+REQ-112: OpenAPS shall use the most recent data any dosing recommendation.
+REQ-113: Process scheduling in the OS must ensure enough time for OpenAPS to run its functions.
+REQ-114: If there have been changes to the OpenAPS algorithm, the implications of any timing changes shall be considered.
+REQ-115: If the OpenAPS algorithm has a fixed time interval for making recommendations, this time interval shall always be updated whenever there is a change in the algorithm's information intake interval or a delay in information intake or processing.
+REQ-116: Correct scheduling must be specified and monitored.
+REQ-117: Correct program flow must be specified and monitored.
+REQ-118: CGM clock must be accurate and match RasPi time and real clock time, to nearest X seconds.
+REQ-119: All times shall be alligned with NTP or a common time source.
+REQ-120: OpenAPS shall warn the human actor if Nightscout is not online.
+REQ-121: OpenAPS shall have a time expectation of when it receives data from Nightscout and compare the time expectation with the timestamp - plausibility check.
+REQ-122: OpenAPS shall perform compatibility checks with all interfacing applications and software and warn the human actor if there is an incompatibility detected.
+REQ-123: SEE REQ-121 (OpenAPS shall have time expectation, plausiblity check, and check of timestamp to ensure validity of data.)
+REQ-124: Human actor must verify the CGM readings every X hours with a glucose meter.
+REQ-125: SEE REQ-102 (OpenAPS shall give a warning if it is connected to an incompatible version of Nightscout.)
+REQ-126: SEE REQ-118 (CGM clock must be accurate and match RasPi time and real clock time, to nearest X seconds.)
+REQ-127: Timestamp needs to be accurate time of the reading rather than the time of the data transfer.
+REQ-128: If possible, OpenAPS must monitor insulin pump battery.
+REQ-129: OpenAPS must make less than X requests to the insulin pump per minute.
+REQ-130: Correct OpenAPS request timing must be specified, verified and monitored.
+REQ-131: When the human is close to experiencing hypoglycemia, OpenAPS must suspend the insulin pump or at least audibly alert the human user to suspend the insulin pump, within X minutes.
+REQ-132: SEE REQ-77 (OpenAPS must warn the human actor if insulin is in low supply.)
+REQ-133: OpenAPS must notify the human when OpenAPS is suspending insulin dosing.
+REQ-134: If the human turns the pump on again after OpenAPS has suspended the pump, if the human still has hypoglycemia then OpenAPS must again suspend the pump, within X minutes of the pump being turned on again.
+REQ-135: OpenAPS glucose level projections must be verified, and projection calculations must be refined if projections are regularly inaccurate.
+REQ-136: OpenAPS shall not suspend insulin dosing when the human is not close to experiencing hypoglycemia.
+REQ-137: OpenAPS shall inform the human actor when it suspends the insulin pump (due to a problem with the insulin pump).
+REQ-138: OpenAPS shall employ a monitoring task to ensure that all safety-related threads in the application are triggered by the kernel on a timely basis (e.g. watchdog timer).
+REQ-139: OpenAPS shall notify user when other components' clock time differs from RasPi system clock.
+REQ-140: SEE REQ-134 (OpenAPS must suspend insulin dosing within X minutes after the human is experiencing or close to experiencing hypoglycemia (same as controller constraint).)
+REQ-141: OpenAPS rig setup instructions shall be clear, complete, easy to find and cover all possible hardware.
+REQ-142: There shall be a way for errors in the OpenAPS instructions to be reported.
+REQ-143: There shall only be one set of official OpenAPS instructions online, which contains all the information that needs to be known to use OpenAPS safely.
+REQ-144: OpenAPS rig hardware setup shall be tested for robustness and fragiliity.
+REQ-145: OpenAPS shall send a warning to human actor when human actor hasn't set up the rig matching with the configurations.
+REQ-146: Whenever a change is made to the OpenAPS system or the compatible versions change, the docs shall be updated.
+REQ-147: There shall only be one set of official OpenAPS documentation available for the human actor to read, which contain all information that is in any other instructions found online.
+REQ-148: SEE REQ-146 (If there is a change to the system, the documentation shall be updated to reflect this.)
+REQ-149: OpenAPS docs regarding other components shall be reviewed regularly, in keeping with the latest recommended approach.
+REQ-150: OpenAPS shall notify user when SD card is of the wrong size or format.
+REQ-151: Important information in docs shall be easy to find in the hardware setup area of the docs.
+REQ-152: The OpenAPS docs must be easy to navigate, with a search bar.
+REQ-153: OpenAPS shall detect if incompatible insulin pump software is being used and indicate this to the user.
+REQ-154: When new updates have been tested to be compatible, OpenAPS shall issue an email notification.
+REQ-155: OpenAPS shall list compatible versions in the documentation.
+REQ-156: SEE REQ-99 (OpenAPS shall check that human is using compatible versions of components. New versions of components shall be tested.)
+REQ-157: SEE REQ-99 (OpenAPS must verify that the insulin pump software and firmware is compatible with OpenAPS.)
+REQ-158: Add prompts in OpenAPS UI that insists that human reviews and understands instructions prior to, during and after setting up the rig.
+REQ-159: There shall be an educational video on how to set up the rig.
+REQ-160: Any errors that are found in the insulin pump instructions shall be listed in the OpenAPS documentation.
+REQ-161: There shall be a way for errors in the insulin pump instructions to be directed to the OpenAPS developers.
+REQ-162: OpenAPS shall check that all the necessary system dependencies are installed before looping.
+REQ-163: The dependencies script must install all of the dependencies correctly.
+REQ-164: OpenAPS shall use only well trusted and well tested dependencies.
+REQ-165: There shall be e-mail notifications of available OpenAPS updates.
+REQ-166: Human must be able to select their preferred frequencies of notifications.
+REQ-167: The versions of OpenAPS dependencies that are installed shall be fixed.
+REQ-168: Somebody shall keep a look out and test for major updates to OpenAPS dependencies.
+REQ-169: Major updates to OpenAPS shall be tested.
+REQ-170: There shall be an e-mail or OpenAPS prompt to update dependencies when newer versions are being used.
+REQ-171: OpenAPS docs shall advise the human to only install dependencies via dependencies script (or at least see the versions here) and not manually.
+REQ-172: Human actor must get a notification e-mail when sofware versions change.
+REQ-173: OpenAPS shall not provide dosing recommendations if it has not been tested to be safely compatible with the software versions of other components in the system.
+REQ-174: Human actor shall be discouraged from installing any other dependencies that are not in the installation script.
+REQ-175: Where possible, OpenAPS shall detect a change in the loop setup and request that the human actor updates the configurations.
+REQ-176: If there is a change in the components that OpenAPS is physically connected to, OpenAPS shall prompt the human actor to review the configurations.
+REQ-177: OpenAPS safe defaults shall be verified as part of each release.
+REQ-178: Developers shall try and involve any new device which would improve the functionality of OpenAPS.
+REQ-179: OpenAPS shall follow good secure coding practices.
+REQ-180: OpenAPS rig shall ask for verification when the human actor has requested information.
+REQ-181: OpenAPS shall make the human verify their selections after configuring OpenAPS.
+REQ-182: Human actor shall be warned to use only oref0.
+REQ-183: OpenAPS shall have an expiremental mode for human actor to play with other algorithms.
+REQ-184: The OpenAPS shall inform the human when there is a new update available.
+REQ-185: Whenever there is a improvement to the algorithm, human actor gets a notification email.
+REQ-186: OpenAPS system shall come / start with test mode and the user shall be aware that this is not a toy and documentation shall outline major "Don'ts" as much as possible.
+REQ-187: There shall be e-mail notifications of available algorithm updates.
+REQ-188: OpenAPS must inform the human actor whether it's recommendations are being applied.
+REQ-189: OpenAPS must alarm the human actor if it suddenly stops or starts working.
+REQ-190: OpenAPS shall get feedback from the insulin pump when it has administered a dose, and shall send this to the user.
+REQ-191: Human actor shall track blood glucose levels to make sure the OpenAPS treatment is working.
+REQ-192: There shall be feedback to the user indicating whether OpenAPS is successfully issuing dosing recommendations to the user.
+REQ-193: OpenAPS information shall be verified and not compromised.
+REQ-194: Human shall be able to override the guidance of OpenAPS and keep OpenAPS running.
+REQ-195: When the OpenAPS rig is disconnected, the insulin pump shall fall back to normal operation.
+REQ-196: OpenAPS system shall supply a reason if it suggests that it needs to be turned off.
+REQ-197: When human actor switches off the OpenAPS rig suddenly, the insulin pump goes back to normal operation and OpenAPS settings are retained as before.
+REQ-198: If the OpenAPS rig is disconnected, the insulin pump shall go back to regular operation.
+REQ-199: There shall be a forum and a resource which the human can use to understand the OpenAPS logs.
+REQ-200: Human actor needs to know what to do and how to check if the insulin dosing is working.
+REQ-201: Include prompt or message in the OpenAPS UI that OpenAPS is still booting up; nothing is wrong.
+REQ-202: All of the buttons on the OpenAPS rig shall be clearly labelled.
+REQ-203: Any parts of the OpenAPS rig that shall be treated with care shall come with a warning.
+REQ-204: SEE REQ-203 (Any parts of an OpenAPS rig that shall be treated with care shall come with a warning.)
+REQ-205: Warning shall be easy to see for user and there shall be a warning symbol permanently present when there is a problem.
+REQ-206: The human shall have the option to avoid entering meal data.
+REQ-207: Any safety critical input shall trigger a prompt for verification.
+REQ-208: SEE REQ-75 (OpenAPS shall warn the human actor if human has not input useful daily information in X hours.)
+REQ-209: Any OpenAPS relevant gap in insulin pump documentation that is found by a user shall be recorded in OpenAPS documentation or the OpenAPS forum.
+REQ-210: OpenAPS documentation shall make it clear that the human will be able to operate the pump manually, before the human puts the loop in place.
+REQ-211: OpenAPS shall give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human shall still have ability to make decision.
+REQ-212: If mealtime data hasn't been entered into the insulin pump or OpenAPS rig for a long time, OpenAPS shall estimate the meal data or prompt the human to enter their meal data.
+REQ-213: SEE REQ-211 (OpenAPS shall give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human shall still have ability to make decision.)
+REQ-214: If the user data given to OpenAPS is causing recommendations which are leading to a non-optimal glucose level, OpenAPS shall adjust it's dosing recommendation and remind the human user to check the calibration of the CGM.
+REQ-215: OpenAPS shall not provide dosing recommendations if the insulin pump is not configured correctly for OpenAPS use.
+REQ-216: OpenAPS instructions and any complexities shall be as clear as possible.
+REQ-217: Insulin pump or OpenAPS docs shall recommend a timeframe to provide meal data to the insulin pump.
+REQ-218: SEE REQ-217 (OpenAPS documentation shall state a time limit in which to provide meal data.)
+REQ-219: Make sure human knows the time for the insulin to react in their body and sets the advanced time (by X minutes) accordingly.
+REQ-220: SEE REQ-216 (OpenAPS instructions and any complexities shall be as clear as possible.)
+REQ-221: OpenAPS system shall come / start with test mode.
+REQ-222: User shall be aware that this is not a toy and documentation shall outline major "Don'ts" as much as possible.
+REQ-223: There shall be multiple reviews including signoffs and phase gates prior to release of OpenAPS instructions.
+REQ-224: SEE REQ-85 (OpenAPS shall give a warning when human actor has provided non recommended configurations.)
+REQ-225: The human shall be able to ask questions to an OpenAPS forum and preferably communicate with maintainers of the repository.
+REQ-226: SEE REQ-84 (OpenAPS must pull all configurations from Insulin pump.)
+REQ-227: OpenAPS shall make a notification when the insulin pump settings do not match the recommended configuration in the OpenAPS documentation with X frequency.
+REQ-228: OpenAPS algorithm shall be designed for secure operation.
