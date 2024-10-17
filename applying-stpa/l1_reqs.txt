@@ -42,7 +42,7 @@ REQ-41: When changing time zone, OpenAPS must either change to the correct time 
 REQ-42: OpenAPS shall have a hardware integrity check.
 REQ-43: OpenAPS glucose level value must match glucose data from the CGM, unless it has been overriden by a human input.
 REQ-44: Processing of glucose data shall to be continuously tested and monitored.
-REQ-45: OpenAPS glucose level value must match glucose data from the CGM, unless it has been overriden by a human inputProcessing of glucose data needs to be tested and monitored.
+REQ-45: SEE REQ-43 (OpenAPS glucose level value must match glucose data from the CGM, unless it has been overriden by a human input.)
 REQ-46: OpenAPS must verify that all systems are set to the same time.
 REQ-47: SEE REQ-41 (OpenAPS shall detect the local timezone and prompt the user to change the time when this changes.)
 REQ-48: The OpenAPS rig and it's potentially sensitive information packets must be secure and protected from being hacked into.
