@@ -6,7 +6,7 @@ REQ-5: The OpenAPS rig shall emit a warning if it's going out of range of the in
 REQ-6: If the insulin pump goes out of range of OpenAPS, it shall fall back to normal operation.
 REQ-7: OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.
 REQ-8: If the Insulin Pump is on low battery, OpenAPS shall stop sending it commands and let it fall back to normal operation.
-REQ-9: The OpenAPS algorithm must set a temporary basal dosing recommendation if the insulin dosage is not optimal and it has been over X minutes since the last temporary basal recommendation.
+REQ-9: The OpenAPS algorithm must set a temporary basal dosing recommendation if the insulin dosage is not optimal and it has been over a defined period defined by TBD since the last temporary basal recommendation.
 REQ-10: OpenAPS algorithm shall be tested, validated in realtime for accuracy and designed securely.
 REQ-11: If OpenAPS is having problems communicating with other devices in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.
 REQ-12: OpenAPS shall warn the human actor if it is no longer connected to and/or no longer receiving information from Nightscout.
