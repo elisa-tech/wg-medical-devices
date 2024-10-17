@@ -76,7 +76,7 @@ REQ-75: Standardize timesource or use timesource separate from the main system c
 REQ-76: When RasPi processor is hung, insulin pump must fall back to regular operation.
 REQ-77: When RasPi hardware fails, insulin pump must fall back to regular operation.
 REQ-78: The algorithm must successfully import commands from the OpenAPS app.
-REQ-79: Watchdog must be in place to monitor individual functions in the algorithm .
+REQ-79: Watchdog must be in place to monitor individual functions in the algorithm.
 REQ-80: Function in the algorithm must take less than X seconds to be applied to the RasPi OS.
 REQ-81: Any compatibility check relating to OpenAPS configurations must accurately report when the configurations are currently not accurate.
 REQ-82: When the user updates their version of OpenAPS, they shall be prompted to set any new config settings.
