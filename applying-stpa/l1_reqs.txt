@@ -28,7 +28,7 @@ REQ-27: The OpenAPS rig must have a safe exit process.
 REQ-28: The OpenAPS User Manual must have guidelines on avoiding a low power supply.
 REQ-29: SEE-REQ-11 (If OpenAPS is having problems communicating with other devies in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.)
 REQ-30: OpenAPS wireless network signals must have a radio frequency in a user defined range specified in  MegaHertz.
-REQ-31: OpenAPS documentation must direct the human actor to easily use the right OpenAPS software dependencies, perhaps via an automated script.
+REQ-31: OpenAPS User Manual must direct the human actor to incorporate the right OpenAPS software dependencies.
 REQ-32: If the human actor updates to incompatible software dependencies, there must be a way to restore software dependencies that work for OpenAPS.
 REQ-33: When backward compatibility is affected by an update, it needs to be clearly flagged.
 REQ-34: SEE REQ-7 (OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.)
