@@ -225,3 +225,4 @@ REQ-224: SEE REQ-85 (OpenAPS shall give a warning when human actor has provided 
 REQ-225: The human shall be able to ask questions to an OpenAPS forum and preferably communicate with maintainers of the repository.
 REQ-226: SEE REQ-84 (OpenAPS must pull all configurations from Insulin pump.)
 REQ-227: OpenAPS shall make a notification when the insulin pump settings do not match the recommended configuration in the OpenAPS documentation with X frequency.
+REQ-228: OpenAPS algorithm shall be designed for secure operation.
