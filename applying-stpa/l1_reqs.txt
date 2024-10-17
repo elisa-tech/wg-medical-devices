@@ -1,4 +1,4 @@
-REQ-1: The OpenAPS rig must pull required data from the other components of the system every X seconds or whenever this data is available.
+REQ-1: The OpenAPS rig must pull required data from the other components of the system on a user defined periodic basis.
 REQ-2: If OpenAPS believes that data is insufficient for a dosing recommendation to be made, OpenAPS shall still predict the effect of the fallback dosing recommendation and if this is far out of the targets it shall make a dosing recommendation anyway, with a warning.
 REQ-3: There shall be a way for the human manually to override glucose data from the CGM / Nightscout.
 REQ-4: OpenAPS shall prompt the user every week to calibrate the CGM.
