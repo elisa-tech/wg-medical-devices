@@ -7,18 +7,18 @@ REQ-6: If the insulin pump goes out of range of OpenAPS, it shall fall back to n
 REQ-7: OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.
 REQ-8: If the Insulin Pump is on low battery, OpenAPS shall stop sending it commands and let it fall back to normal operation.
 REQ-9: The OpenAPS algorithm must set a temporary basal dosing recommendation if the insulin dosage is not optimal and it has been over a defined period defined by TBD since the last temporary basal recommendation.
-REQ-10: OpenAPS algorithm shall be tested, validated in realtime for accuracy and designed securely.
+REQ-10: OpenAPS algorithm shall be tested, validated in realtime for accuracy.
 REQ-11: If OpenAPS is having problems communicating with other devices in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.
 REQ-12: OpenAPS shall warn the human actor if it is no longer connected to and/or no longer receiving information from Nightscout.
 REQ-13: There shall be checks for wireless interference on a periodic basis as defined by TBD, and OpenAPS shall send a warning to the user if interference is detected.
 REQ-14: OpenAPS plausibility check shall include examination of the raw data from the insulin pump to ensure the data is in its expected range.
 REQ-15: OpenAPS must inform the human actor if the insulin pump is set to use the wrong units.
-REQ-16: If the OpenAPS rig components are not connected together properly there must be an alarm, warning or error.
+REQ-16: If the OpenAPS rig components are not connected together properly there must be notification provided to the user.
 REQ-17: The OpenAPS rig components must connect together securely.
-REQ-18: User manual must specify the correct hardware setup.
-REQ-19: Software must check that all required OpenAPS dependencies are present.
+REQ-18: The OpenAPS User Manual must specify the correct hardware setup.
+REQ-19: Software must check that all required OpenAPS software dependencies are present.
 REQ-20: Hardware connections need to be set up to match the configuration the human entered to the openAPS configuration.
-REQ-21: Communication between components must have an integrity check.
+REQ-21: All physical system components must have a communication integrity check.
 REQ-22: SEE REQ-7 (OpenAPS shall have watchdog timer or heartbeat communications between systems to detect if components are active and working properly and if not warn the user.)
 REQ-23: OpenAPS must alert human actor if the insulin pump has stopped giving feedback.
 REQ-24: OpenAPS shall be able to interpret error signals from insulin pump and convey to the human actor.
