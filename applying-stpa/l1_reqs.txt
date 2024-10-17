@@ -210,14 +210,14 @@ REQ-209: Any OpenAPS relevant gap in insulin pump documentation that is found by
 REQ-210: OpenAPS documentation shall make it clear that the human will be able to operate the pump manually, before the human puts the loop in place.
 REQ-211: OpenAPS shall give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human shall still have ability to make decision.
 REQ-212: If mealtime data hasn't been entered into the insulin pump or OpenAPS rig for a long time, OpenAPS shall estimate the meal data or prompt the human to enter their meal data.
-REQ-213: OpenAPS shall give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human shall still have ability to make decision.
+REQ-213: SEE REQ-211 (OpenAPS shall give notification either when human entry to insulin pump looks incorrect or when human actor may have forgotten to enter info into the insulin pump. Human shall still have ability to make decision.)
 REQ-214: If the user data given to OpenAPS is causing recommendations which are leading to a non-optimal glucose level, OpenAPS shall adjust it's dosing recommendation and remind the human user to check the calibration of the CGM.
 REQ-215: OpenAPS shall not provide dosing recommendations if the insulin pump is not configured correctly for OpenAPS use.
-REQ-216: SEE REQ-141 (OpenAPS instructions and any complexities shall be as clear as possible.)
+REQ-216: OpenAPS instructions and any complexities shall be as clear as possible.
 REQ-217: Insulin pump or OpenAPS docs shall recommend a timeframe to provide meal data to the insulin pump.
 REQ-218: SEE REQ-217 (OpenAPS documentation shall state a time limit in which to provide meal data.)
 REQ-219: Make sure human knows the time for the insulin to react in their body and sets the advanced time (by X minutes) accordingly.
-REQ-220: OpenAPS instructions must be clear and non-ambiguous.
+REQ-220: SEE REQ-216 (OpenAPS instructions and any complexities shall be as clear as possible.)
 REQ-221: OpenAPS system shall come / start with test mode.
 REQ-222: User shall be aware that this is not a toy and documentation shall outline major "Don'ts" as much as possible.
 REQ-223: There shall be multiple reviews including signoffs and phase gates prior to release of OpenAPS instructions.
