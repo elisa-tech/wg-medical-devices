@@ -27,7 +27,7 @@ REQ-26: The OpenAPS rig must alert the user when on low power.
 REQ-27: The OpenAPS rig must have a safe exit process.
 REQ-28: The OpenAPS User Manual must have guidelines on avoiding a low power supply.
 REQ-29: SEE-REQ-11 (If OpenAPS is having problems communicating with other devies in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.)
-REQ-30: OpenAPS wireless network signals must have a radio frequency between X MegaHertz and Y MegaHertz.
+REQ-30: OpenAPS wireless network signals must have a radio frequency in a user defined range specified in  MegaHertz.
 REQ-31: OpenAPS documentation must direct the human actor to easily use the right OpenAPS software dependencies, perhaps via an automated script.
 REQ-32: If the human actor updates to incompatible software dependencies, there must be a way to restore software dependencies that work for OpenAPS.
 REQ-33: When backward compatibility is affected by an update, it needs to be clearly flagged.
