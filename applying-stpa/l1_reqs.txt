@@ -25,7 +25,7 @@ REQ-24: OpenAPS shall be able to interpret error signals from insulin pump and c
 REQ-25: The OpenAPS rig must have as long a battery life as possible.
 REQ-26: The OpenAPS rig must alert the user when on low power.
 REQ-27: The OpenAPS rig must have a safe exit process.
-REQ-28: Docs must have guidelines on avoiding a low power supply.
+REQ-28: The OpenAPS User Manual must have guidelines on avoiding a low power supply.
 REQ-29: SEE-REQ-11 (If OpenAPS is having problems communicating with other devies in the loop, OpenAPS shall indicate this and fallback to the human programmed basal rates.)
 REQ-30: OpenAPS wireless network signals must have a radio frequency between X MegaHertz and Y MegaHertz.
 REQ-31: OpenAPS documentation must direct the human actor to easily use the right OpenAPS software dependencies, perhaps via an automated script.
