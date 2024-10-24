@@ -9,8 +9,8 @@ REQ-8: SEE REQ-1 (OpenAPS install script shall have pre-install and post-install
 REQ-9: OpenAPS shall check whether the software update is effective and conforming to OpenAPS recommendatoins in the context of the versions of the other components in the users system.
 REQ-10: SEE REQ-9 (OpenAPS shall require specific versions of dependencies which have been tested to be compatible with all of the components.)
 REQ-11: Human shall be warned in documentation not to install too many packages.
-REQ-12: There shall be continuous testing of OpenAPS dependencies with updated OS.
-REQ-13: When there are software updates on the RasPi, OpenAPS shall stop making recommendations.
+REQ-12: There shall be continuous testing of OpenAPS dependencies when the OS is updated by the developers, to ensure the OpenAPS dependencies can be met by updated OS.
+REQ-13: When there are software updates on the RasPi, OpenAPS shall stop making recommendations to the user.
 REQ-14: Human user shall be warned of any possible security threats.
 REQ-15: OpenAPS app shall remind the user to update configs when there has been a change in devices available.
 REQ-16: OpenAPS app shall provide information to the user on how to update relevant configs when the devices available have changed.
@@ -42,7 +42,6 @@ REQ-41: Alarm is needed if a handshake is expected but missing for too long .
 REQ-42: Device must be kept from interference by many other signals and if the network connection falters the insulin pump shall stop using OpenAPS and fallback to defaults.
 REQ-43: RasPi OS must believe that it is looping when it is looping.
 REQ-44: RasPi OS must be able to execute all the commands that OpenAPS app sends to RasPi OS.
-REQ-45: Fallback.
 REQ-46: RasPi OS and OpenAPS communication must be secure.
 REQ-47: RasPi OS must be able to clearly identify the source of a command.
 REQ-48: Commands from OpenAPS to RasPi must be unique.
