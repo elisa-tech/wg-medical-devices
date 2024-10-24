@@ -48,4 +48,5 @@ def gen_requirements(xlsx_file, loss_scenarios_sheet, output_file):
     return req_string
 
 if __name__ == '__main__':
+
     gen_requirements()
