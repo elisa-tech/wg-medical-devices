@@ -42,11 +42,12 @@ REQ-41: Alarm is needed if a handshake is expected but missing for too long .
 REQ-42: Device must be kept from interference by many other signals and if the network connection falters the insulin pump shall stop using OpenAPS and fallback to defaults.
 REQ-43: RasPi OS must believe that it is looping when it is looping.
 REQ-44: RasPi OS must be able to execute all the commands that OpenAPS app sends to RasPi OS.
+REQ-45: DELETED was (Fallback)
 REQ-46: RasPi OS and OpenAPS communication must be secure.
 REQ-47: RasPi OS must be able to clearly identify the source of a command.
 REQ-48: Commands from OpenAPS to RasPi must be unique.
 REQ-49: OpenAPS commands must be compatible with RasPi OS.
-REQ-50: RasPi OS and OpenAPS communciation must be secure.
+REQ-50: SEE REQ-46 (RasPi OS and OpenAPS communciation must be secure.)
 REQ-51: OpenAPS must recongnize when its communcation with RasPi OS is flawed.
 REQ-52: There needs to be an external entity to monitor behaviour of RasPi OS.
 REQ-53: Use independent or external monitoring software that can detect unexpected or unusual operation in the kernel.
