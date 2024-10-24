@@ -127,3 +127,4 @@ REQ-126: There must be communication about updates between developers of differe
 REQ-127: OpenAPS app commands must be clearly documented.
 REQ-128: Developers shall be informed about which commands have changed behaviours in different versions.
 REQ-129: OpenAPS shall warn user when other components have different timestamps and also refactor the incoming timestamps of other components in this case.
+
