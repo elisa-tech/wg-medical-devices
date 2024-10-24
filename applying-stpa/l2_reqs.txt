@@ -1,5 +1,5 @@
 REQ-1: OpenAPS shall be able to detect if dependencies are completely installed to match the current OpenAPS algorithm.
-REQ-2: Raspberry OS is up to date.
+REQ-2: Raspberry OS must be up to date.
 REQ-3: Human shall make sure that the script has been run successfully.
 REQ-4: Human shall make sure OpenAPS installation has been successful.
 REQ-5: SEE REQ-1 (OpenAPS shall have a script which can be run to detect if all dependencies are completely installed.)
@@ -127,4 +127,3 @@ REQ-126: There must be communication about updates between developers of differe
 REQ-127: OpenAPS app commands must be clearly documented.
 REQ-128: Developers shall be informed about which commands have changed behaviours in different versions.
 REQ-129: OpenAPS shall warn user when other components have different timestamps and also refactor the incoming timestamps of other components in this case.
-
